@@ -1,0 +1,6 @@
+framework module Pods_StyleRent {
+  umbrella header "Pods-StyleRent-umbrella.h"
+
+  export *
+  module * { export * }
+}
