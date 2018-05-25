@@ -8,6 +8,16 @@
 
 import UIKit
 import AWSMobileClient
+import FBSDKCoreKit
+
+//class FacebookProvider: NSObject, AWSIdentityProviderManager {
+//	func logins() -> AWSTask<NSDictionary> {
+//		if let token = AccessToken.current?.authenticationToken {
+//			return AWSTask(result: [AWSIdentityProviderFacebook:token])
+//		}
+//		return AWSTask(error:NSError(domain: "Facebook Login", code: -1 , userInfo: ["Facebook" : "No current Facebook access token"]))
+//	}
+//}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)
+	}
+
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+		return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+	}
+
+	func application(_ application: UIApplication, open url: URL,
+					 sourceApplication: String?, annotation: Any) -> Bool {
+		return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
 	}
 
 	func applicationWillResignActive(_ application: UIApplication) {
@@ -38,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationDidBecomeActive(_ application: UIApplication) {
 		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+		FBSDKAppEvents.activateApp()
 	}
 
 	func applicationWillTerminate(_ application: UIApplication) {

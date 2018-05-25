@@ -4,7 +4,14 @@
 target 'StyleRent' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'AWSMobileClient', '~> 2.6.13'
+  pod 'AWSMobileClient'
+  pod 'AWSDynamoDB'
+  pod 'AWSUserPoolsSignIn'
+  pod 'AWSAuthUI'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit'
+  pod 'AWSFacebookSignIn'
+  pod 'FBSDKShareKit'
   # Pods for StyleRent
 
 end

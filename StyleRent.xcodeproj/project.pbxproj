@@ -7,26 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F47BF1620B6060D00C2CA55 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1220B6060C00C2CA55 /* Listing.swift */; };
-		0F47BF1720B6060D00C2CA55 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1320B6060C00C2CA55 /* Rental.swift */; };
-		0F47BF1820B6060D00C2CA55 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1420B6060C00C2CA55 /* Rating.swift */; };
-		0F47BF1920B6060D00C2CA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1520B6060D00C2CA55 /* User.swift */; };
+		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
+		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
+		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
+		0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */; };
+		0F47BF3320B643CA00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */; };
+		0F47BF3520B6553A00C2CA55 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F47BF3420B6553A00C2CA55 /* Bolts.framework */; };
+		0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3C20B7E7E500C2CA55 /* User.swift */; };
+		0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */; };
+		0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3E20B7E7E500C2CA55 /* Rental.swift */; };
+		0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3F20B7E7E600C2CA55 /* Listing.swift */; };
+		0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */; };
+		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
 		0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */; };
-		0FA2D18020B5FBA500D7F243 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17F20B5FBA500D7F243 /* ViewController.swift */; };
+		0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */; };
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
 		0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18420B5FBA800D7F243 /* Assets.xcassets */; };
 		0FA2D18820B5FBA800D7F243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */; };
 		64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0F47BF2620B63D3500C2CA55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FA2D17220B5FBA500D7F243 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FA2D17920B5FBA500D7F243;
+			remoteInfo = StyleRent;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		0F47BF1220B6060C00C2CA55 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
-		0F47BF1320B6060C00C2CA55 /* Rental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
-		0F47BF1420B6060C00C2CA55 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
-		0F47BF1520B6060D00C2CA55 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0F47BF1B20B63C4C00C2CA55 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
+		0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StyleRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
+		0F47BF2520B63D3500C2CA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		0F47BF3420B6553A00C2CA55 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		0F47BF3C20B7E7E500C2CA55 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
+		0F47BF3E20B7E7E500C2CA55 /* Rental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
+		0F47BF3F20B7E7E600C2CA55 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
+		0F47BF4720B7EFB400C2CA55 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0FA2D17A20B5FBA500D7F243 /* StyleRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0FA2D17F20B5FBA500D7F243 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0FA2D18220B5FBA500D7F243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0FA2D18420B5FBA800D7F243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FA2D18720B5FBA800D7F243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,32 +64,51 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0F47BF1E20B63D3500C2CA55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0FA2D17720B5FBA500D7F243 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */,
+				0F47BF3520B6553A00C2CA55 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F47BF1A20B6061600C2CA55 /* Models */ = {
+		0F47BF2220B63D3500C2CA55 /* StyleRentTests */ = {
 			isa = PBXGroup;
 			children = (
-				0F47BF1220B6060C00C2CA55 /* Listing.swift */,
-				0F47BF1420B6060C00C2CA55 /* Rating.swift */,
-				0F47BF1320B6060C00C2CA55 /* Rental.swift */,
-				0F47BF1520B6060D00C2CA55 /* User.swift */,
+				0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */,
+				0F47BF2520B63D3500C2CA55 /* Info.plist */,
 			);
-			path = Models;
+			path = StyleRentTests;
+			sourceTree = "<group>";
+		};
+		0F47BF4420B7E7EE00C2CA55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0F47BF3F20B7E7E600C2CA55 /* Listing.swift */,
+				0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */,
+				0F47BF3E20B7E7E500C2CA55 /* Rental.swift */,
+				0F47BF3C20B7E7E500C2CA55 /* User.swift */,
+			);
+			name = Models;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		0FA2D17120B5FBA500D7F243 = {
 			isa = PBXGroup;
 			children = (
 				0FA2D17C20B5FBA500D7F243 /* StyleRent */,
+				0F47BF2220B63D3500C2CA55 /* StyleRentTests */,
 				0FA2D17B20B5FBA500D7F243 /* Products */,
 				FA1CF9EF4DF9CB4ADBA51072 /* Pods */,
 				B7A79CD2EA7DC9DCAC30519D /* Frameworks */,
@@ -73,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA2D17A20B5FBA500D7F243 /* StyleRent.app */,
+				0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,12 +127,17 @@
 		0FA2D17C20B5FBA500D7F243 /* StyleRent */ = {
 			isa = PBXGroup;
 			children = (
-				0F47BF1A20B6061600C2CA55 /* Models */,
+				0F47BF4420B7E7EE00C2CA55 /* Models */,
 				0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */,
-				0FA2D17F20B5FBA500D7F243 /* ViewController.swift */,
+				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
+				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
+				0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */,
+				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
+				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
 				0FA2D18120B5FBA500D7F243 /* Main.storyboard */,
 				0FA2D18420B5FBA800D7F243 /* Assets.xcassets */,
 				0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */,
+				0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */,
 				0FA2D18920B5FBA800D7F243 /* Info.plist */,
 			);
 			path = StyleRent;
@@ -94,6 +146,7 @@
 		B7A79CD2EA7DC9DCAC30519D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F47BF3420B6553A00C2CA55 /* Bolts.framework */,
 				C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */,
 			);
 			name = Frameworks;
@@ -111,6 +164,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0F47BF2020B63D3500C2CA55 /* StyleRentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F47BF2820B63D3500C2CA55 /* Build configuration list for PBXNativeTarget "StyleRentTests" */;
+			buildPhases = (
+				0F47BF1D20B63D3500C2CA55 /* Sources */,
+				0F47BF1E20B63D3500C2CA55 /* Frameworks */,
+				0F47BF1F20B63D3500C2CA55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F47BF2720B63D3500C2CA55 /* PBXTargetDependency */,
+			);
+			name = StyleRentTests;
+			productName = StyleRentTests;
+			productReference = 0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0FA2D17920B5FBA500D7F243 /* StyleRent */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0FA2D18C20B5FBA800D7F243 /* Build configuration list for PBXNativeTarget "StyleRent" */;
@@ -140,6 +211,10 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Rohin Bhushan";
 				TargetAttributes = {
+					0F47BF2020B63D3500C2CA55 = {
+						CreatedOnToolsVersion = 9.3.1;
+						TestTargetID = 0FA2D17920B5FBA500D7F243;
+					};
 					0FA2D17920B5FBA500D7F243 = {
 						CreatedOnToolsVersion = 9.3.1;
 					};
@@ -159,15 +234,24 @@
 			projectRoot = "";
 			targets = (
 				0FA2D17920B5FBA500D7F243 /* StyleRent */,
+				0F47BF2020B63D3500C2CA55 /* StyleRentTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0F47BF1F20B63D3500C2CA55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0FA2D17820B5FBA500D7F243 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F47BF3320B643CA00C2CA55 /* awsconfiguration.json in Resources */,
 				0FA2D18820B5FBA800D7F243 /* LaunchScreen.storyboard in Resources */,
 				0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */,
 				0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */,
@@ -185,14 +269,34 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -220,20 +324,41 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0F47BF1D20B63D3500C2CA55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */,
+				0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0FA2D17620B5FBA500D7F243 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FA2D18020B5FBA500D7F243 /* ViewController.swift in Sources */,
-				0F47BF1720B6060D00C2CA55 /* Rental.swift in Sources */,
-				0F47BF1620B6060D00C2CA55 /* Listing.swift in Sources */,
-				0F47BF1820B6060D00C2CA55 /* Rating.swift in Sources */,
-				0F47BF1920B6060D00C2CA55 /* User.swift in Sources */,
+				0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */,
+				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
+				0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */,
+				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
+				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
+				0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */,
+				0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */,
+				0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */,
+				0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */,
 				0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F47BF2720B63D3500C2CA55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0FA2D17920B5FBA500D7F243 /* StyleRent */;
+			targetProxy = 0F47BF2620B63D3500C2CA55 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0FA2D18120B5FBA500D7F243 /* Main.storyboard */ = {
@@ -255,6 +380,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0F47BF2920B63D3500C2CA55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NH6S8FD2DQ;
+				INFOPLIST_FILE = StyleRentTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rohinbhushan.StyleRentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StyleRent.app/StyleRent";
+			};
+			name = Debug;
+		};
+		0F47BF2A20B63D3500C2CA55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NH6S8FD2DQ;
+				INFOPLIST_FILE = StyleRentTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rohinbhushan.StyleRentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StyleRent.app/StyleRent";
+			};
+			name = Release;
+		};
 		0FA2D18A20B5FBA800D7F243 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -376,7 +541,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NH6S8FD2DQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"\"$(SRCROOT)/Bolts.framework\"",
+				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,7 +566,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NH6S8FD2DQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,6 +586,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0F47BF2820B63D3500C2CA55 /* Build configuration list for PBXNativeTarget "StyleRentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F47BF2920B63D3500C2CA55 /* Debug */,
+				0F47BF2A20B63D3500C2CA55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0FA2D17520B5FBA500D7F243 /* Build configuration list for PBXProject "StyleRent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
