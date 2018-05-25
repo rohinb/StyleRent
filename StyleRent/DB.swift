@@ -10,6 +10,7 @@ import Foundation
 import AWSDynamoDB
 
 struct DB {
+	// ALWAYS REMEMBER TO CALL DELEGATES IN MAIN THREAD
 	private static let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
 	static var delegate : DBDelegate?
 
@@ -18,14 +19,36 @@ struct DB {
 		dynamoDbObjectMapper.save(user, completionHandler: {
 			(error: Error?) -> Void in
 
-			if let error = error {
-				delegate?.createUserResponse(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+			DispatchQueue.main.async {
+				if let error = error {
+					delegate?.createUserResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+				}
+				delegate?.createUserResponse?(success: true, error: nil)
 			}
-			delegate?.createUserResponse(success: true, error: nil)
+		})
+	}
+
+	static func getNearbyListings(userId : String, lat : Double, lon : Double) {
+		// TODO: Filter based on user's choice and location
+		let scanExpression = AWSDynamoDBScanExpression()
+		scanExpression.limit = 20
+//		scanExpression.filterExpression = "Price < :val"
+//		scanExpression.expressionAttributeValues = [":val": 50]
+		dynamoDbObjectMapper.scan(Listing.self, expression: scanExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+			DispatchQueue.main.async {
+				if let error = task.error as NSError? {
+					print("The request failed. Error: \(error)")
+					delegate?.getListingsResponse?(success: false, listings: [], error: error.localizedDescription)
+				} else if let paginatedOutput = task.result {
+					delegate?.getListingsResponse?(success: true, listings: paginatedOutput.items as! [Listing], error: nil)
+				}
+			}
+			return nil
 		})
 	}
 }
 
-protocol DBDelegate {
-	func createUserResponse(success : Bool, error : String?)
+@objc protocol DBDelegate {
+	@objc optional func createUserResponse(success : Bool, error : String?)
+	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?)
 }

@@ -14,6 +14,8 @@ import AWSFacebookSignIn
 
 class LoginViewController: UIViewController {
 
+	var firstTime = true
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		DB.delegate = self
@@ -27,7 +29,10 @@ class LoginViewController: UIViewController {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		attemptLogin()
+		if !firstTime {
+			attemptLogin()
+		}
+		firstTime = false
 	}
 
 	func attemptLogin() {
@@ -61,7 +66,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController : DBDelegate {
 	func createUserResponse(success: Bool, error: String?) {
 		if success {
-			popupAlert(title: "User Creations success!", message: nil, actionTitles: ["Ok"], actions: [nil])
+			self.performSegue(withIdentifier: "loginSegue", sender: nil)
 		} else {
 			popupAlert(title: "User Creations failed!", message: error, actionTitles: ["Ok"], actions: [nil])
 		}

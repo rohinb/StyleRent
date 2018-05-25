@@ -21,10 +21,28 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="SoH-qn-gH6"/>
+                    <connections>
+                        <segue destination="5u3-Ig-VBs" kind="show" identifier="loginSegue" id="YOe-Z0-7MI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="700" y="-665"/>
+        </scene>
+        <!--Listing View Controller-->
+        <scene sceneID="TpN-3D-DzC">
+            <objects>
+                <viewController id="5u3-Ig-VBs" customClass="ListingViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lTL-WM-5cb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dPo-0Q-7If"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vmi-xz-saz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1371" y="-664"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gV5-UX-t7w">
