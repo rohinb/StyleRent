@@ -6,6 +6,7 @@ target 'StyleRent' do
   use_frameworks!
   pod 'AWSMobileClient'
   pod 'AWSDynamoDB'
+  pod 'AWSS3'
   pod 'AWSUserPoolsSignIn'
   pod 'AWSAuthUI'
   pod 'FBSDKLoginKit'

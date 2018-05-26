@@ -17,6 +17,8 @@ PODS:
     - FBSDKLoginKit (~> 4.0)
   - AWSMobileClient (2.6.18):
     - AWSAuthCore (= 2.6.18)
+  - AWSS3 (2.6.18):
+    - AWSCore (= 2.6.18)
   - AWSUserPoolsSignIn (2.6.18):
     - AWSAuthCore (= 2.6.18)
     - AWSCognitoIdentityProvider (= 2.6.18)
@@ -38,6 +40,7 @@ DEPENDENCIES:
   - AWSDynamoDB
   - AWSFacebookSignIn
   - AWSMobileClient
+  - AWSS3
   - AWSUserPoolsSignIn
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -53,6 +56,7 @@ SPEC REPOS:
     - AWSDynamoDB
     - AWSFacebookSignIn
     - AWSMobileClient
+    - AWSS3
     - AWSUserPoolsSignIn
     - Bolts
     - FBSDKCoreKit
@@ -68,12 +72,13 @@ SPEC CHECKSUMS:
   AWSDynamoDB: 8071c225bb409a3ff5b2ca3e8e64aa41ef24d806
   AWSFacebookSignIn: 03e11d59bbc3c21dde3ef9f6f6168c049ac3c415
   AWSMobileClient: 7e6786ec708698aa3b25f12376464db1820afaed
+  AWSS3: 659953f91bf85f62b6290625e86c45e3b9dd8dee
   AWSUserPoolsSignIn: 1e2b1bdb841802b697be489acd5050cc6b6d2301
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
   FBSDKShareKit: 1869cb24db2cea90666a50cb9d568deb38e2d16e
 
-PODFILE CHECKSUM: e5796f7017bb8244f9554e60315b4855324deb01
+PODFILE CHECKSUM: 5057a5a10ddc0b9fa401fd85b488f686f9589955
 
 COCOAPODS: 1.5.2

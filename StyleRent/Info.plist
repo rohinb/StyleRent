@@ -44,6 +44,10 @@
 	<string>StyleLend needs to use your location to find listings and renters near you.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSCameraUsageDescription</key>
+	<string>StyleLend needs to use your camera to take pictures of your clothing before you post a listing.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>StyleLend needs to use your camera roll to upload pictures of your clothing before you post a listing.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

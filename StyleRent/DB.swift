@@ -28,6 +28,20 @@ struct DB {
 		})
 	}
 
+	static func createListing(listing : Listing) {
+
+		dynamoDbObjectMapper.save(listing, completionHandler: {
+			(error: Error?) -> Void in
+
+			DispatchQueue.main.async {
+				if let error = error {
+					delegate?.createListingResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+				}
+				delegate?.createListingResponse?(success: true, error: nil)
+			}
+		})
+	}
+
 	static func getNearbyListings(userId : String, lat : Double, lon : Double) {
 		// TODO: Filter based on user's choice and location
 		let scanExpression = AWSDynamoDBScanExpression()
@@ -50,5 +64,6 @@ struct DB {
 
 @objc protocol DBDelegate {
 	@objc optional func createUserResponse(success : Bool, error : String?)
+	@objc optional func createListingResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?)
 }

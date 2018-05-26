@@ -24,6 +24,7 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _longitude: NSNumber?
     var _name: String?
     var _price: NSNumber?
+	var _imageCount: NSNumber?
     var _sellerId: String?
     var _size: String?
     var _type: String?
@@ -46,6 +47,7 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_longitude" : "longitude",
                "_name" : "name",
                "_price" : "price",
+			   "_imageCount" : "imageCount",
                "_sellerId" : "sellerId",
                "_size" : "size",
                "_type" : "type",

@@ -11,7 +11,6 @@
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
 		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */; };
-		0F47BF3320B643CA00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */; };
 		0F47BF3520B6553A00C2CA55 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F47BF3420B6553A00C2CA55 /* Bolts.framework */; };
 		0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3C20B7E7E500C2CA55 /* User.swift */; };
 		0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */; };
@@ -19,6 +18,11 @@
 		0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3F20B7E7E600C2CA55 /* Listing.swift */; };
 		0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */; };
 		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
+		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
+		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
+		0F47BF4E20B9435200C2CA55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4D20B9435200C2CA55 /* Constants.swift */; };
+		0F47BF5120B94CDA00C2CA55 /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */; };
+		0F47BF5220B94CDA00C2CA55 /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */; };
 		0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */; };
 		0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */; };
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
@@ -43,7 +47,6 @@
 		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
 		0F47BF2520B63D3500C2CA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF3420B6553A00C2CA55 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		0F47BF3C20B7E7E500C2CA55 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
@@ -51,6 +54,11 @@
 		0F47BF3F20B7E7E600C2CA55 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		0F47BF4720B7EFB400C2CA55 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
+		0F47BF4D20B9435200C2CA55 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
+		0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0FA2D17A20B5FBA500D7F243 /* StyleRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -131,13 +139,17 @@
 				0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
+				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
 				0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */,
 				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
 				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
+				0F47BF4D20B9435200C2CA55 /* Constants.swift */,
+				0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */,
+				0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */,
 				0FA2D18120B5FBA500D7F243 /* Main.storyboard */,
 				0FA2D18420B5FBA800D7F243 /* Assets.xcassets */,
 				0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */,
-				0F47BF3220B643CA00C2CA55 /* awsconfiguration.json */,
+				0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */,
 				0FA2D18920B5FBA800D7F243 /* Info.plist */,
 			);
 			path = StyleRent;
@@ -251,10 +263,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F47BF3320B643CA00C2CA55 /* awsconfiguration.json in Resources */,
 				0FA2D18820B5FBA800D7F243 /* LaunchScreen.storyboard in Resources */,
 				0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */,
 				0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */,
+				0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */,
+				0F47BF5220B94CDA00C2CA55 /* ListingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +289,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -292,6 +306,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -340,6 +355,7 @@
 				0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */,
 				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
 				0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */,
+				0F47BF5120B94CDA00C2CA55 /* ListingCell.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
 				0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */,
@@ -347,6 +363,8 @@
 				0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */,
 				0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */,
 				0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */,
+				0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */,
+				0F47BF4E20B9435200C2CA55 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

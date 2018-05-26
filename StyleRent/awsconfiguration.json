@@ -12,6 +12,12 @@
   "IdentityManager": {
     "Default": {}
   },
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "stylerentbackend-userfiles-mobilehub-1070684980",
+      "Region": "us-east-2"
+    }
+  },
   "DynamoDBObjectMapper": {
     "Default": {
       "Region": "us-east-2"
@@ -26,6 +32,12 @@
   "PinpointTargeting": {
     "Default": {
       "Region": "us-east-1"
+    }
+  },
+  "UserFileManager": {
+    "Default": {
+      "Bucket": "stylerentbackend-userfiles-mobilehub-1070684980",
+      "Region": "us-east-2"
     }
   }
 }
