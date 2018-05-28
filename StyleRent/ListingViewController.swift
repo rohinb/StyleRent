@@ -25,17 +25,20 @@ class ListingViewController: UIViewController {
 		tableView.register(UINib(nibName: "ListingCell", bundle: nil), forCellReuseIdentifier: "listingCell")
 		locManager.requestWhenInUseAuthorization()
 
+
 		if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
 			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
 			currentLocation = locManager.location
 			print(currentLocation.coordinate.latitude)
 			print(currentLocation.coordinate.longitude)
+			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), 1000, 1000)
+			print(region)
 		}
     }
 
 	fileprivate func loadImage(index : Int) {
 		let listing = listings[index]
-		let fileName = "listing-images/\(listing._id!)-1"
+		let fileName = "listing-images/\(listing._id!)-\(index + 1)"
 		let expression = AWSS3TransferUtilityDownloadExpression()
 		expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
 			print(progress.fractionCompleted)
