@@ -7,11 +7,10 @@ target 'StyleRent' do
   pod 'AWSMobileClient'
   pod 'AWSDynamoDB'
   pod 'AWSS3'
-  pod 'AWSUserPoolsSignIn'
-  pod 'AWSAuthUI'
+  pod 'AWSAuthCore', '~> 2.6.13'
+  pod 'AWSAPIGateway', '~> 2.6.13'
   pod 'FBSDKLoginKit'
   pod 'FBSDKCoreKit'
-  pod 'AWSFacebookSignIn'
   pod 'FBSDKShareKit'
   # Pods for StyleRent
 

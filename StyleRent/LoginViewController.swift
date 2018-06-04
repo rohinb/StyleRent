@@ -8,9 +8,7 @@
 
 import UIKit
 import AWSAuthCore
-import AWSAuthUI
 import FBSDKLoginKit
-import AWSFacebookSignIn
 
 class LoginViewController: UIViewController {
 
@@ -18,6 +16,7 @@ class LoginViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		API.doInvokeAPI()
 		DB.delegate = self
 
 		let loginButton = FBSDKLoginButton()
