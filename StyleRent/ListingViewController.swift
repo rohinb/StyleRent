@@ -11,18 +11,25 @@ import MapKit
 import AWSS3
 
 class ListingViewController: UIViewController {
+	@IBOutlet weak var collectionView: UICollectionView!
+
 	var locManager = CLLocationManager()
 	var currentLocation: CLLocation!
 	var listings = [Listing]()
 	var listingImages = [String : UIImage]()
-	@IBOutlet weak var tableView: UITableView!
+
+	let reuseIdentifier = "ListingCell"
+	let kCellHeight = 200
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		DB.delegate = self
-		tableView.delegate = self
-		tableView.dataSource = self
-		tableView.register(UINib(nibName: "ListingCell", bundle: nil), forCellReuseIdentifier: "listingCell")
+		DB.shared().delegate = self
+
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		collectionView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+		collectionView.backgroundColor = UIColor.clear
+
 		locManager.requestWhenInUseAuthorization()
 
 
@@ -34,11 +41,13 @@ class ListingViewController: UIViewController {
 			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), 1000, 1000)
 			print(region)
 		}
+
+		DB.shared().getNearbyListings(userId: gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude)
     }
 
 	fileprivate func loadImage(index : Int) {
 		let listing = listings[index]
-		let fileName = "listing-images/\(listing._id!)-\(index + 1)"
+		let fileName = "listing-images/\(listing._id!)-1"
 		let expression = AWSS3TransferUtilityDownloadExpression()
 		expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
 			print(progress.fractionCompleted)
@@ -53,7 +62,7 @@ class ListingViewController: UIViewController {
 				} else {
 					print("downlaod complete")
 					self.listingImages[listing._id!] = UIImage(data: data!)
-					self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+					self.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
 				}
 			})
 		}
@@ -80,8 +89,7 @@ class ListingViewController: UIViewController {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		DB.delegate = self
-		DB.getNearbyListings(userId: gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude)
+		DB.shared().delegate = self
 	}
 
     override func didReceiveMemoryWarning() {
@@ -98,25 +106,43 @@ extension ListingViewController : DBDelegate {
 		for index in 0..<listings.count {
 			loadImage(index: index)
 		}
-		tableView.reloadData()
+		collectionView.reloadData()
 	}
 }
 
-extension ListingViewController : UITableViewDelegate, UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ListingViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return listings.count
 	}
 
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 80
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ListingCell
+		let listing = listings[indexPath.row]
+		cell.listingNameLabel.text = listing._id!
+		cell.sizeLabel.text = "Size: \(listing._size!)"
+		cell.lenderNameLabel.text = "By \(listing._sellerId!)"
+		cell.priceLabel.text = "$\(listing._price!)"
+		cell.listingImageView.image = listingImages[listing._id!] ?? nil
+		return cell
 	}
 
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "listingCell") as! ListingCell
-		let listing = listings[indexPath.row]
-		cell.listingName.text = listing._id!
-		cell.listingImageView.image = listingImages[listing._id!] ?? #imageLiteral(resourceName: "loadingImage")
-		return cell
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		// TODO: Go to ListingDetailsViewController
+	}
+
+	//make sure that it's two columns of cells
+	func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(kCellHeight))
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 8
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+		return CGSize(width: self.view.frame.width, height: 24)
 	}
 }
 

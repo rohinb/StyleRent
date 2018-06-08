@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		API.doInvokeAPI()
-		DB.delegate = self
+		DB.shared().delegate = self
 
 		let loginButton = FBSDKLoginButton()
 		loginButton.center = self.view.center
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
 						user?._id = results["id"]
 						user?._name = results["name"]
 					}
-					DB.createUser(user: user!)
+					DB.shared().createUser(user: user!)
 					gblUserId = user!._id!
 					gblUserName = user!._name!
 					print("FB Login Success!")

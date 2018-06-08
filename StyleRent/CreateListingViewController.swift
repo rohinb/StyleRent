@@ -14,7 +14,7 @@ class CreateListingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		DB.delegate = self
+		DB.shared().delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -64,15 +64,16 @@ class CreateListingViewController: UIViewController {
 					} else {
 						let newListing = Listing()
 						newListing?._id = newListingId
+						newListing?._name = "Gucci shirt"
 						newListing?._latitude = 37.2657536962002
 						newListing?._longitude = -121.971246711695
 						newListing?._description = "testing listing"
 						newListing?._imageCount = NSNumber(integerLiteral: self.images.count)
 						newListing?._price = 40
-						newListing?._size = "Medium"
+						newListing?._size = "M"
 						newListing?._sellerId = gblUserId!
 						newListing?._type = "Dress test"
-						DB.createListing(listing: newListing!)
+						DB.shared().createListing(listing: newListing!)
 					}
 				})
 			}

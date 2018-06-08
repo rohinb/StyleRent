@@ -2,26 +2,23 @@
 //  ListingCell.swift
 //  StyleRent
 //
-//  Created by Rohin Bhushan on 5/26/18.
+//  Created by Rohin Bhushan on 6/7/18.
 //  Copyright © 2018 Rohin Bhushan. All rights reserved.
 //
 
 import UIKit
-import AWSS3
 
-class ListingCell: UITableViewCell {
+class ListingCell: UICollectionViewCell {
 	@IBOutlet weak var listingImageView: UIImageView!
-	@IBOutlet weak var listingName: UILabel!
-
+	@IBOutlet weak var sizeLabel: UILabel!
+	@IBOutlet weak var priceLabel: UILabel!
+	@IBOutlet weak var listingNameLabel: UILabel!
+	@IBOutlet weak var lenderNameLabel: UILabel!
+	
 	override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+		self.layer.borderWidth = 1.0
+		self.layer.borderColor = UIColor.lightGray.cgColor
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

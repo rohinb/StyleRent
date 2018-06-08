@@ -9,40 +9,58 @@
 import Foundation
 import AWSDynamoDB
 
-struct DB {
-	// ALWAYS REMEMBER TO CALL DELEGATES IN MAIN THREAD
-	private static let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
-	static var delegate : DBDelegate?
+/**
+	Singleton class for calling DB methods. Delegate methods should always be called in Main Thread.
+*/
 
-	static func createUser(user : User) {
+class DB {
+	private static var instance : DB?
+	private let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+	var delegate : DBDelegate?
+
+	static func shared() -> DB {
+		if let instance = instance {
+			return instance
+		} else {
+			let newDB = DB()
+			instance = newDB
+			return newDB
+		}
+	}
+
+	init() {
+
+	}
+
+	func createUser(user : User) {
 		
 		dynamoDbObjectMapper.save(user, completionHandler: {
 			(error: Error?) -> Void in
 
 			DispatchQueue.main.async {
 				if let error = error {
-					delegate?.createUserResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+					self.delegate?.createUserResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
 				}
-				delegate?.createUserResponse?(success: true, error: nil)
+				self.delegate?.createUserResponse?(success: true, error: nil)
 			}
 		})
 	}
 
-	static func createListing(listing : Listing) {
+	func createListing(listing : Listing) {
 
 		dynamoDbObjectMapper.save(listing, completionHandler: {
 			(error: Error?) -> Void in
 
 			DispatchQueue.main.async {
 				if let error = error {
-					delegate?.createListingResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+					self.delegate?.createListingResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
 				}
-				delegate?.createListingResponse?(success: true, error: nil)
+				self.delegate?.createListingResponse?(success: true, error: nil)
 			}
 		})
 	}
 
-	static func getNearbyListings(userId : String, lat : Double, lon : Double) {
+	func getNearbyListings(userId : String, lat : Double, lon : Double) {
 		// TODO: Filter based on user's choice and location
 		let scanExpression = AWSDynamoDBScanExpression()
 		scanExpression.limit = 20
@@ -52,9 +70,9 @@ struct DB {
 			DispatchQueue.main.async {
 				if let error = task.error as NSError? {
 					print("The request failed. Error: \(error)")
-					delegate?.getListingsResponse?(success: false, listings: [], error: error.localizedDescription)
+					self.delegate?.getListingsResponse?(success: false, listings: [], error: error.localizedDescription)
 				} else if let paginatedOutput = task.result {
-					delegate?.getListingsResponse?(success: true, listings: paginatedOutput.items as! [Listing], error: nil)
+					self.delegate?.getListingsResponse?(success: true, listings: paginatedOutput.items as! [Listing], error: nil)
 				}
 			}
 			return nil

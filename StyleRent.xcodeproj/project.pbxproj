@@ -14,6 +14,8 @@
 		0F1387EA20BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E920BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m */; };
 		0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387EB20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m */; };
 		0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387F120BB9CE000E78B25 /* StringExtension.swift */; };
+		0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6B20C9F66C0036141B /* ListingCell.swift */; };
+		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
 		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
@@ -28,8 +30,6 @@
 		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
 		0F47BF4E20B9435200C2CA55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4D20B9435200C2CA55 /* Constants.swift */; };
-		0F47BF5120B94CDA00C2CA55 /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */; };
-		0F47BF5220B94CDA00C2CA55 /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */; };
 		0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */; };
 		0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */; };
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
@@ -60,6 +60,8 @@
 		0F1387EE20BB99E300E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSAPI_DI8UQ5E635_ResponseSchema.h; sourceTree = "<group>"; };
 		0F1387EF20BB99E900E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSAPI_DI8UQ5E635_RequestSchema.h; sourceTree = "<group>"; };
 		0F1387F120BB9CE000E78B25 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		0F384A6B20C9F66C0036141B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
+		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F47BF1B20B63C4C00C2CA55 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StyleRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
@@ -75,8 +77,6 @@
 		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
 		0F47BF4D20B9435200C2CA55 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
-		0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0FA2D17A20B5FBA500D7F243 /* StyleRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 		0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */ = {
 			isa = PBXGroup;
 			children = (
-				0F47BF4F20B94CDA00C2CA55 /* ListingCell.swift */,
-				0F47BF5020B94CDA00C2CA55 /* ListingCell.xib */,
+				0F384A6B20C9F66C0036141B /* ListingCell.swift */,
+				0F384A6C20C9F66C0036141B /* ListingCell.xib */,
 			);
 			path = "XIBs and their VCs";
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */,
 				0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */,
 				0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */,
-				0F47BF5220B94CDA00C2CA55 /* ListingCell.xib in Resources */,
+				0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +407,7 @@
 			files = (
 				0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */,
 				0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */,
+				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,
 				0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */,
 				0F1387E620BB952800E78B25 /* APICalls.swift in Sources */,
 				0F1387E820BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m in Sources */,
@@ -414,7 +415,6 @@
 				0F1387DE20BB8AF500E78B25 /* QRScannerController.swift in Sources */,
 				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
 				0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */,
-				0F47BF5120B94CDA00C2CA55 /* ListingCell.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
 				0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */,

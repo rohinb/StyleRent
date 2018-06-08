@@ -12,7 +12,7 @@ class StyleRentTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-		DB.delegate = self
+		DB.shared().delegate = self
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -26,7 +26,7 @@ class StyleRentTests: XCTestCase {
 		basicUser?._emailAddress = "test1-email"
 		basicUser?._name = "Test 1"
 		basicUser?._password = "Test 1 Password"
-		DB.createUser(user: basicUser)
+		DB.shared().createUser(user: basicUser)
 		// TODO: Make test work for delegate callback model
     }
     
