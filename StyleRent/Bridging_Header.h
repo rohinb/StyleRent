@@ -11,3 +11,4 @@
 //
 
 #import "AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.h"
+#import <UIScrollView_InfiniteScroll/UIScrollView+InfiniteScroll.h>

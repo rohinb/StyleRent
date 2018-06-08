@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import AWSS3
+import AWSDynamoDB
 
 class ListingViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -17,6 +18,8 @@ class ListingViewController: UIViewController {
 	var currentLocation: CLLocation!
 	var listings = [Listing]()
 	var listingImages = [String : UIImage]()
+	var freshPull = true
+	var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
 
 	let reuseIdentifier = "ListingCell"
 	let kCellHeight = 200
@@ -41,8 +44,16 @@ class ListingViewController: UIViewController {
 			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), 1000, 1000)
 			print(region)
 		}
+		collectionView.addInfiniteScroll { (collectionView) in
+			DB.shared().getNearbyListings(userId: gblUserId, lat: self.currentLocation.coordinate.latitude, lon: self.currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, types: nil, lastEvalKey: self.lastEvalKey)
+		}
 
-		DB.shared().getNearbyListings(userId: gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude)
+		collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+			return self.freshPull || self.lastEvalKey != nil
+		}
+		collectionView.infiniteScrollTriggerOffset = 100.0 // TODO: Fine tune
+		collectionView.beginInfiniteScroll(true)
+
     }
 
 	fileprivate func loadImage(index : Int) {
@@ -100,13 +111,21 @@ class ListingViewController: UIViewController {
 }
 
 extension ListingViewController : DBDelegate {
-	func getListingsResponse(success: Bool, listings: [Listing], error: String?) {
+	func getListingsResponse(success: Bool, listings: [Listing], error: String?, lastEval: [String : AWSDynamoDBAttributeValue]?) {
 		print(success, listings)
-		self.listings = listings
-		for index in 0..<listings.count {
+		let initialCount = self.listings.count
+		self.listings += listings
+		lastEvalKey = lastEval
+		freshPull = false
+		let newIndexes = initialCount..<(listings.count + initialCount)
+		for index in newIndexes { // load only new images
 			loadImage(index: index)
 		}
-		collectionView.reloadData()
+		let indexPathsToReload = newIndexes.map { (index) -> IndexPath in
+			return IndexPath(item: index, section: 0)
+		}
+		collectionView.insertItems(at: indexPathsToReload)
+		collectionView.finishInfiniteScroll()
 	}
 }
 
