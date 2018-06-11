@@ -7,12 +7,14 @@ target 'StyleRent' do
   pod 'AWSMobileClient'
   pod 'AWSDynamoDB'
   pod 'AWSS3'
-  pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
   pod 'AWSAuthCore', '~> 2.6.13'
   pod 'AWSAPIGateway', '~> 2.6.13'
   pod 'FBSDKLoginKit'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
+
+  pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
+  pod 'ESPullToRefresh'
   # Pods for StyleRent
 
 end

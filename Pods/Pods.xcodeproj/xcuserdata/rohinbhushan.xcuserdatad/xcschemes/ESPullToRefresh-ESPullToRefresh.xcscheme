@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "39C72A5DE5D28A561AA2EE503C7D5EA4"
-               BuildableName = "Pods_StyleRent.framework"
-               BlueprintName = "Pods-StyleRent"
+               BlueprintIdentifier = "D1CFA156DF9AD56A6424A8B5DDDCC42B"
+               BuildableName = "ESPullToRefresh.bundle"
+               BlueprintName = "ESPullToRefresh-ESPullToRefresh"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "39C72A5DE5D28A561AA2EE503C7D5EA4"
-            BuildableName = "Pods_StyleRent.framework"
-            BlueprintName = "Pods-StyleRent"
+            BlueprintIdentifier = "D1CFA156DF9AD56A6424A8B5DDDCC42B"
+            BuildableName = "ESPullToRefresh.bundle"
+            BlueprintName = "ESPullToRefresh-ESPullToRefresh"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

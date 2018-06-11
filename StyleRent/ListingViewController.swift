@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import AWSS3
 import AWSDynamoDB
+import ESPullToRefresh
 
 class ListingViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -22,7 +23,7 @@ class ListingViewController: UIViewController {
 	var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
 
 	let reuseIdentifier = "ListingCell"
-	let kCellHeight = 200
+	static let kCellHeight = 200.0
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,16 @@ class ListingViewController: UIViewController {
 		}
 		collectionView.infiniteScrollTriggerOffset = 100.0 // TODO: Fine tune
 		collectionView.beginInfiniteScroll(true)
+
+		self.collectionView.es.addPullToRefresh {
+			[unowned self] in
+			self.freshPull = true
+			self.lastEvalKey = nil
+			self.listings = []
+			self.listingImages = [:]
+			self.collectionView.reloadData()
+			DB.shared().getNearbyListings(userId: gblUserId, lat: self.currentLocation.coordinate.latitude, lon: self.currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, types: nil, lastEvalKey: self.lastEvalKey)
+		}
 
     }
 
@@ -126,6 +137,7 @@ extension ListingViewController : DBDelegate {
 		}
 		collectionView.insertItems(at: indexPathsToReload)
 		collectionView.finishInfiniteScroll()
+		collectionView.es.stopPullToRefresh()
 	}
 }
 
@@ -153,7 +165,7 @@ extension ListingViewController : UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(kCellHeight))
+		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(ListingViewController.kCellHeight))
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

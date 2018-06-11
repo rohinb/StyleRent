@@ -9,5 +9,5 @@
 import Foundation
 
 struct Constants {
-	let listingImageBucket = "stylerentbackend-userfiles-mobilehub-1070684980"
+	
 }
