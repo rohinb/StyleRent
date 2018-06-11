@@ -123,7 +123,7 @@ class CreateListingViewController: UIViewController {
 
 extension CreateListingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-		let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+		let image = info[UIImagePickerControllerEditedImage] as! UIImage
 		images.append(image)
 		picker.dismiss(animated: true, completion: nil)
 	}
