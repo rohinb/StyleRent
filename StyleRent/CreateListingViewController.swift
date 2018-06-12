@@ -13,10 +13,17 @@ class CreateListingViewController: UIViewController {
 	var images = [UIImage]()
 	var uploadFailed = false
 	var uploadedCount = 0
+	@IBOutlet weak var imageCollectionView: UICollectionView!
+	let reuseIdentifier = "listingImageCell"
 
-    override func viewDidLoad() {
+	override func viewDidLoad() {
         super.viewDidLoad()
 		DB.shared().delegate = self
+		self.imageCollectionView.delegate = self
+		self.imageCollectionView.dataSource = self
+		self.imageCollectionView.dragDelegate = self
+		self.imageCollectionView.dropDelegate = self
+		self.imageCollectionView.dragInteractionEnabled = true
         // Do any additional setup after loading the view.
     }
 
@@ -125,6 +132,8 @@ extension CreateListingViewController : UIImagePickerControllerDelegate, UINavig
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		let image = info[UIImagePickerControllerEditedImage] as! UIImage
 		images.append(image)
+		let newIndexPath = IndexPath(row: images.count - 1, section: 0)
+		imageCollectionView.insertItems(at: [newIndexPath])
 		picker.dismiss(animated: true, completion: nil)
 	}
 }
@@ -133,12 +142,118 @@ extension CreateListingViewController : DBDelegate {
 	func createListingResponse(success : Bool, error : String?) {
 		if success {
 			images = []
+			imageCollectionView.reloadData()
 			popupAlert(title: "Listing posted!", message: nil, actionTitles: ["Ok"], actions: [nil])
 		} else {
 			popupAlert(title: "Failed to save your listing", message: "Please try again soon.", actionTitles: ["Ok"], actions: [nil])
 		}
 	}
 }
+
+extension CreateListingViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return images.count
+	}
+
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImageCell
+		let image = self.images[indexPath.row]
+		cell.theImageView.image = image
+		return cell
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		// TODO: Go to ListingDetailsViewController
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 8
+	}
+
+	func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+
+	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		print("Starting Index: \(sourceIndexPath.item)")
+		print("Ending Index: \(destinationIndexPath.item)")
+	}
+}
+
+extension CreateListingViewController : UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+	func collectionView(_ collectionView: UICollectionView, performDropWith
+		coordinator: UICollectionViewDropCoordinator) {
+
+		let destinationIndexPath =
+			coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+
+		switch coordinator.proposal.operation {
+		case .move:
+
+			let items = coordinator.items
+
+			for item in items {
+
+				guard let sourceIndexPath = item.sourceIndexPath
+					else { return }
+
+				collectionView.performBatchUpdates({
+
+					let moveImage = images[sourceIndexPath.item]
+					images.remove(at: sourceIndexPath.item)
+					images.insert(moveImage, at: destinationIndexPath.item)
+
+					collectionView.deleteItems(at: [sourceIndexPath])
+					collectionView.insertItems(at: [destinationIndexPath])
+				})
+				coordinator.drop(item.dragItem,
+								 toItemAt: destinationIndexPath)
+			}
+		case .copy:
+
+			let items = coordinator.items
+
+			for item in items {
+				item.dragItem.itemProvider.loadObject(ofClass: UIImage.self,
+													  completionHandler: {(newImage, error)  -> Void in
+									if let image = newImage as? UIImage {
+
+										self.images.insert(image, at: destinationIndexPath.item)
+
+										DispatchQueue.main.async {
+											collectionView.insertItems(
+												at: [destinationIndexPath])
+										}
+									}
+				})
+			}
+		default: return
+		}
+	}
+
+	func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate
+		session: UIDropSession, withDestinationIndexPath destinationIndexPath:
+		IndexPath?) -> UICollectionViewDropProposal {
+
+		if session.localDragSession != nil {
+			return UICollectionViewDropProposal(operation: .move,
+												intent: .insertAtDestinationIndexPath)
+		} else {
+			return UICollectionViewDropProposal(operation: .copy,
+												intent: .insertAtDestinationIndexPath)
+		}
+	}
+
+	func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+		let image = self.images[indexPath.row]
+		let itemProvider = NSItemProvider(object: image as UIImage)
+		let dragItem = UIDragItem(itemProvider: itemProvider)
+		dragItem.localObject = image
+		return [dragItem]
+	}
+
+}
+
 
 
 

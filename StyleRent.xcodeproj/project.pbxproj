@@ -17,6 +17,7 @@
 		0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6B20C9F66C0036141B /* ListingCell.swift */; };
 		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
+		0F384A7620CF41C70036141B /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7520CF41C70036141B /* ImageCell.swift */; };
 		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
 		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
@@ -64,6 +65,7 @@
 		0F384A6B20C9F66C0036141B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
 		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		0F384A7520CF41C70036141B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		0F47BF1B20B63C4C00C2CA55 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StyleRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				0F384A6B20C9F66C0036141B /* ListingCell.swift */,
 				0F384A6C20C9F66C0036141B /* ListingCell.xib */,
+				0F384A7520CF41C70036141B /* ImageCell.swift */,
 			);
 			path = "XIBs and their VCs";
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
+				0F384A7620CF41C70036141B /* ImageCell.swift in Sources */,
 				0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */,
 				0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */,
 				0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */,
@@ -633,7 +637,7 @@
 					"\"$(SRCROOT)/Bolts.framework\"",
 				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -658,7 +662,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
