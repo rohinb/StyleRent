@@ -119,6 +119,11 @@ class ListingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let index = sender as? Int, let dest = segue.destination as? ListingDetailsViewController {
+			dest.listing = listings[index]
+		}
+	}
 }
 
 extension ListingViewController : DBDelegate {
@@ -158,7 +163,7 @@ extension ListingViewController : UICollectionViewDelegate, UICollectionViewData
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		// TODO: Go to ListingDetailsViewController
+		performSegue(withIdentifier: "toListingDetails", sender: indexPath.row)
 	}
 
 	//make sure that it's two columns of cells

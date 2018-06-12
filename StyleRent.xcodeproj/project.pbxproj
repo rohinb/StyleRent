@@ -18,6 +18,7 @@
 		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
 		0F384A7620CF41C70036141B /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7520CF41C70036141B /* ImageCell.swift */; };
+		0F384A7820CF95300036141B /* ListingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7720CF95300036141B /* ListingDetailsViewController.swift */; };
 		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
 		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
@@ -66,6 +67,7 @@
 		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		0F384A7520CF41C70036141B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		0F384A7720CF95300036141B /* ListingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailsViewController.swift; sourceTree = "<group>"; };
 		0F47BF1B20B63C4C00C2CA55 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StyleRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				0F1387F320BB9CF300E78B25 /* Extensions */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
+				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
 				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
 				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
@@ -415,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F384A7820CF95300036141B /* ListingDetailsViewController.swift in Sources */,
 				0F47BF4620B7EFA800C2CA55 /* ListingViewController.swift in Sources */,
 				0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */,
 				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,

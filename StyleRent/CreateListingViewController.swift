@@ -118,7 +118,7 @@ class CreateListingViewController: UIViewController {
 		newListing?._latitude = 37.2657536962002
 		newListing?._longitude = -121.971246711695
 		newListing?._description = "testing listing"
-		newListing?._imageCount = NSNumber(integerLiteral: self.images.count)
+		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
 		newListing?._price = 40
 		newListing?._size = "M"
 		newListing?._sellerId = gblUserId!
