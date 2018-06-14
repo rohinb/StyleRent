@@ -9,6 +9,7 @@
 import UIKit
 import AWSAuthCore
 import FBSDKLoginKit
+import SendBirdSDK
 
 class LoginViewController: UIViewController {
 
@@ -47,6 +48,11 @@ class LoginViewController: UIViewController {
 						user?._id = results["id"]
 						user?._name = results["name"]
 					}
+					SBDMain.connect(withUserId: user!._id!, completionHandler: { (newUser, error) in
+						SBDMain.updateCurrentUserInfo(withNickname: user!._name, profileUrl: "http://graph.facebook.com/\(user!._id!)/picture?type=square", completionHandler: { (error) in
+							print("Connected to SendBird and set up user")
+						})
+					})
 					DB.shared().createUser(user: user!)
 					gblUserId = user!._id!
 					gblUserName = user!._name!

@@ -9,6 +9,7 @@
 import UIKit
 import AWSMobileClient
 import FBSDKCoreKit
+import SendBirdSDK
 
 //class FacebookProvider: NSObject, AWSIdentityProviderManager {
 //	func logins() -> AWSTask<NSDictionary> {
@@ -23,11 +24,20 @@ import FBSDKCoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	static let instance: NSCache<AnyObject, AnyObject> = NSCache()
 
+	static func imageCache() -> NSCache<AnyObject, AnyObject>! {
+		if AppDelegate.instance.totalCostLimit == 104857600 {
+			AppDelegate.instance.totalCostLimit = 104857600
+		}
+
+		return AppDelegate.instance
+	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+		SBDMain.initWithApplicationId("64DBE184-31A5-421E-BC58-CA2E3A34E5D5")
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)

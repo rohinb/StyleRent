@@ -15,6 +15,12 @@ target 'StyleRent' do
 
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
   pod 'ESPullToRefresh'
+  pod 'SendBirdSDK'
+  pod 'MGSwipeTableCell'
+  pod 'HTMLKit', '~> 2.1'
+  pod 'NYTPhotoViewer', '~> 1.1.0'
+  pod 'TTTAttributedLabel'
+  pod 'AlamofireImage'
   # Pods for StyleRent
 
 end

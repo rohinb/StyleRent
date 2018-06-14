@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (4.7.2)
+  - AlamofireImage (3.3.1):
+    - Alamofire (~> 4.5)
   - AWSAPIGateway (2.6.18):
     - AWSCore (= 2.6.18)
   - AWSAuthCore (2.6.18):
@@ -23,9 +26,22 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.33.0):
     - FBSDKCoreKit (~> 4.33.0)
+  - FLAnimatedImage (1.0.12)
+  - HTMLKit (2.1.4)
+  - MGSwipeTableCell (1.6.7)
+  - NYTPhotoViewer (1.1.0):
+    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
+    - NYTPhotoViewer/Core (= 1.1.0)
+  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
+    - FLAnimatedImage (~> 1.0.8)
+    - NYTPhotoViewer/Core
+  - NYTPhotoViewer/Core (1.1.0)
+  - SendBirdSDK (3.0.99)
+  - TTTAttributedLabel (2.0.0)
   - UIScrollView-InfiniteScroll (1.1.0)
 
 DEPENDENCIES:
+  - AlamofireImage
   - AWSAPIGateway (~> 2.6.13)
   - AWSAuthCore (~> 2.6.13)
   - AWSDynamoDB
@@ -35,10 +51,17 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - HTMLKit (~> 2.1)
+  - MGSwipeTableCell
+  - NYTPhotoViewer (~> 1.1.0)
+  - SendBirdSDK
+  - TTTAttributedLabel
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
     - AWSAPIGateway
     - AWSAuthCore
     - AWSCore
@@ -50,9 +73,17 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
+    - FLAnimatedImage
+    - HTMLKit
+    - MGSwipeTableCell
+    - NYTPhotoViewer
+    - SendBirdSDK
+    - TTTAttributedLabel
     - UIScrollView-InfiniteScroll
 
 SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   AWSAPIGateway: fbde9d6b4959e81b55f4097e7b9ba44e36970a9b
   AWSAuthCore: 32c8b728338fb54b0b1723f4be5be3777d5ca0ae
   AWSCore: 5594f02730a821907d155ac28e96593d1caa6f64
@@ -64,8 +95,14 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
   FBSDKShareKit: 1869cb24db2cea90666a50cb9d568deb38e2d16e
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  HTMLKit: 2f4c7d3e14906cdfc2d3d51b85dfdf29ad9ae65f
+  MGSwipeTableCell: fb20e983988bde2b8d0df29c2d9e1d8ffd10b74a
+  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
+  SendBirdSDK: 6e9212f86ebd2b95bb98b670332b1b59b0e7ca2c
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 5f705b7867ddf0408dd2fe3e285e671805a2ac4b
+PODFILE CHECKSUM: e99f0028a9218a6e78c9e8856065ddca43a00e3e
 
 COCOAPODS: 1.5.2

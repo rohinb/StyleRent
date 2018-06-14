@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSS3
+import SendBirdSDK
 
 class ListingDetailsViewController: UIViewController {
 	@IBOutlet weak var scrollView: UIScrollView!
@@ -82,4 +83,19 @@ class ListingDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+	@IBAction func messageOwner(_ sender: Any) {
+		let userIds = [gblUserId!, listing._sellerId!]
+		SBDGroupChannel.createChannel(withUserIds: userIds, isDistinct: true) { (channel, error) in
+			if error != nil {
+				NSLog("Error: %@", error!)
+				return
+			}
+			channel?.name = "Listing Chat"
+			let vc = GroupChannelChattingViewController(nibName: "GroupChannelChattingViewController", bundle: Bundle.main)
+			vc.groupChannel = channel
+
+			self.present(vc, animated: true, completion: nil)
+			print("Channel created!")
+		}
+	}
 }

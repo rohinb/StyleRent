@@ -146,6 +146,7 @@ extension ListingViewController : DBDelegate {
 	}
 }
 
+// MARK: UICollectionView
 extension ListingViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return listings.count
