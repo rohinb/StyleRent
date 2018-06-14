@@ -94,6 +94,7 @@
 		0F98FA3720D252140054E14C /* GroupChannelChattingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F98FA3620D252140054E14C /* GroupChannelChattingViewController.xib */; };
 		0F98FA3920D252190054E14C /* CreateGroupChannelUserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F98FA3820D252190054E14C /* CreateGroupChannelUserListViewController.xib */; };
 		0F98FA3B20D2521F0054E14C /* CreateGroupChannelSelectOptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F98FA3A20D2521F0054E14C /* CreateGroupChannelSelectOptionViewController.xib */; };
+		0F98FA3E20D25E130054E14C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98FA3D20D25E130054E14C /* TabBarViewController.swift */; };
 		0FA2D17E20B5FBA500D7F243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */; };
 		0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */; };
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
@@ -226,6 +227,7 @@
 		0F98FA3620D252140054E14C /* GroupChannelChattingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupChannelChattingViewController.xib; sourceTree = "<group>"; };
 		0F98FA3820D252190054E14C /* CreateGroupChannelUserListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupChannelUserListViewController.xib; sourceTree = "<group>"; };
 		0F98FA3A20D2521F0054E14C /* CreateGroupChannelSelectOptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupChannelSelectOptionViewController.xib; sourceTree = "<group>"; };
+		0F98FA3D20D25E130054E14C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0FA2D17A20B5FBA500D7F243 /* StyleRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
+				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
 				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
 				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
 				0FA2D18420B5FBA800D7F243 /* Assets.xcassets */,
@@ -824,6 +827,7 @@
 				0F98F9C120D1FE7E0054E14C /* OutgoingUserMessageTableViewCell.swift in Sources */,
 				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,
 				0F98F9FD20D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift in Sources */,
+				0F98FA3E20D25E130054E14C /* TabBarViewController.swift in Sources */,
 				0F98FA0520D1FEA10054E14C /* GroupChannelListTableViewCell.swift in Sources */,
 				0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */,
 				0F98FA0E20D1FEA10054E14C /* GroupChannelListViewController.swift in Sources */,

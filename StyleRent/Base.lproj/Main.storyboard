@@ -310,10 +310,10 @@
             </objects>
             <point key="canvasLocation" x="3140" y="273"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="TZ4-7L-TI1">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dol-sI-eO0" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dol-sI-eO0" customClass="TabBarViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d1s-9M-D4X">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
