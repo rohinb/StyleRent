@@ -39,7 +39,6 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
         self.refreshControl?.addTarget(self, action: #selector(refreshChannelList), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl!)
         
-        self.setDefaultNavigationItems()
         
         self.noChannelLabel.isHidden = true
         
@@ -228,8 +227,8 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
         if self.editableChannel == false {
             let vc = GroupChannelChattingViewController(nibName: "GroupChannelChattingViewController", bundle: Bundle.main)
             vc.groupChannel = self.channels[indexPath.row]
-            
-            self.present(vc, animated: true, completion: nil)
+
+			self.navigationController?.pushViewController(vc, animated: true)
         }
         else {
             let cell = tableView.cellForRow(at: indexPath) as! MGSwipeTableCell

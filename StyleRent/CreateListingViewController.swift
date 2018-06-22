@@ -9,10 +9,18 @@
 import UIKit
 import AWSS3
 
+enum OptionType : String {
+	case upload = "Upload"
+	case take = "Take"
+
+	static let types = [OptionType.upload, OptionType.take]
+}
+
 class CreateListingViewController: UIViewController {
 	var images = [UIImage]()
 	var uploadFailed = false
 	var uploadedCount = 0
+	let MAX_IMAGE_COUNT = 5
 	@IBOutlet weak var imageCollectionView: UICollectionView!
 	let reuseIdentifier = "listingImageCell"
 
@@ -32,7 +40,7 @@ class CreateListingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-	@IBAction func loadImage(_ sender: Any) {
+	func takeImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self
@@ -42,7 +50,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	@IBAction func uploadImage(_ sender: Any) {
+	func uploadImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self
@@ -152,18 +160,40 @@ extension CreateListingViewController : DBDelegate {
 
 extension CreateListingViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return images.count
+		return min(images.count + 1, MAX_IMAGE_COUNT)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImageCell
-		let image = self.images[indexPath.row]
-		cell.theImageView.image = image
-		return cell
+		if images.count < MAX_IMAGE_COUNT && indexPath.row == images.count {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addOneCell", for: indexPath)
+			return cell
+		} else {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImageCell
+			let image = self.images[indexPath.row]
+			cell.theImageView.image = image
+			return cell
+		}
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		// TODO: Go to ListingDetailsViewController
+		if indexPath.row == images.count {
+			let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+			alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+			alert.addAction(UIAlertAction(title: OptionType.take.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
+				self.takeImage()
+			}))
+			alert.addAction(UIAlertAction(title: OptionType.upload.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
+				self.uploadImage()
+			}))
+
+			self.present(alert, animated: true, completion: nil)
+		} else {
+			popupAlert(title: "Do you want to delete this picture?", message: nil, actionTitles: ["Delete", "Cancel"],
+					   actions: [{ (action) in
+							self.images.remove(at: indexPath.row)
+							self.imageCollectionView.deleteItems(at: [indexPath])
+						}, nil])
+		}
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -171,7 +201,15 @@ extension CreateListingViewController : UICollectionViewDelegate, UICollectionVi
 	}
 
 	func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-		return true
+		return !(images.count < MAX_IMAGE_COUNT && indexPath.row == images.count)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+		if images.count < MAX_IMAGE_COUNT && proposedIndexPath.row == images.count {
+			return originalIndexPath
+		} else {
+			return proposedIndexPath
+		}
 	}
 
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -196,6 +234,9 @@ extension CreateListingViewController : UICollectionViewDragDelegate, UICollecti
 
 				guard let sourceIndexPath = item.sourceIndexPath
 					else { return }
+				if images.count < MAX_IMAGE_COUNT && destinationIndexPath.row == images.count {
+					return
+				}
 
 				collectionView.performBatchUpdates({
 
@@ -208,24 +249,6 @@ extension CreateListingViewController : UICollectionViewDragDelegate, UICollecti
 				})
 				coordinator.drop(item.dragItem,
 								 toItemAt: destinationIndexPath)
-			}
-		case .copy:
-
-			let items = coordinator.items
-
-			for item in items {
-				item.dragItem.itemProvider.loadObject(ofClass: UIImage.self,
-													  completionHandler: {(newImage, error)  -> Void in
-									if let image = newImage as? UIImage {
-
-										self.images.insert(image, at: destinationIndexPath.item)
-
-										DispatchQueue.main.async {
-											collectionView.insertItems(
-												at: [destinationIndexPath])
-										}
-									}
-				})
 			}
 		default: return
 		}
@@ -245,11 +268,15 @@ extension CreateListingViewController : UICollectionViewDragDelegate, UICollecti
 	}
 
 	func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-		let image = self.images[indexPath.row]
-		let itemProvider = NSItemProvider(object: image as UIImage)
-		let dragItem = UIDragItem(itemProvider: itemProvider)
-		dragItem.localObject = image
-		return [dragItem]
+		if indexPath.row < images.count { // only move images
+			let image = self.images[indexPath.row]
+			let itemProvider = NSItemProvider(object: image as UIImage)
+			let dragItem = UIDragItem(itemProvider: itemProvider)
+			dragItem.localObject = image
+			return [dragItem]
+		} else {
+			return []
+		}
 	}
 
 }

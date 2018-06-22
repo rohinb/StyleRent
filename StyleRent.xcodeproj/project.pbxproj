@@ -400,16 +400,16 @@
 			isa = PBXGroup;
 			children = (
 				0F98FA3A20D2521F0054E14C /* CreateGroupChannelSelectOptionViewController.xib */,
+				0F98F9EA20D1FEA10054E14C /* CreateGroupChannelSelectOptionViewController.swift */,
 				0F98FA3820D252190054E14C /* CreateGroupChannelUserListViewController.xib */,
+				0F98F9E020D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift */,
+				0F98F9FC20D1FEA10054E14C /* GroupChannelChattingViewController.swift */,
 				0F98FA3620D252140054E14C /* GroupChannelChattingViewController.xib */,
 				0F98FA3420D2520E0054E14C /* GroupChannelListViewController.xib */,
-				0F98F9E020D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift */,
-				0F98F9E120D1FEA10054E14C /* MemberListViewController.swift */,
-				0F98F9EA20D1FEA10054E14C /* CreateGroupChannelSelectOptionViewController.swift */,
-				0F98F9EF20D1FEA10054E14C /* ViewCell */,
 				0F98F9FA20D1FEA10054E14C /* GroupChannelListViewController.swift */,
 				0F98F9FB20D1FEA10054E14C /* GroupChannelChattingViewController.xib */,
-				0F98F9FC20D1FEA10054E14C /* GroupChannelChattingViewController.swift */,
+				0F98F9E120D1FEA10054E14C /* MemberListViewController.swift */,
+				0F98F9EF20D1FEA10054E14C /* ViewCell */,
 			);
 			path = GroupChannel;
 			sourceTree = "<group>";

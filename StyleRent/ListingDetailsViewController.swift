@@ -85,6 +85,7 @@ class ListingDetailsViewController: UIViewController {
 
 	@IBAction func messageOwner(_ sender: Any) {
 		let userIds = [gblUserId!, listing._sellerId!]
+		//SBDGroupChannel.createChannel(withName: <#T##String?#>, isDistinct: <#T##Bool#>, users: <#T##[SBDUser]#>, coverUrl: <#T##String?#>, data: <#T##String?#>, completionHandler: <#T##(SBDGroupChannel?, SBDError?) -> Void#>)
 		SBDGroupChannel.createChannel(withUserIds: userIds, isDistinct: true) { (channel, error) in
 			if error != nil {
 				NSLog("Error: %@", error!)

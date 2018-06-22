@@ -12,11 +12,14 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		// Add messages view
 		let vc = GroupChannelListViewController()
-		let item = UITabBarItem(title: "Messages", image: nil, selectedImage: nil)
-		vc.tabBarItem = item
-		self.viewControllers?.append(vc)
-        // Do any additional setup after loading the view.
+		let navController = UINavigationController()
+		navController.viewControllers = [vc]
+		let item = UITabBarItem(title: "Conversations", image: nil, selectedImage: nil)
+		navController.tabBarItem = item
+		navController.title = "Conversations"
+		self.viewControllers?.append(navController)
     }
 
     override func didReceiveMemoryWarning() {
