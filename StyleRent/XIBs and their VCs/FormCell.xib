@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FormCell" id="KGk-i7-Jjw" customClass="FormCell" customModule="StyleRent" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJj-1e-2rn">
+                        <rect key="frame" x="20" y="15" width="87" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2M-rq-MVS">
+                        <rect key="frame" x="117" y="0.0" width="1" height="43.5"/>
+                        <color key="backgroundColor" red="0.78427058458328247" green="0.78005510568618774" blue="0.80065268278121948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="yjv-6V-76l"/>
+                        </constraints>
+                    </view>
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4p3-uu-Xeu">
+                        <rect key="frame" x="135" y="6" width="97" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="i2M-rq-MVS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="117" id="24v-Vr-kUa"/>
+                    <constraint firstItem="i2M-rq-MVS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DrW-xT-UPq"/>
+                    <constraint firstItem="i2M-rq-MVS" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="Ewp-tX-gzf"/>
+                    <constraint firstItem="i2M-rq-MVS" firstAttribute="leading" secondItem="jJj-1e-2rn" secondAttribute="trailing" constant="10" id="Nqm-kH-nIO"/>
+                    <constraint firstItem="jJj-1e-2rn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pwV-X2-m9f"/>
+                    <constraint firstItem="jJj-1e-2rn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vFb-MQ-HF1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="field" destination="4p3-uu-Xeu" id="TMI-Fx-7Ht"/>
+                <outlet property="nameLabel" destination="jJj-1e-2rn" id="JOD-8o-50a"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

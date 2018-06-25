@@ -9,12 +9,57 @@
 import UIKit
 import AWSS3
 
-enum OptionType : String {
+enum PhotoOptionType : String {
 	case upload = "Upload"
 	case take = "Take"
 
-	static let types = [OptionType.upload, OptionType.take]
+	static let types = [PhotoOptionType.upload, PhotoOptionType.take]
 }
+
+enum DetailType : String {
+	case name = "Name"
+	case description = "Description"
+	case category = "Category"
+	case size = "Size"
+	case originalPrice = "Original Price"
+	case listingPrice = "Listing Price"
+	case earnings = "Your earnings"
+}
+
+enum SectionType : Int {
+	case name = 0
+	case description
+	case details
+	case price
+
+	var rows : [DetailType] {
+		switch self {
+		case .name: return [.name]
+		case .description: return [.description]
+		case .details: return [.category, .size]
+		case .price: return [.originalPrice, .listingPrice, .earnings]
+		}
+	}
+
+	var header : String? {
+		switch self {
+		case .name: return "Details"
+		case .description: return nil
+		case .details: return nil
+		case .price: return nil
+		}
+	}
+
+	var rowHeight : CGFloat {
+		switch self {
+		case .name: return 40
+		case .description: return 70
+		case .details: return 35
+		case .price: return 35
+		}
+	}
+}
+
 
 class CreateListingViewController: UIViewController {
 	var images = [UIImage]()
@@ -22,18 +67,39 @@ class CreateListingViewController: UIViewController {
 	var uploadedCount = 0
 	let MAX_IMAGE_COUNT = 5
 	@IBOutlet weak var imageCollectionView: UICollectionView!
+	@IBOutlet weak var tableView: UITableView!
 	let reuseIdentifier = "listingImageCell"
+	let newListing = Listing()
+	@IBOutlet weak var scrollView: UIScrollView!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		DB.shared().delegate = self
-		self.imageCollectionView.delegate = self
-		self.imageCollectionView.dataSource = self
-		self.imageCollectionView.dragDelegate = self
-		self.imageCollectionView.dropDelegate = self
-		self.imageCollectionView.dragInteractionEnabled = true
+
+		hideKeyboardWhenTappedAround()
+
+		imageCollectionView.delegate = self
+		imageCollectionView.dataSource = self
+		imageCollectionView.dragDelegate = self
+		imageCollectionView.dropDelegate = self
+		imageCollectionView.dragInteractionEnabled = true
+
+		tableView.delegate = self
+		tableView.dataSource = self
+		tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
+		tableView.register(UINib(nibName: "FormCell", bundle: nil), forCellReuseIdentifier: "FormCell")
         // Do any additional setup after loading the view.
+		let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.gestureAction(_:)))
+		recognizer.numberOfTapsRequired = 1
+		scrollView.isUserInteractionEnabled = true
+		scrollView.addGestureRecognizer(recognizer)
     }
+
+	@objc func gestureAction(_ sender: UITapGestureRecognizer?) {
+		let touchLocation: CGPoint? = sender?.location(ofTouch: 0, in: tableView)
+		let indexPath: IndexPath? = tableView.indexPathForRow(at: touchLocation ?? CGPoint.zero)
+		didTap(indexPath: indexPath!)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,7 +186,6 @@ class CreateListingViewController: UIViewController {
 	}
 
 	func writeListing(id : String) {
-		let newListing = Listing()
 		newListing?._id = id
 		newListing?._name = "Gucci shirt"
 		newListing?._latitude = 37.2657536962002
@@ -132,6 +197,14 @@ class CreateListingViewController: UIViewController {
 		newListing?._sellerId = gblUserId!
 		newListing?._type = "Dress test"
 		DB.shared().createListing(listing: newListing!)
+	}
+
+	func didTap(indexPath: IndexPath) {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
+		vc.delegate = self
+		vc.type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 
 }
@@ -179,10 +252,10 @@ extension CreateListingViewController : UICollectionViewDelegate, UICollectionVi
 		if indexPath.row == images.count {
 			let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
 			alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-			alert.addAction(UIAlertAction(title: OptionType.take.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
+			alert.addAction(UIAlertAction(title: PhotoOptionType.take.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
 				self.takeImage()
 			}))
-			alert.addAction(UIAlertAction(title: OptionType.upload.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
+			alert.addAction(UIAlertAction(title: PhotoOptionType.upload.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
 				self.uploadImage()
 			}))
 
@@ -278,9 +351,91 @@ extension CreateListingViewController : UICollectionViewDragDelegate, UICollecti
 			return []
 		}
 	}
-
 }
 
+extension CreateListingViewController : UITableViewDelegate, UITableViewDataSource {
 
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let type = SectionType(rawValue: indexPath.section)!
+		switch type {
+		case .name:
+			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
+			cell.field.placeholder = "What are you selling?"
+			cell.field.text = newListing?._name
+			return cell
+		case .description:
+			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
+			cell.field.placeholder = "Describe it!"
+			cell.field.text = newListing?._description
+			return cell
+		case .details:
+			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
+			let detailType = type.rows[indexPath.row]
+			cell.nameLabel.text = detailType.rawValue
+			switch detailType {
+			case .category: cell.field.text = nil // TODO: Get from gen class
+			case .size: cell.field.text = newListing?._size
+			default: break
+			}
+			cell.field.placeholder = "required"
+			return cell
+		case .price:
+			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
+			let detailType = type.rows[indexPath.row]
+			cell.nameLabel.text = detailType.rawValue
+			switch detailType {
+			case .originalPrice: cell.field.text = nil // TODO: Get from gen class
+			case .listingPrice: cell.field.text = newListing?._price != nil ? String(describing: newListing?._price) : ""
+			default: break
+			}
+			cell.field.placeholder = "required"
+			return cell
+		}
+	}
 
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 4
+	}
 
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		didTap(indexPath: indexPath)
+	}
+
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		let type = SectionType(rawValue: section)!
+		return type.rows.count
+	}
+
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		let type = SectionType(rawValue: indexPath.section)!
+		return type.rowHeight
+	}
+
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		let type = SectionType(rawValue: section)!
+		return type.header
+	}
+
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		let type = SectionType(rawValue: section)!
+		if type.header == nil {
+			return 5
+		} else {
+			return 40
+		}
+	}
+}
+
+extension CreateListingViewController : SelectionDelegate {
+	func madeSelection(type: DetailType, value: String) {
+		switch type {
+		case .category: break // TODO: add category to Listing Table and generate classes
+		case .description: newListing!._description = value
+		case .name: newListing!._name = value
+		case .listingPrice: newListing!._price = NSNumber(integerLiteral: Int(value)!)
+		case .size: newListing!._size = value
+		default: break
+		}
+		self.tableView.reloadData()
+	}
+}

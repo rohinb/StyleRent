@@ -22,4 +22,14 @@ extension UIViewController {
 	func singleActionPopup(title : String?, message : String?) {
 		popupAlert(title: title, message: message, actionTitles: ["Ok"], actions: [nil])
 	}
+
+	func hideKeyboardWhenTappedAround() {
+		let tapGesture = UITapGestureRecognizer(target: self,
+												action: #selector(hideKeyboard))
+		view.addGestureRecognizer(tapGesture)
+	}
+
+	@objc func hideKeyboard() {
+		view.endEditing(true)
+	}
 }

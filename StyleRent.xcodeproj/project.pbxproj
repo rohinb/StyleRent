@@ -100,6 +100,11 @@
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
 		0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18420B5FBA800D7F243 /* Assets.xcassets */; };
 		0FA2D18820B5FBA800D7F243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */; };
+		0FD0F97C20E0C28D00FE56AE /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */; };
+		0FD0F97D20E0C28D00FE56AE /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */; };
+		0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */; };
+		0FD0F98120E0C4CE00FE56AE /* FormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */; };
+		0FD0F98320E0D31B00FE56AE /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */; };
 		64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */; };
 /* End PBXBuildFile section */
 
@@ -235,6 +240,11 @@
 		0FA2D18420B5FBA800D7F243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FA2D18720B5FBA800D7F243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FA2D18920B5FBA800D7F243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
+		0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
+		0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormCell.xib; sourceTree = "<group>"; };
+		0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		13CD6D88FC7021165C65618F /* Pods-StyleRent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.release.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.release.xcconfig"; sourceTree = "<group>"; };
 		81724D835042D626E98E91D4 /* Pods-StyleRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.debug.xcconfig"; sourceTree = "<group>"; };
 		C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StyleRent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +291,10 @@
 		0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */ = {
 			isa = PBXGroup;
 			children = (
+				0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */,
+				0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */,
+				0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */,
+				0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */,
 				0F384A6B20C9F66C0036141B /* ListingCell.swift */,
 				0F384A6C20C9F66C0036141B /* ListingCell.xib */,
 				0F384A7520CF41C70036141B /* ImageCell.swift */,
@@ -516,6 +530,7 @@
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
+				0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */,
 				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
 				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
 				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
@@ -696,6 +711,7 @@
 				0F98FA0A20D1FEA10054E14C /* SelectedUserListCollectionViewCell.xib in Resources */,
 				0F98F9C820D1FE7E0054E14C /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				0F98F9CE20D1FE7E0054E14C /* IncomingUserMessageTableViewCell.xib in Resources */,
+				0FD0F98120E0C4CE00FE56AE /* FormCell.xib in Resources */,
 				0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */,
 				0F98FA3920D252190054E14C /* CreateGroupChannelUserListViewController.xib in Resources */,
 				0F98F9CD20D1FE7E0054E14C /* IncomingGeneralUrlPreviewMessageTableViewCell.xib in Resources */,
@@ -705,6 +721,7 @@
 				0F98FA0920D1FEA10054E14C /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
 				0F98FA1220D21A4E0054E14C /* CommonCrypto.xcconfig in Resources */,
 				0F98F9CB20D1FE7E0054E14C /* IncomingFileMessageTableViewCell.xib in Resources */,
+				0FD0F97D20E0C28D00FE56AE /* TextViewCell.xib in Resources */,
 				0F98FA0F20D1FEA10054E14C /* GroupChannelChattingViewController.xib in Resources */,
 				0F98FA3B20D2521F0054E14C /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
 				0F98FA3720D252140054E14C /* GroupChannelChattingViewController.xib in Resources */,
@@ -839,6 +856,7 @@
 				0F98FA2D20D24C450054E14C /* ChatImage.swift in Sources */,
 				0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */,
 				0F1387DE20BB8AF500E78B25 /* QRScannerController.swift in Sources */,
+				0FD0F98320E0D31B00FE56AE /* SelectionViewController.swift in Sources */,
 				0F98FA0320D1FEA10054E14C /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
 				0F98FA0B20D1FEA10054E14C /* GroupChannelListEditableTableViewCell.swift in Sources */,
@@ -853,6 +871,8 @@
 				0F98F9DA20D1FE7E0054E14C /* String+SendBird.swift in Sources */,
 				0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */,
 				0F98F9C220D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.swift in Sources */,
+				0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */,
+				0FD0F97C20E0C28D00FE56AE /* TextViewCell.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F98F9FE20D1FEA10054E14C /* MemberListViewController.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
