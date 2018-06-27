@@ -14,6 +14,7 @@
 		0F1387EA20BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E920BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m */; };
 		0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387EB20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m */; };
 		0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387F120BB9CE000E78B25 /* StringExtension.swift */; };
+		0F1C5CBE20E4268B00A320AF /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */; };
 		0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6B20C9F66C0036141B /* ListingCell.swift */; };
 		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
@@ -104,7 +105,7 @@
 		0FD0F97D20E0C28D00FE56AE /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */; };
 		0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */; };
 		0FD0F98120E0C4CE00FE56AE /* FormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */; };
-		0FD0F98320E0D31B00FE56AE /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */; };
+		0FD0F98320E0D31B00FE56AE /* TextEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */; };
 		64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,7 @@
 		0F1387EE20BB99E300E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSAPI_DI8UQ5E635_ResponseSchema.h; sourceTree = "<group>"; };
 		0F1387EF20BB99E900E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSAPI_DI8UQ5E635_RequestSchema.h; sourceTree = "<group>"; };
 		0F1387F120BB9CE000E78B25 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		0F384A6B20C9F66C0036141B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
 		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -244,7 +246,7 @@
 		0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormCell.xib; sourceTree = "<group>"; };
-		0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEntryViewController.swift; sourceTree = "<group>"; };
 		13CD6D88FC7021165C65618F /* Pods-StyleRent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.release.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.release.xcconfig"; sourceTree = "<group>"; };
 		81724D835042D626E98E91D4 /* Pods-StyleRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.debug.xcconfig"; sourceTree = "<group>"; };
 		C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StyleRent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -530,7 +532,8 @@
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
-				0FD0F98220E0D31B00FE56AE /* SelectionViewController.swift */,
+				0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */,
+				0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */,
 				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
 				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
 				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
@@ -842,6 +845,7 @@
 				0F98FA2A20D24BA90054E14C /* ReusableViewFromXib.swift in Sources */,
 				0F98F9DC20D1FE7E0054E14C /* CustomNavigationBar.swift in Sources */,
 				0F98F9C120D1FE7E0054E14C /* OutgoingUserMessageTableViewCell.swift in Sources */,
+				0F1C5CBE20E4268B00A320AF /* SelectionViewController.swift in Sources */,
 				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,
 				0F98F9FD20D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift in Sources */,
 				0F98FA3E20D25E130054E14C /* TabBarViewController.swift in Sources */,
@@ -856,7 +860,7 @@
 				0F98FA2D20D24C450054E14C /* ChatImage.swift in Sources */,
 				0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */,
 				0F1387DE20BB8AF500E78B25 /* QRScannerController.swift in Sources */,
-				0FD0F98320E0D31B00FE56AE /* SelectionViewController.swift in Sources */,
+				0FD0F98320E0D31B00FE56AE /* TextEntryViewController.swift in Sources */,
 				0F98FA0320D1FEA10054E14C /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
 				0F98FA0B20D1FEA10054E14C /* GroupChannelListEditableTableViewCell.swift in Sources */,

@@ -27,7 +27,7 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		title = "Conversations"
         // Do any additional setup after loading the view.
         self.tableView.delegate = self
         self.tableView.dataSource = self

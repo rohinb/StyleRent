@@ -97,8 +97,10 @@ class CreateListingViewController: UIViewController {
 
 	@objc func gestureAction(_ sender: UITapGestureRecognizer?) {
 		let touchLocation: CGPoint? = sender?.location(ofTouch: 0, in: tableView)
-		let indexPath: IndexPath? = tableView.indexPathForRow(at: touchLocation ?? CGPoint.zero)
-		didTap(indexPath: indexPath!)
+		var indexPath: IndexPath? = tableView.indexPathForRow(at: touchLocation ?? CGPoint.zero)
+		if indexPath != nil {
+			didTap(indexPath: indexPath!)
+		}
 	}
 
     override func didReceiveMemoryWarning() {
@@ -200,11 +202,31 @@ class CreateListingViewController: UIViewController {
 	}
 
 	func didTap(indexPath: IndexPath) {
+		let type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
-		vc.delegate = self
-		vc.type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
-		self.navigationController?.pushViewController(vc, animated: true)
+		if type == .name || type == .description || type == .originalPrice {
+			let vc = storyboard.instantiateViewController(withIdentifier: "TextEntryVC") as! TextEntryViewController
+			vc.delegate = self
+			vc.type = type
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else {
+			let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
+			vc.delegate = self
+			vc.type = type
+			if type == .category {
+				vc.options = ListingCategory.allValues.map({ (category) -> String in
+					return category.rawValue
+				})
+			} else if type == .size {
+				if newListing!._type == nil {
+					singleActionPopup(title: "You must first select a category", message: nil)
+				}
+				vc.options = ClothingUtils.getSizeOptions(for: ListingCategory(rawValue: newListing!._type!)!)
+			} else {
+				vc.options = []
+			}
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
 	}
 
 }
@@ -373,8 +395,8 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 			let detailType = type.rows[indexPath.row]
 			cell.nameLabel.text = detailType.rawValue
 			switch detailType {
-			case .category: cell.field.text = nil // TODO: Get from gen class
-			case .size: cell.field.text = newListing?._size
+			case .category: cell.field.text = newListing!._type
+			case .size: cell.field.text = newListing!._size
 			default: break
 			}
 			cell.field.placeholder = "required"
@@ -429,7 +451,7 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 extension CreateListingViewController : SelectionDelegate {
 	func madeSelection(type: DetailType, value: String) {
 		switch type {
-		case .category: break // TODO: add category to Listing Table and generate classes
+		case .category: newListing!._type = value
 		case .description: newListing!._description = value
 		case .name: newListing!._name = value
 		case .listingPrice: newListing!._price = NSNumber(integerLiteral: Int(value)!)

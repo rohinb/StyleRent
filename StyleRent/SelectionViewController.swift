@@ -1,43 +1,47 @@
 //
-//  SelectionViewController.swift
+//  SelectionTableViewController.swift
 //  StyleRent
 //
-//  Created by Rohin Bhushan on 6/25/18.
+//  Created by Rohin Bhushan on 6/27/18.
 //  Copyright © 2018 Rohin Bhushan. All rights reserved.
 //
 
 import UIKit
 
-class SelectionViewController: UIViewController {
-	@IBOutlet weak var textView: UITextView!
+class SelectionViewController: UITableViewController {
+
 	var type : DetailType!
 	var delegate : SelectionDelegate!
+	var options : [String]!
+
+	fileprivate var selectedValue : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		title = type.rawValue
-		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(done))
-		navigationItem.rightBarButtonItem = doneButton
-    }
 
-	@objc func done(sender: UIBarButtonItem) {
-		delegate.madeSelection(type: type, value: textView.text)
-		self.navigationController?.popViewController(animated: true)
+		title = type.rawValue
 	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count
     }
 
-}
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
 
-protocol SelectionDelegate {
-	func madeSelection(type : DetailType, value : String)
+        cell.textLabel?.text = options[indexPath.row]
+
+        return cell
+    }
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		delegate.madeSelection(type: type, value: options[indexPath.row])
+		self.navigationController?.popViewController(animated: true)
+	}
 }
