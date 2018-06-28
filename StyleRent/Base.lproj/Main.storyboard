@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -125,46 +124,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGR-kt-mXB">
-                                <rect key="frame" x="0.0" y="180" width="375" height="438"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOF-IH-pFC">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w42-hT-srv">
-                                                <rect key="frame" x="19" y="440" width="337.5" height="30"/>
-                                                <state key="normal" title="Save Listing"/>
-                                                <connections>
-                                                    <action selector="saveListing:" destination="9iR-8E-MpL" eventType="touchUpInside" id="tRf-WQ-3ct"/>
-                                                </connections>
-                                            </button>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="oP5-DK-LU5">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="420"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="420" id="Mif-Lr-s9t"/>
-                                                </constraints>
-                                            </tableView>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.92146831750869751" green="0.92162626981735229" blue="0.92145836353302002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="oP5-DK-LU5" firstAttribute="top" secondItem="gOF-IH-pFC" secondAttribute="top" id="AGa-ty-NWn"/>
-                                            <constraint firstAttribute="bottom" secondItem="w42-hT-srv" secondAttribute="bottom" constant="20" id="TwF-dD-ISP"/>
-                                            <constraint firstItem="w42-hT-srv" firstAttribute="centerX" secondItem="gOF-IH-pFC" secondAttribute="centerX" id="eyW-EW-UWD"/>
-                                            <constraint firstItem="oP5-DK-LU5" firstAttribute="leading" secondItem="gOF-IH-pFC" secondAttribute="leading" id="iyt-Yj-lAd"/>
-                                            <constraint firstItem="w42-hT-srv" firstAttribute="top" secondItem="oP5-DK-LU5" secondAttribute="bottom" constant="20" id="lG8-18-nNM"/>
-                                            <constraint firstItem="oP5-DK-LU5" firstAttribute="centerX" secondItem="gOF-IH-pFC" secondAttribute="centerX" id="mhV-ar-ubl"/>
-                                            <constraint firstItem="w42-hT-srv" firstAttribute="width" secondItem="gOF-IH-pFC" secondAttribute="width" multiplier="0.9" id="sJu-bX-6Wb"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="gOF-IH-pFC" secondAttribute="bottom" id="Hut-Bi-fCm"/>
-                                    <constraint firstItem="gOF-IH-pFC" firstAttribute="leading" secondItem="UGR-kt-mXB" secondAttribute="leading" id="MMl-Mc-G1t"/>
-                                    <constraint firstAttribute="trailing" secondItem="gOF-IH-pFC" secondAttribute="trailing" id="kpa-Pt-Vd5"/>
-                                    <constraint firstItem="gOF-IH-pFC" firstAttribute="top" secondItem="UGR-kt-mXB" secondAttribute="top" id="myT-5G-Fvq"/>
-                                </constraints>
-                            </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdL-U3-Ug0">
                                 <rect key="frame" x="16" y="84" width="343" height="76"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -219,25 +178,26 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="oP5-DK-LU5">
+                                <rect key="frame" x="16" y="180" width="343" height="438"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.92146831750000002" green="0.92162626979999995" blue="0.92145836349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gOF-IH-pFC" firstAttribute="width" secondItem="Ug8-hj-DGI" secondAttribute="width" id="2uf-ws-f7D"/>
-                            <constraint firstItem="gOF-IH-pFC" firstAttribute="centerX" secondItem="QDN-oJ-TFm" secondAttribute="centerX" id="6kW-dn-eYR"/>
+                            <constraint firstItem="oP5-DK-LU5" firstAttribute="bottom" secondItem="QDN-oJ-TFm" secondAttribute="bottom" id="4oG-AC-ZlP"/>
                             <constraint firstItem="mdL-U3-Ug0" firstAttribute="leading" secondItem="QDN-oJ-TFm" secondAttribute="leading" constant="16" id="8Rg-5u-xSh"/>
-                            <constraint firstAttribute="trailing" secondItem="UGR-kt-mXB" secondAttribute="trailing" id="Aer-sH-WVB"/>
-                            <constraint firstItem="UGR-kt-mXB" firstAttribute="top" secondItem="mdL-U3-Ug0" secondAttribute="bottom" constant="20" id="HJ8-Jq-I69"/>
+                            <constraint firstItem="oP5-DK-LU5" firstAttribute="leading" secondItem="QDN-oJ-TFm" secondAttribute="leading" constant="16" id="SFQ-u3-pa9"/>
                             <constraint firstItem="mdL-U3-Ug0" firstAttribute="centerX" secondItem="QDN-oJ-TFm" secondAttribute="centerX" id="UwJ-yw-sHi"/>
-                            <constraint firstItem="QDN-oJ-TFm" firstAttribute="bottom" secondItem="UGR-kt-mXB" secondAttribute="bottom" id="kcb-gs-4OO"/>
+                            <constraint firstItem="oP5-DK-LU5" firstAttribute="top" secondItem="mdL-U3-Ug0" secondAttribute="bottom" constant="20" id="cOO-aq-ar8"/>
                             <constraint firstItem="mdL-U3-Ug0" firstAttribute="top" secondItem="QDN-oJ-TFm" secondAttribute="top" constant="20" id="lV1-t0-qDG"/>
-                            <constraint firstItem="UGR-kt-mXB" firstAttribute="leading" secondItem="Ug8-hj-DGI" secondAttribute="leading" id="ne0-n7-Uzk"/>
+                            <constraint firstItem="QDN-oJ-TFm" firstAttribute="trailing" secondItem="oP5-DK-LU5" secondAttribute="trailing" constant="16" id="yHO-ux-KLo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QDN-oJ-TFm"/>
                     </view>
                     <navigationItem key="navigationItem" id="Apv-UJ-XfQ"/>
                     <connections>
                         <outlet property="imageCollectionView" destination="mdL-U3-Ug0" id="sBH-nt-hFE"/>
-                        <outlet property="scrollView" destination="UGR-kt-mXB" id="3OO-E4-lUs"/>
                         <outlet property="tableView" destination="oP5-DK-LU5" id="1Rx-D3-c9z"/>
                     </connections>
                 </viewController>

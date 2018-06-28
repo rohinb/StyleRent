@@ -18,14 +18,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="363" height="123.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you selling?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JbR-Fe-9wa">
-                        <rect key="frame" x="9" y="0.0" width="159" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="What are you selling?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JbR-Fe-9wa">
+                        <rect key="frame" x="15" y="10" width="333" height="103.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="JbR-Fe-9wa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="3gw-bi-hsk"/>
+                    <constraint firstAttribute="bottom" secondItem="JbR-Fe-9wa" secondAttribute="bottom" constant="10" id="629-BD-J4d"/>
+                    <constraint firstAttribute="trailing" secondItem="JbR-Fe-9wa" secondAttribute="trailing" constant="15" id="p71-Za-lY5"/>
+                    <constraint firstItem="JbR-Fe-9wa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pwm-y4-vA0"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

@@ -83,6 +83,7 @@ class ListingViewController: UIViewController {
 					print(error)
 				} else {
 					print("downlaod complete")
+					if data == nil { return } // handle weird edge case
 					self.listingImages[listing._id!] = UIImage(data: data!)
 					self.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
 				}
@@ -155,7 +156,7 @@ extension ListingViewController : UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ListingCell
 		let listing = listings[indexPath.row]
-		cell.listingNameLabel.text = listing._id!
+		cell.listingNameLabel.text = listing._name!
 		cell.sizeLabel.text = "Size: \(listing._size!)"
 		cell.lenderNameLabel.text = "By \(listing._sellerId!)"
 		cell.priceLabel.text = "$\(listing._price!)"

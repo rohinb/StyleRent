@@ -69,8 +69,7 @@ class CreateListingViewController: UIViewController {
 	@IBOutlet weak var imageCollectionView: UICollectionView!
 	@IBOutlet weak var tableView: UITableView!
 	let reuseIdentifier = "listingImageCell"
-	let newListing = Listing()
-	@IBOutlet weak var scrollView: UIScrollView!
+	var newListing = Listing()
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,25 +87,16 @@ class CreateListingViewController: UIViewController {
 		tableView.dataSource = self
 		tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
 		tableView.register(UINib(nibName: "FormCell", bundle: nil), forCellReuseIdentifier: "FormCell")
-        // Do any additional setup after loading the view.
-		let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.gestureAction(_:)))
-		recognizer.numberOfTapsRequired = 1
-		scrollView.isUserInteractionEnabled = true
-		scrollView.addGestureRecognizer(recognizer)
-    }
 
-	@objc func gestureAction(_ sender: UITapGestureRecognizer?) {
-		let touchLocation: CGPoint? = sender?.location(ofTouch: 0, in: tableView)
-		var indexPath: IndexPath? = tableView.indexPathForRow(at: touchLocation ?? CGPoint.zero)
-		if indexPath != nil {
-			didTap(indexPath: indexPath!)
-		}
+		title = "Post Listing"
+		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(saveListing))
+		navigationItem.rightBarButtonItem = doneButton
 	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		DB.shared().delegate = self
+	}
     
 	func takeImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -128,7 +118,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	@IBAction func saveListing(_ sender: Any) {
+	@objc func saveListing(sender: UIBarButtonItem) {
 		// start uploading images to S3
 		guard let firstImage = images.first else {
 			popupAlert(title: "You must upload at least one image!", message: nil, actionTitles: ["Ok"], actions: [nil])
@@ -189,46 +179,12 @@ class CreateListingViewController: UIViewController {
 
 	func writeListing(id : String) {
 		newListing?._id = id
-		newListing?._name = "Gucci shirt"
 		newListing?._latitude = 37.2657536962002
 		newListing?._longitude = -121.971246711695
-		newListing?._description = "testing listing"
 		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
-		newListing?._price = 40
-		newListing?._size = "M"
 		newListing?._sellerId = gblUserId!
-		newListing?._type = "Dress test"
 		DB.shared().createListing(listing: newListing!)
 	}
-
-	func didTap(indexPath: IndexPath) {
-		let type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		if type == .name || type == .description || type == .originalPrice {
-			let vc = storyboard.instantiateViewController(withIdentifier: "TextEntryVC") as! TextEntryViewController
-			vc.delegate = self
-			vc.type = type
-			self.navigationController?.pushViewController(vc, animated: true)
-		} else {
-			let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
-			vc.delegate = self
-			vc.type = type
-			if type == .category {
-				vc.options = ListingCategory.allValues.map({ (category) -> String in
-					return category.rawValue
-				})
-			} else if type == .size {
-				if newListing!._type == nil {
-					singleActionPopup(title: "You must first select a category", message: nil)
-				}
-				vc.options = ClothingUtils.getSizeOptions(for: ListingCategory(rawValue: newListing!._type!)!)
-			} else {
-				vc.options = []
-			}
-			self.navigationController?.pushViewController(vc, animated: true)
-		}
-	}
-
 }
 
 extension CreateListingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -245,6 +201,8 @@ extension CreateListingViewController : DBDelegate {
 	func createListingResponse(success : Bool, error : String?) {
 		if success {
 			images = []
+			newListing = Listing()
+			tableView.reloadData()
 			imageCollectionView.reloadData()
 			singleActionPopup(title: "Listing posted!", message: nil)
 		} else {
@@ -395,7 +353,7 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 			let detailType = type.rows[indexPath.row]
 			cell.nameLabel.text = detailType.rawValue
 			switch detailType {
-			case .category: cell.field.text = newListing!._type
+			case .category: cell.field.text = newListing!._category
 			case .size: cell.field.text = newListing!._size
 			default: break
 			}
@@ -406,8 +364,8 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 			let detailType = type.rows[indexPath.row]
 			cell.nameLabel.text = detailType.rawValue
 			switch detailType {
-			case .originalPrice: cell.field.text = nil // TODO: Get from gen class
-			case .listingPrice: cell.field.text = newListing?._price != nil ? String(describing: newListing?._price) : ""
+			case .originalPrice: cell.field.text = newListing?._originalPrice != nil ? String(describing: newListing!._originalPrice!) : ""
+			case .listingPrice: cell.field.text = newListing?._price != nil ? String(describing: newListing!._price!) : ""
 			default: break
 			}
 			cell.field.placeholder = "required"
@@ -420,7 +378,31 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		didTap(indexPath: indexPath)
+		let type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		if type == .name || type == .description || type == .originalPrice || type == .listingPrice{
+			let vc = storyboard.instantiateViewController(withIdentifier: "TextEntryVC") as! TextEntryViewController
+			vc.delegate = self
+			vc.type = type
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else {
+			let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
+			vc.delegate = self
+			vc.type = type
+			if type == .category {
+				vc.options = ListingCategory.allValues.map({ (category) -> String in
+					return category.rawValue
+				})
+			} else if type == .size {
+				if newListing!._category == nil {
+					singleActionPopup(title: "You must first select a category", message: nil)
+				}
+				vc.options = ClothingUtils.getSizeOptions(for: ListingCategory(rawValue: newListing!._category!)!)
+			} else {
+				vc.options = []
+			}
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -451,10 +433,11 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 extension CreateListingViewController : SelectionDelegate {
 	func madeSelection(type: DetailType, value: String) {
 		switch type {
-		case .category: newListing!._type = value
+		case .category: newListing!._category = value
 		case .description: newListing!._description = value
 		case .name: newListing!._name = value
 		case .listingPrice: newListing!._price = NSNumber(integerLiteral: Int(value)!)
+		case .originalPrice: newListing!._originalPrice = NSNumber(integerLiteral: Int(value)!)
 		case .size: newListing!._size = value
 		default: break
 		}

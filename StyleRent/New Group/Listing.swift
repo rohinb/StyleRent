@@ -24,10 +24,11 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _longitude: NSNumber?
     var _name: String?
     var _price: NSNumber?
+	var _originalPrice: NSNumber?
 	var _imageCount: NSNumber?
     var _sellerId: String?
     var _size: String?
-    var _type: String?
+    var _category: String?
     
     class func dynamoDBTableName() -> String {
 
@@ -48,9 +49,10 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_name" : "name",
                "_price" : "price",
 			   "_imageCount" : "imageCount",
+			   "_originalPrice" : "originalPrice",
                "_sellerId" : "sellerId",
                "_size" : "size",
-               "_type" : "type",
+               "_category" : "category",
         ]
     }
 }
