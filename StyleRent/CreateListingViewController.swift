@@ -76,7 +76,7 @@ class CreateListingViewController: UIViewController {
         super.viewDidLoad()
 		DB.shared().delegate = self
 
-		hideKeyboardWhenTappedAround()
+		//hideKeyboardWhenTappedAround()
 
 		imageCollectionView.delegate = self
 		imageCollectionView.dataSource = self
@@ -246,9 +246,9 @@ extension CreateListingViewController : DBDelegate {
 		if success {
 			images = []
 			imageCollectionView.reloadData()
-			popupAlert(title: "Listing posted!", message: nil, actionTitles: ["Ok"], actions: [nil])
+			singleActionPopup(title: "Listing posted!", message: nil)
 		} else {
-			popupAlert(title: "Failed to save your listing", message: "Please try again soon.", actionTitles: ["Ok"], actions: [nil])
+			singleActionPopup(title: "Failed to save your listing", message: "Please try again soon.")
 		}
 	}
 }

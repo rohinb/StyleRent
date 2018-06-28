@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StyleRent/CreateListingViewController.swift"
-            timestampString = "551826242.067242"
+            timestampString = "551858031.3115129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StyleRent/CreateListingViewController.swift"
-            timestampString = "551826261.702442"
+            timestampString = "551858031.312235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "collectionView(_:canMoveItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
