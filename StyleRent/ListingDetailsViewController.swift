@@ -11,28 +11,56 @@ import AWSS3
 import SendBirdSDK
 
 class ListingDetailsViewController: UIViewController {
+	@IBOutlet weak var sellerNameLabel: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageContainerView: UIView!
+	@IBOutlet weak var listingNameLabel: UILabel!
+	@IBOutlet var listingPriceLabels: [UILabel]!
+	@IBOutlet var originalPriceLabels: [UILabel]!
+	@IBOutlet weak var sizeLabel: UILabel!
+	@IBOutlet weak var descriptionTextView: UITextView!
+	@IBOutlet weak var categoryLabel: UILabel!
+	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+
 	var listing : Listing!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		scrollView.isPagingEnabled = true
-		scrollView.contentSize = CGSize(width: Double(scrollView.frame.size.height) * Double(listing._imageCount!.intValue - 1), height: Double(scrollView.frame.size.height))
-		
+		imageContainerHeightConstraint.constant = CGFloat(listing._imageCount!.intValue) * imageContainerView.frame.width
+
+		listingNameLabel.text = listing._name ?? ".."
+		let price = listing._price == nil ? 0 : listing._price!.intValue
+		for label in listingPriceLabels {
+			label.text = "$\(price)"
+		}
+		let originalPrice = listing._originalPrice == nil ? 0 : listing._originalPrice!.intValue
+		let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "$\(originalPrice)")
+		attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue), range: NSMakeRange(0, attributeString.length))
+		for label in originalPriceLabels {
+			label.attributedText = attributeString
+		}
+		sizeLabel.text = "Size: \(listing._size ?? "..")"
+		descriptionTextView.text = listing._description ?? ".."
+		categoryLabel.text = listing!._category ?? ".."
+
+		textViewHeightConstraint.constant = descriptionTextView.contentSize.height
+		self.view.layoutIfNeeded()
+
 		loadImage(index: 2)
     }
 
 	func addImage(_ image : UIImage) {
-		let index = CGFloat(scrollView.subviews.count)
-		let height = scrollView.frame.size.height
-		let width = scrollView.frame.size.width
+		let index = CGFloat(imageContainerView.subviews.count)
+		let height = imageContainerView.frame.size.width
+		let width = imageContainerView.frame.size.width
+		let padding = CGFloat(20)
 
 		let imageView = UIImageView()
 		imageView.image = image
-		imageView.frame = CGRect(x: (index - 1) * width, y: 0, width: width, height: height)
+		imageView.frame = CGRect(x: 0, y: index * (height + padding), width: width, height: height)
 
-		scrollView.addSubview(imageView)
-		scrollView.flashScrollIndicators()
+		imageContainerView.addSubview(imageView)
 	}
 
 	fileprivate func loadImage(index : Int) {
