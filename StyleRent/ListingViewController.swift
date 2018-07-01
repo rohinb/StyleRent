@@ -20,6 +20,7 @@ class ListingViewController: UIViewController {
 	var listings = [Listing]()
 	var listingImages = [String : UIImage]()
 	var freshPull = true
+	var currentFilter = ListingDetail()
 	var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
 
 	let reuseIdentifier = "ListingCell"
@@ -46,7 +47,7 @@ class ListingViewController: UIViewController {
 			print(region)
 		}
 		collectionView.addInfiniteScroll { (collectionView) in
-			DB.shared().getNearbyListings(userId: gblUserId, lat: self.currentLocation.coordinate.latitude, lon: self.currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, types: nil, lastEvalKey: self.lastEvalKey)
+			self.fetchListings()
 		}
 
 		collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
@@ -57,15 +58,23 @@ class ListingViewController: UIViewController {
 
 		self.collectionView.es.addPullToRefresh {
 			[unowned self] in
-			self.freshPull = true
-			self.lastEvalKey = nil
-			self.listings = []
-			self.listingImages = [:]
-			self.collectionView.reloadData()
-			DB.shared().getNearbyListings(userId: gblUserId, lat: self.currentLocation.coordinate.latitude, lon: self.currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, types: nil, lastEvalKey: self.lastEvalKey)
+			self.performFreshPull()
 		}
 
     }
+
+	fileprivate func performFreshPull() {
+		freshPull = true
+		lastEvalKey = nil
+		listings = []
+		listingImages = [:]
+		collectionView.reloadData()
+		fetchListings()
+	}
+
+	fileprivate func fetchListings() {
+		DB.shared().getNearbyListings(userId: gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, lastEvalKey: self.lastEvalKey)
+	}
 
 	fileprivate func loadImage(index : Int) {
 		let listing = listings[index]
@@ -124,6 +133,17 @@ class ListingViewController: UIViewController {
 		if let index = sender as? Int, let dest = segue.destination as? ListingDetailsViewController {
 			dest.listing = listings[index]
 		}
+
+		if segue.identifier == "toFilter" {
+			let dest = segue.destination as! UINavigationController
+			let vc = dest.viewControllers[0] as! FiltersViewController
+			vc.currentDetail = currentFilter
+			vc.delegate = self
+		}
+	}
+
+	@IBAction func filterPressed(_ sender: UIBarButtonItem) {
+		self.performSegue(withIdentifier: "toFilter", sender: nil)
 	}
 }
 
@@ -144,6 +164,13 @@ extension ListingViewController : DBDelegate {
 		collectionView.insertItems(at: indexPathsToReload)
 		collectionView.finishInfiniteScroll()
 		collectionView.es.stopPullToRefresh()
+	}
+}
+
+extension ListingViewController : FiltersDelegate {
+	func filtersUpdated(newDetail: ListingDetail) {
+		self.currentFilter = newDetail
+		performFreshPull()
 	}
 }
 

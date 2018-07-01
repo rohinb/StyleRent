@@ -61,7 +61,7 @@ class DB {
 		})
 	}
 
-	func getNearbyListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, types : [String]?, lastEvalKey : [String : AWSDynamoDBAttributeValue]?) {
+	func getNearbyListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, category : String?, size : String?, lastEvalKey : [String : AWSDynamoDBAttributeValue]?) {
 		let boundingRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: lon), radius, radius)
 		let latDelta = boundingRegion.span.latitudeDelta
 		let lonDelta = boundingRegion.span.longitudeDelta
@@ -75,13 +75,25 @@ class DB {
 		expression.limit = PAGE_AMOUNT as NSNumber
 		expression.exclusiveStartKey = lastEvalKey
 
-		expression.filterExpression = "latitude BETWEEN :latStart AND :latEnd AND longitude BETWEEN :lonStart AND :lonEnd AND price < :maxPrice"
+		var filterExpression = "latitude BETWEEN :latStart AND :latEnd AND longitude BETWEEN :lonStart AND :lonEnd AND price BETWEEN :minPrice AND :maxPrice"
 		var attrValues = [String : Any]()
 		attrValues[":latStart"] = latStart
 		attrValues[":latEnd"] = latEnd
 		attrValues[":lonStart"] = lonStart
 		attrValues[":lonEnd"] = lonEnd
 		attrValues[":maxPrice"] = maxPrice ?? 99999
+		attrValues[":minPrice"] = minPrice ?? 0
+		if category != nil {
+			filterExpression += " AND category = :category"
+			attrValues[":category"] = category
+		}
+
+		if size != nil {
+			filterExpression += " AND size = :size"
+			attrValues[":size"] = size
+		}
+
+		expression.filterExpression = filterExpression
 
 		expression.expressionAttributeValues = attrValues
 

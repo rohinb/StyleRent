@@ -15,6 +15,9 @@
 		0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387EB20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m */; };
 		0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387F120BB9CE000E78B25 /* StringExtension.swift */; };
 		0F1C5CBE20E4268B00A320AF /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */; };
+		0F1C5CC020E8BB3600A320AF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */; };
+		0F1C5CC320E8CBA700A320AF /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CC120E8CBA700A320AF /* DetailCell.swift */; };
+		0F1C5CC420E8CBA700A320AF /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C5CC220E8CBA700A320AF /* DetailCell.xib */; };
 		0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6B20C9F66C0036141B /* ListingCell.swift */; };
 		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
@@ -153,6 +156,9 @@
 		0F1387EF20BB99E900E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSAPI_DI8UQ5E635_RequestSchema.h; sourceTree = "<group>"; };
 		0F1387F120BB9CE000E78B25 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		0F1C5CC120E8CBA700A320AF /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		0F1C5CC220E8CBA700A320AF /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		0F384A6B20C9F66C0036141B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
 		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -296,6 +302,8 @@
 				0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */,
 				0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */,
 				0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */,
+				0F1C5CC120E8CBA700A320AF /* DetailCell.swift */,
+				0F1C5CC220E8CBA700A320AF /* DetailCell.xib */,
 				0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */,
 				0F384A6B20C9F66C0036141B /* ListingCell.swift */,
 				0F384A6C20C9F66C0036141B /* ListingCell.xib */,
@@ -530,6 +538,7 @@
 				0F1387F320BB9CF300E78B25 /* Extensions */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
 				0F47BF4520B7EFA800C2CA55 /* ListingViewController.swift */,
+				0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
 				0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */,
@@ -715,6 +724,7 @@
 				0F98F9C820D1FE7E0054E14C /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				0F98F9CE20D1FE7E0054E14C /* IncomingUserMessageTableViewCell.xib in Resources */,
 				0FD0F98120E0C4CE00FE56AE /* FormCell.xib in Resources */,
+				0F1C5CC420E8CBA700A320AF /* DetailCell.xib in Resources */,
 				0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */,
 				0F98FA3920D252190054E14C /* CreateGroupChannelUserListViewController.xib in Resources */,
 				0F98F9CD20D1FE7E0054E14C /* IncomingGeneralUrlPreviewMessageTableViewCell.xib in Resources */,
@@ -841,7 +851,9 @@
 				0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */,
 				0F98F9DE20D1FE7E0054E14C /* FLAnimatedImageView+ImageCache.swift in Sources */,
 				0F98F9BF20D1FE7E0054E14C /* OutgoingVideoFileMessageTableViewCell.swift in Sources */,
+				0F1C5CC320E8CBA700A320AF /* DetailCell.swift in Sources */,
 				0F98F9C920D1FE7E0054E14C /* IncomingImageFileMessageTableViewCell.swift in Sources */,
+				0F1C5CC020E8BB3600A320AF /* FiltersViewController.swift in Sources */,
 				0F98FA2A20D24BA90054E14C /* ReusableViewFromXib.swift in Sources */,
 				0F98F9DC20D1FE7E0054E14C /* CustomNavigationBar.swift in Sources */,
 				0F98F9C120D1FE7E0054E14C /* OutgoingUserMessageTableViewCell.swift in Sources */,

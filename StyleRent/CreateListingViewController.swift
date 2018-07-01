@@ -396,6 +396,7 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 			} else if type == .size {
 				if newListing!._category == nil {
 					singleActionPopup(title: "You must first select a category", message: nil)
+					return
 				}
 				vc.options = ClothingUtils.getSizeOptions(for: ListingCategory(rawValue: newListing!._category!)!)
 			} else {
