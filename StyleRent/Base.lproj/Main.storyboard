@@ -404,16 +404,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lft-tO-GL7">
+                                <rect key="frame" x="280" y="188" width="79" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="79" id="oZt-JW-7yu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.89794141054153442" green="0.89809560775756836" blue="0.89793163537979126" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Lft-tO-GL7" firstAttribute="trailing" secondItem="ude-eH-V8U" secondAttribute="trailing" id="Dii-eA-0bx"/>
                             <constraint firstItem="ude-eH-V8U" firstAttribute="top" secondItem="Rsi-Jx-44b" secondAttribute="top" constant="32" id="MJt-Xc-qYe"/>
+                            <constraint firstItem="Lft-tO-GL7" firstAttribute="top" secondItem="ude-eH-V8U" secondAttribute="bottom" constant="8" id="Xcb-nM-9gj"/>
                             <constraint firstItem="ude-eH-V8U" firstAttribute="centerX" secondItem="Rsi-Jx-44b" secondAttribute="centerX" id="qti-bB-AuQ"/>
                             <constraint firstItem="ude-eH-V8U" firstAttribute="leading" secondItem="Rsi-Jx-44b" secondAttribute="leading" constant="16" id="qxu-J6-PbT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rsi-Jx-44b"/>
                     </view>
                     <connections>
+                        <outlet property="charsLabel" destination="Lft-tO-GL7" id="qz3-61-8al"/>
                         <outlet property="textView" destination="ude-eH-V8U" id="2qr-Ln-bQP"/>
                     </connections>
                 </viewController>

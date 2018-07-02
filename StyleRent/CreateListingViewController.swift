@@ -185,6 +185,10 @@ class CreateListingViewController: UIViewController {
 		newListing?._sellerId = gblUserId!
 		DB.shared().createListing(listing: newListing!)
 	}
+
+	func getCurrInfo(for type: DetailType) {
+		//TODO
+	}
 }
 
 extension CreateListingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -378,6 +382,7 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		let type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		if type == .name || type == .description || type == .originalPrice || type == .listingPrice{
