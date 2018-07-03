@@ -1,4 +1,4 @@
-//
+ //
 //  ListingViewController.swift
 //  StyleRent
 //
@@ -12,7 +12,7 @@ import AWSS3
 import AWSDynamoDB
 import ESPullToRefresh
 
-class ListingViewController: UIViewController {
+class ListingsViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	fileprivate var locManager = CLLocationManager()
@@ -136,7 +136,7 @@ class ListingViewController: UIViewController {
     }
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let index = sender as? Int, let dest = segue.destination as? ListingsDetailsViewController {
+		if let index = sender as? Int, let dest = segue.destination as? ListingDetailsViewController {
 			dest.listing = listings[index]
 		}
 
@@ -153,7 +153,7 @@ class ListingViewController: UIViewController {
 	}
 }
 
-extension ListingViewController : DBDelegate {
+extension ListingsViewController : DBDelegate {
 	func getListingsResponse(success: Bool, listings: [Listing], error: String?, lastEval: [String : AWSDynamoDBAttributeValue]?) {
 		print(success, listings)
 		let initialCount = self.listings.count
@@ -173,7 +173,7 @@ extension ListingViewController : DBDelegate {
 	}
 }
 
-extension ListingViewController : FiltersDelegate {
+extension ListingsViewController : FiltersDelegate {
 	func filtersUpdated(newDetail: ListingDetail) {
 		self.currentFilter = newDetail
 		performFreshPull()
@@ -181,7 +181,7 @@ extension ListingViewController : FiltersDelegate {
 }
 
 // MARK: UICollectionView
-extension ListingViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return listings.count
 	}
@@ -205,7 +205,7 @@ extension ListingViewController : UICollectionViewDelegate, UICollectionViewData
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(ListingViewController.kCellHeight))
+		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(ListingsViewController.kCellHeight))
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

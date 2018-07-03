@@ -97,7 +97,7 @@ class DB {
 			filterExpression += " AND sellerId = :sellerId"
 			attrValues[":sellerId"] = userId
 		} else {
-			filterExpression += " AND sellerId != :sellerId"
+			filterExpression += " AND sellerId <> :sellerId" // only show other users' listings
 			attrValues[":sellerId"] = userId
 		}
 
@@ -119,10 +119,25 @@ class DB {
 			return nil
 		})
 	}
+
+	func deleteListing(_ listing : Listing) {
+		dynamoDbObjectMapper.remove(listing).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+			DispatchQueue.main.async {
+				if let error = task.error as? NSError {
+					print("The request failed. Error: \(error)")
+					self.delegate?.deleteListingResponse?(success: false)
+				} else {
+					self.delegate?.deleteListingResponse?(success: true)
+				}
+			}
+		})
+		// TODO: Delete images associated with listing
+	}
 }
 
 @objc protocol DBDelegate {
 	@objc optional func createUserResponse(success : Bool, error : String?)
 	@objc optional func createListingResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
+	@objc optional func deleteListingResponse(success : Bool)
 }

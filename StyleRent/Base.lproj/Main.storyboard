@@ -66,7 +66,7 @@
         <!--Listings-->
         <scene sceneID="TpN-3D-DzC">
             <objects>
-                <viewController storyboardIdentifier="ListingsVC" id="5u3-Ig-VBs" customClass="ListingViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListingsVC" id="5u3-Ig-VBs" customClass="ListingsViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lTL-WM-5cb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +121,7 @@
         <!--Listing Details-->
         <scene sceneID="7tw-vi-fp6">
             <objects>
-                <viewController title="Listing Details" id="x7q-6i-93H" customClass="ListingsDetailsViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Listing Details" id="x7q-6i-93H" customClass="ListingDetailsViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rpn-dt-P24">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,6 +292,7 @@
                         <outletCollection property="originalPriceLabels" destination="DSh-eF-HIl" collectionClass="NSMutableArray" id="K6w-L3-cqD"/>
                         <outletCollection property="listingPriceLabels" destination="2bo-mx-bqs" collectionClass="NSMutableArray" id="fTR-Z3-Rfu"/>
                         <outletCollection property="listingPriceLabels" destination="LPo-iv-tDn" collectionClass="NSMutableArray" id="uLv-0p-Pyg"/>
+                        <segue destination="9iR-8E-MpL" kind="show" identifier="toEditListing" id="K5r-Wl-X7S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f60-k8-jTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -641,4 +642,7 @@
     <resources>
         <image name="cross" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="K5r-Wl-X7S"/>
+    </inferredMetricsTieBreakers>
 </document>

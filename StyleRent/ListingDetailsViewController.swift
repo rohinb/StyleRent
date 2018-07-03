@@ -10,7 +10,7 @@ import UIKit
 import AWSS3
 import SendBirdSDK
 
-class ListingsDetailsViewController: UIViewController {
+class ListingDetailsViewController: UIViewController {
 	@IBOutlet weak var sellerNameLabel: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
@@ -23,12 +23,29 @@ class ListingsDetailsViewController: UIViewController {
 	@IBOutlet weak var categoryLabel: UILabel!
 	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 
-	let imagePadding = CGFloat(20)
+	fileprivate let imagePadding = CGFloat(20)
+	fileprivate var isLoadingImages = false
 
 	var listing : Listing!
+	var images = [UIImage]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+		update()
+
+		if listing._sellerId! == gblUserId {
+			let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editPressed))
+			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
+			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
+		}
+    }
+
+	func update() {
+		for sub in imageContainerView.subviews {
+			sub.removeFromSuperview()
+		}
+
 		imageContainerHeightConstraint.constant = CGFloat(listing._imageCount!.intValue) * (imageContainerView.frame.width + imagePadding)
 
 		listingNameLabel.text = listing._name ?? ".."
@@ -46,13 +63,34 @@ class ListingsDetailsViewController: UIViewController {
 		descriptionTextView.text = listing._description ?? ".."
 		categoryLabel.text = listing!._category ?? ".."
 
+		images = []
+		loadImage(index: 2)
 		textViewHeightConstraint.constant = descriptionTextView.contentSize.height
 		self.view.layoutIfNeeded()
+	}
 
-		loadImage(index: 2)
-    }
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		DB.shared().delegate = self
+	}
+
+	@objc func editPressed() {
+		if isLoadingImages {
+			singleActionPopup(title: "Please wait", message: "Images must finish loading before you edit this listing.")
+			return
+		}
+		performSegue(withIdentifier: "toEditListing", sender: nil)
+	}
+
+	@objc func deletePressed() {
+		popupAlert(title: "Are you sure you want to delete your listing?", message: "This action cannot be undone.", actionTitles: ["Delete", "Cancel"], actions: [{ (action) in
+			DB.shared().deleteListing(self.listing)
+		}, nil])
+	}
 
 	func addImage(_ image : UIImage) {
+		images.append(image)
+
 		let index = CGFloat(imageContainerView.subviews.count)
 		let height = imageContainerView.frame.size.width
 		let width = imageContainerView.frame.size.width
@@ -65,6 +103,7 @@ class ListingsDetailsViewController: UIViewController {
 	}
 
 	fileprivate func loadImage(index : Int) {
+		isLoadingImages = true
 		let fileName = "listing-images/\(listing._id!)-\(index)" // CHANGED CODE
 		let expression = AWSS3TransferUtilityDownloadExpression()
 		expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
@@ -78,10 +117,12 @@ class ListingsDetailsViewController: UIViewController {
 				if error != nil {
 					print(error)
 				} else {
-					print("downlaod complete")
+					print("download complete")
 					self.addImage(UIImage(data: data!)!) // CHANGED CODE
 					if index <= self.listing._imageCount!.intValue {
 						self.loadImage(index: index + 1)
+					} else {
+						self.isLoadingImages = false
 					}
 				}
 			})
@@ -126,6 +167,27 @@ class ListingsDetailsViewController: UIViewController {
 
 			self.present(vc, animated: true, completion: nil)
 			print("Channel created!")
+		}
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "toEditListing" {
+			if let vc = segue.destination as? CreateListingViewController {
+				vc.isEditView = true
+				vc.images = self.images
+				vc.newListing = self.listing
+				vc.parentVC = self
+			}
+		}
+	}
+}
+
+extension ListingDetailsViewController : DBDelegate {
+	func deleteListingResponse(success: Bool) {
+		if success {
+			self.navigationController?.popViewController(animated: true)
+		} else {
+			singleActionPopup(title: "Failed to delete your listing.", message: "Please try again later.")
 		}
 	}
 }

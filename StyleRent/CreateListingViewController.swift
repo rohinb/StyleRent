@@ -63,14 +63,18 @@ enum SectionType : Int {
 
 
 class CreateListingViewController: UIViewController {
-	var images = [UIImage]()
-	var uploadFailed = false
-	var uploadedCount = 0
-	let MAX_IMAGE_COUNT = 5
 	@IBOutlet weak var imageCollectionView: UICollectionView!
 	@IBOutlet weak var tableView: UITableView!
-	let reuseIdentifier = "listingImageCell"
+
+	fileprivate var uploadFailed = false
+	fileprivate var uploadedCount = 0
+	fileprivate let MAX_IMAGE_COUNT = 5
+	fileprivate let reuseIdentifier = "listingImageCell"
+
 	var newListing = Listing()
+	var images = [UIImage]()
+	var isEditView = false
+	var parentVC : ListingDetailsViewController?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +93,7 @@ class CreateListingViewController: UIViewController {
 		tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
 		tableView.register(UINib(nibName: "FormCell", bundle: nil), forCellReuseIdentifier: "FormCell")
 
-		title = "Post Listing"
+		title = isEditView ? "Edit Listing" : "Post Listing"
 		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePressed))
 		navigationItem.rightBarButtonItem = doneButton
 	}
@@ -142,11 +146,11 @@ class CreateListingViewController: UIViewController {
 		SVProgressHUD.show(withStatus: "Creating listing...")
 		uploadFailed = false
 		uploadedCount = 0
-		let thumbnailSideLength = ListingViewController.kCellHeight - 60.0
+		let thumbnailSideLength = ListingsViewController.kCellHeight - 60.0
 		let thumbnailSize = CGSize(width: thumbnailSideLength, height: thumbnailSideLength)
 		images.insert(firstImage.resizeImageWith(newSize: thumbnailSize), at: 0)
 
-		let newListingId = UUID().uuidString
+		let newListingId = isEditView ? newListing!._id! : UUID().uuidString
 		for (index, image) in images.enumerated() {
 			let data = UIImageJPEGRepresentation(image, 0.7)!
 
@@ -242,11 +246,19 @@ extension CreateListingViewController : DBDelegate {
 	func createListingResponse(success : Bool, error : String?) {
 		SVProgressHUD.dismiss()
 		if success {
-			images = []
-			newListing = Listing()
-			tableView.reloadData()
-			imageCollectionView.reloadData()
-			singleActionPopup(title: "Listing posted!", message: nil)
+			if isEditView {
+				if let vc = self.parentVC {
+					vc.listing = self.newListing
+					vc.update()
+				}
+				self.navigationController?.popViewController(animated: true)
+			} else {
+				images = []
+				newListing = Listing()
+				tableView.reloadData()
+				imageCollectionView.reloadData()
+				singleActionPopup(title: "Listing posted!", message: nil)
+			}
 		} else {
 			singleActionPopup(title: "Failed to save your listing", message: "Please try again soon.")
 		}
