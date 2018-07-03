@@ -136,7 +136,7 @@ class ListingViewController: UIViewController {
     }
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let index = sender as? Int, let dest = segue.destination as? ListingDetailsViewController {
+		if let index = sender as? Int, let dest = segue.destination as? ListingsDetailsViewController {
 			dest.listing = listings[index]
 		}
 

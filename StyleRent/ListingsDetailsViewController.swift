@@ -10,7 +10,7 @@ import UIKit
 import AWSS3
 import SendBirdSDK
 
-class ListingDetailsViewController: UIViewController {
+class ListingsDetailsViewController: UIViewController {
 	@IBOutlet weak var sellerNameLabel: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
