@@ -14,12 +14,14 @@ class TextEntryViewController: UIViewController {
 	var type : DetailType!
 	var delegate : SelectionDelegate!
 	var charsAllowed : Int?
+	var startingValue : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		title = type.rawValue
 		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(done))
 		navigationItem.rightBarButtonItem = doneButton
+		if startingValue != nil { textView.text = startingValue!}
 		if type == .name {
 			charsLabel.isHidden = false
 			charsAllowed = 40
@@ -40,6 +42,10 @@ class TextEntryViewController: UIViewController {
 				singleActionPopup(title: "Input too long", message: "Input must be under \(charsAllowed!) characters.")
 				return
 			}
+		}
+		if textView.text.count == 0 {
+			singleActionPopup(title: "Input cannot be empty", message: nil)
+			return
 		}
 		delegate.madeSelection(type: type, value: textView.text)
 		self.navigationController?.popViewController(animated: true)

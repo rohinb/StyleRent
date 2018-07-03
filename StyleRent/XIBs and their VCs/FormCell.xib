@@ -31,21 +31,24 @@
                             <constraint firstAttribute="width" constant="1" id="yjv-6V-76l"/>
                         </constraints>
                     </view>
-                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4p3-uu-Xeu">
-                        <rect key="frame" x="135" y="6" width="97" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4p3-uu-Xeu">
+                        <rect key="frame" x="135" y="6" width="177" height="31.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="4p3-uu-Xeu" firstAttribute="leading" secondItem="i2M-rq-MVS" secondAttribute="trailing" constant="17" id="243-gn-qfh"/>
                     <constraint firstItem="i2M-rq-MVS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="117" id="24v-Vr-kUa"/>
+                    <constraint firstItem="4p3-uu-Xeu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="7j1-YD-yvH"/>
                     <constraint firstItem="i2M-rq-MVS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DrW-xT-UPq"/>
                     <constraint firstItem="i2M-rq-MVS" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="Ewp-tX-gzf"/>
                     <constraint firstItem="i2M-rq-MVS" firstAttribute="leading" secondItem="jJj-1e-2rn" secondAttribute="trailing" constant="10" id="Nqm-kH-nIO"/>
+                    <constraint firstAttribute="bottom" secondItem="4p3-uu-Xeu" secondAttribute="bottom" constant="6" id="Y7W-uq-Tvb"/>
                     <constraint firstItem="jJj-1e-2rn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pwV-X2-m9f"/>
                     <constraint firstItem="jJj-1e-2rn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vFb-MQ-HF1"/>
+                    <constraint firstAttribute="trailing" secondItem="4p3-uu-Xeu" secondAttribute="trailing" constant="8" id="wS5-DC-KVa"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

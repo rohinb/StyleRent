@@ -15,15 +15,19 @@ import ESPullToRefresh
 class ListingViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
 
-	var locManager = CLLocationManager()
-	var currentLocation: CLLocation!
-	var listings = [Listing]()
-	var listingImages = [String : UIImage]()
-	var freshPull = true
-	var currentFilter = ListingDetail()
-	var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
+	fileprivate var locManager = CLLocationManager()
+	fileprivate var currentLocation: CLLocation!
+	fileprivate var listings = [Listing]()
+	fileprivate var listingImages = [String : UIImage]()
+	fileprivate var freshPull = true
+	fileprivate var currentFilter = ListingDetail()
+	fileprivate var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
 
-	let reuseIdentifier = "ListingCell"
+	var listingsOwnerName : String?
+	var listingsOwnerId : String?
+	var onlyMyListings = false
+
+	fileprivate let reuseIdentifier = "ListingCell"
 	static let kCellHeight = 200.0
 
 	override func viewDidLoad() {
@@ -61,6 +65,8 @@ class ListingViewController: UIViewController {
 			self.performFreshPull()
 		}
 
+		title = onlyMyListings ? "\(listingsOwnerName!)'s Closet" : "Listings"
+
     }
 
 	fileprivate func performFreshPull() {
@@ -73,7 +79,7 @@ class ListingViewController: UIViewController {
 	}
 
 	fileprivate func fetchListings() {
-		DB.shared().getNearbyListings(userId: gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, lastEvalKey: self.lastEvalKey)
+		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey)
 	}
 
 	fileprivate func loadImage(index : Int) {

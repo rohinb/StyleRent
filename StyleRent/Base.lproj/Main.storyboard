@@ -66,7 +66,7 @@
         <!--Listings-->
         <scene sceneID="TpN-3D-DzC">
             <objects>
-                <viewController id="5u3-Ig-VBs" customClass="ListingViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListingsVC" id="5u3-Ig-VBs" customClass="ListingViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lTL-WM-5cb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -529,7 +529,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfa-zM-vy0">
-                                <rect key="frame" x="0.0" y="578" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="90Q-Cz-Eoe"/>
@@ -559,7 +559,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2z-Rr-KzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="N6K-yg-lx3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3140" y="273"/>
+            <point key="canvasLocation" x="1452" y="226"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="TZ4-7L-TI1">
@@ -575,7 +575,6 @@
                         <segue destination="z9n-bv-29z" kind="relationship" relationship="viewControllers" id="6rF-Lj-Pnm"/>
                         <segue destination="7d2-Cf-wkr" kind="relationship" relationship="viewControllers" id="KPl-WV-0sC"/>
                         <segue destination="GqL-19-rky" kind="relationship" relationship="viewControllers" id="kM3-TE-kCn"/>
-                        <segue destination="A1G-mZ-Zop" kind="relationship" relationship="viewControllers" id="gLz-Jz-hDA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0W-Qd-WMV" userLabel="First Responder" sceneMemberID="firstResponder"/>

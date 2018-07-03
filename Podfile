@@ -21,6 +21,7 @@ target 'StyleRent' do
   pod 'NYTPhotoViewer', '~> 1.1.0'
   pod 'TTTAttributedLabel'
   pod 'AlamofireImage'
+  pod 'SVProgressHUD'
   # Pods for StyleRent
 
 end

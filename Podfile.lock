@@ -37,6 +37,7 @@ PODS:
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.1.0)
   - SendBirdSDK (3.0.99)
+  - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
   - UIScrollView-InfiniteScroll (1.1.0)
 
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - MGSwipeTableCell
   - NYTPhotoViewer (~> 1.1.0)
   - SendBirdSDK
+  - SVProgressHUD
   - TTTAttributedLabel
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
@@ -78,6 +80,7 @@ SPEC REPOS:
     - MGSwipeTableCell
     - NYTPhotoViewer
     - SendBirdSDK
+    - SVProgressHUD
     - TTTAttributedLabel
     - UIScrollView-InfiniteScroll
 
@@ -100,9 +103,10 @@ SPEC CHECKSUMS:
   MGSwipeTableCell: fb20e983988bde2b8d0df29c2d9e1d8ffd10b74a
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   SendBirdSDK: 6e9212f86ebd2b95bb98b670332b1b59b0e7ca2c
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: e99f0028a9218a6e78c9e8856065ddca43a00e3e
+PODFILE CHECKSUM: ffcc2fd0d42ce96e040712d3c5191537023b4ad6
 
 COCOAPODS: 1.5.2

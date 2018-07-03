@@ -20,6 +20,19 @@ class TabBarViewController: UITabBarController {
 		navController.tabBarItem = item
 		navController.title = "Conversations"
 		self.viewControllers?.append(navController)
+
+		// add my listings page
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc2 = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingViewController
+		vc2.listingsOwnerName = gblUserName
+		vc2.onlyMyListings = true
+		vc2.listingsOwnerId = gblUserId
+		let navController2 = UINavigationController()
+		navController2.viewControllers = [vc2]
+		let item2 = UITabBarItem(title: "My Listings", image: nil, selectedImage: nil)
+		navController2.tabBarItem = item2
+		navController2.title = "My Listings"
+		self.viewControllers?.append(navController2)
     }
 
     override func didReceiveMemoryWarning() {

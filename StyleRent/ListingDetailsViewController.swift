@@ -23,11 +23,13 @@ class ListingDetailsViewController: UIViewController {
 	@IBOutlet weak var categoryLabel: UILabel!
 	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 
+	let imagePadding = CGFloat(20)
+
 	var listing : Listing!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		imageContainerHeightConstraint.constant = CGFloat(listing._imageCount!.intValue) * imageContainerView.frame.width
+		imageContainerHeightConstraint.constant = CGFloat(listing._imageCount!.intValue) * (imageContainerView.frame.width + imagePadding)
 
 		listingNameLabel.text = listing._name ?? ".."
 		let price = listing._price == nil ? 0 : listing._price!.intValue
@@ -54,11 +56,10 @@ class ListingDetailsViewController: UIViewController {
 		let index = CGFloat(imageContainerView.subviews.count)
 		let height = imageContainerView.frame.size.width
 		let width = imageContainerView.frame.size.width
-		let padding = CGFloat(20)
 
 		let imageView = UIImageView()
 		imageView.image = image
-		imageView.frame = CGRect(x: 0, y: index * (height + padding), width: width, height: height)
+		imageView.frame = CGRect(x: 0, y: index * (height + imagePadding), width: width, height: height)
 
 		imageContainerView.addSubview(imageView)
 	}

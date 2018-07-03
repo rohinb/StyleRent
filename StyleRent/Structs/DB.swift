@@ -61,7 +61,7 @@ class DB {
 		})
 	}
 
-	func getNearbyListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, category : String?, size : String?, lastEvalKey : [String : AWSDynamoDBAttributeValue]?) {
+	func getNearbyListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, category : String?, size : String?, showMyListings: Bool, lastEvalKey : [String : AWSDynamoDBAttributeValue]?) {
 		let boundingRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: lon), radius, radius)
 		let latDelta = boundingRegion.span.latitudeDelta
 		let lonDelta = boundingRegion.span.longitudeDelta
@@ -91,6 +91,14 @@ class DB {
 		if size != nil {
 			filterExpression += " AND size = :size"
 			attrValues[":size"] = size
+		}
+
+		if showMyListings {
+			filterExpression += " AND sellerId = :sellerId"
+			attrValues[":sellerId"] = userId
+		} else {
+			filterExpression += " AND sellerId != :sellerId"
+			attrValues[":sellerId"] = userId
 		}
 
 		expression.filterExpression = filterExpression

@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSS3
+import SVProgressHUD
 
 enum PhotoOptionType : String {
 	case upload = "Upload"
@@ -89,7 +90,7 @@ class CreateListingViewController: UIViewController {
 		tableView.register(UINib(nibName: "FormCell", bundle: nil), forCellReuseIdentifier: "FormCell")
 
 		title = "Post Listing"
-		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(saveListing))
+		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePressed))
 		navigationItem.rightBarButtonItem = doneButton
 	}
 
@@ -118,12 +119,27 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	@objc func saveListing(sender: UIBarButtonItem) {
+	@objc func donePressed() {
+		let isValidated = newListing!._category != nil &&
+							newListing!._description != nil &&
+							newListing!._name != nil &&
+							newListing!._originalPrice != nil &&
+							newListing!._price != nil &&
+							newListing!._size != nil
+		if isValidated {
+			saveListing()
+		} else {
+			singleActionPopup(title: "Please complete all fields.", message: nil)
+		}
+	}
+
+	func saveListing() {
 		// start uploading images to S3
 		guard let firstImage = images.first else {
-			popupAlert(title: "You must upload at least one image!", message: nil, actionTitles: ["Ok"], actions: [nil])
+			singleActionPopup(title: "You must upload at least one image!", message: nil)
 			return
 		}
+		SVProgressHUD.show(withStatus: "Creating listing...")
 		uploadFailed = false
 		uploadedCount = 0
 		let thumbnailSideLength = ListingViewController.kCellHeight - 60.0
@@ -145,6 +161,7 @@ class CreateListingViewController: UIViewController {
 			completionHandler = { (task, error) -> Void in
 				DispatchQueue.main.async(execute: {
 					if error != nil {
+						SVProgressHUD.dismiss()
 						self.popupAlert(title: "Uh-oh, we failed to the upload images of your listing.", message: "Please try again later.", actionTitles: ["Ok"], actions: [nil])
 						self.uploadFailed = true
 					} else {
@@ -186,8 +203,28 @@ class CreateListingViewController: UIViewController {
 		DB.shared().createListing(listing: newListing!)
 	}
 
-	func getCurrInfo(for type: DetailType) {
-		//TODO
+	func getCurrInfo(for type: DetailType) -> String? {
+		switch type {
+		case .category: return newListing!._category
+		case .description: return newListing!._description
+		case .name: return newListing!._name
+		case .listingPrice: return newListing?._price != nil ? String(describing: newListing!._price!) : ""
+		case .originalPrice: return newListing?._originalPrice != nil ? String(describing: newListing!._originalPrice!) : ""
+		case .size: return newListing!._size
+		default: return nil
+		}
+	}
+
+	func setCurrInfo(info value : String?, for type: DetailType) {
+		switch type {
+		case .category: newListing!._category = value
+		case .description: newListing!._description = value
+		case .name: newListing!._name = value
+		case .listingPrice: newListing!._price = value == nil ? nil : NSNumber(integerLiteral: Int(value!)!)
+		case .originalPrice: newListing!._originalPrice = value == nil ? nil : NSNumber(integerLiteral: Int(value!)!)
+		case .size: newListing!._size = value
+		default: break
+		}
 	}
 }
 
@@ -203,6 +240,7 @@ extension CreateListingViewController : UIImagePickerControllerDelegate, UINavig
 
 extension CreateListingViewController : DBDelegate {
 	func createListingResponse(success : Bool, error : String?) {
+		SVProgressHUD.dismiss()
 		if success {
 			images = []
 			newListing = Listing()
@@ -341,37 +379,30 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let type = SectionType(rawValue: indexPath.section)!
+		let detailType = type.rows[indexPath.row]
+		let text = getCurrInfo(for: detailType)
 		switch type {
 		case .name:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
 			cell.field.placeholder = "What are you selling?"
-			cell.field.text = newListing?._name
+			cell.field.text = text
 			return cell
 		case .description:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
 			cell.field.placeholder = "Describe it!"
-			cell.field.text = newListing?._description
+			cell.field.text = text
 			return cell
 		case .details:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
-			let detailType = type.rows[indexPath.row]
 			cell.nameLabel.text = detailType.rawValue
-			switch detailType {
-			case .category: cell.field.text = newListing!._category
-			case .size: cell.field.text = newListing!._size
-			default: break
-			}
+			cell.field.text = text
 			cell.field.placeholder = "required"
 			return cell
 		case .price:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
 			let detailType = type.rows[indexPath.row]
 			cell.nameLabel.text = detailType.rawValue
-			switch detailType {
-			case .originalPrice: cell.field.text = newListing?._originalPrice != nil ? String(describing: newListing!._originalPrice!) : ""
-			case .listingPrice: cell.field.text = newListing?._price != nil ? String(describing: newListing!._price!) : ""
-			default: break
-			}
+			cell.field.text = text
 			cell.field.placeholder = "required"
 			return cell
 		}
@@ -383,17 +414,20 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		let type = SectionType(rawValue: indexPath.section)?.rows[indexPath.row]
+		let type = SectionType(rawValue: indexPath.section)!.rows[indexPath.row]
+		let currInfo = getCurrInfo(for: type)
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		if type == .name || type == .description || type == .originalPrice || type == .listingPrice{
 			let vc = storyboard.instantiateViewController(withIdentifier: "TextEntryVC") as! TextEntryViewController
 			vc.delegate = self
 			vc.type = type
+			vc.startingValue = currInfo
 			self.navigationController?.pushViewController(vc, animated: true)
 		} else {
 			let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
 			vc.delegate = self
 			vc.type = type
+			vc.startingValue = currInfo
 			if type == .category {
 				vc.options = ListingCategory.allValues.map({ (category) -> String in
 					return category.rawValue
@@ -438,14 +472,9 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 
 extension CreateListingViewController : SelectionDelegate {
 	func madeSelection(type: DetailType, value: String) {
-		switch type {
-		case .category: newListing!._category = value
-		case .description: newListing!._description = value
-		case .name: newListing!._name = value
-		case .listingPrice: newListing!._price = NSNumber(integerLiteral: Int(value)!)
-		case .originalPrice: newListing!._originalPrice = NSNumber(integerLiteral: Int(value)!)
-		case .size: newListing!._size = value
-		default: break
+		setCurrInfo(info: value, for: type)
+		if type == .category {
+			setCurrInfo(info: nil, for: .size)
 		}
 		self.tableView.reloadData()
 	}

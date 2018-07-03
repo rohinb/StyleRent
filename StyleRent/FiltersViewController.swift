@@ -57,11 +57,13 @@ class FiltersViewController: UITableViewController {
 		vc.delegate = self
 		if indexPath.row == 0 {
 			vc.type = .category
+			vc.startingValue = currentDetail.category?.rawValue
 			vc.options = ListingCategory.allValues.map({ (category) -> String in
 				return category.rawValue
 			})
 		} else if indexPath.row == 1 {
 			vc.type = .size
+			vc.startingValue = currentDetail.size
 			if currentDetail.category == nil {
 				singleActionPopup(title: "You must first select a category", message: nil)
 				return
@@ -81,7 +83,11 @@ class FiltersViewController: UITableViewController {
 extension FiltersViewController : SelectionDelegate {
 	func madeSelection(type: DetailType, value: String) {
 		switch type {
-		case .category: currentDetail.category = ListingCategory(rawValue: value)!
+		case .category:
+			if value != currentDetail.category?.rawValue {
+				currentDetail.size = nil
+			}
+			currentDetail.category = ListingCategory(rawValue: value)!
 		case .size: currentDetail.size = value
 		default: return
 		}

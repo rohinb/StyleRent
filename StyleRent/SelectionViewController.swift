@@ -13,12 +13,10 @@ class SelectionViewController: UITableViewController {
 	var type : DetailType!
 	var delegate : SelectionDelegate!
 	var options : [String]!
-
-	fileprivate var selectedValue : String?
+	var startingValue : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 		title = type.rawValue
 	}
 
@@ -34,14 +32,24 @@ class SelectionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-
-        cell.textLabel?.text = options[indexPath.row]
+		let text = options[indexPath.row]
+        cell.textLabel?.text = text
+		cell.accessoryType = text == startingValue ? .checkmark : .none
 
         return cell
     }
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if let cell = tableView.cellForRow(at: indexPath) {
+			cell.accessoryType = .checkmark
+		}
 		delegate.madeSelection(type: type, value: options[indexPath.row])
 		self.navigationController?.popViewController(animated: true)
+	}
+
+	override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		if let cell = tableView.cellForRow(at: indexPath) {
+			cell.accessoryType = .none
+		}
 	}
 }
