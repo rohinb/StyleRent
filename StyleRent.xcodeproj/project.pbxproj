@@ -109,6 +109,7 @@
 		0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */; };
 		0FD0F98120E0C4CE00FE56AE /* FormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */; };
 		0FD0F98320E0D31B00FE56AE /* TextEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */; };
+		0FFE8FD920ECBF92002E9D8F /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFE8FD820ECBF92002E9D8F /* Services.swift */; };
 		64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */; };
 /* End PBXBuildFile section */
 
@@ -253,6 +254,7 @@
 		0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		0FD0F97F20E0C4CE00FE56AE /* FormCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormCell.xib; sourceTree = "<group>"; };
 		0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEntryViewController.swift; sourceTree = "<group>"; };
+		0FFE8FD820ECBF92002E9D8F /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		13CD6D88FC7021165C65618F /* Pods-StyleRent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.release.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.release.xcconfig"; sourceTree = "<group>"; };
 		81724D835042D626E98E91D4 /* Pods-StyleRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StyleRent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StyleRent/Pods-StyleRent.debug.xcconfig"; sourceTree = "<group>"; };
 		C2F974B44D93D6531FCA8733 /* Pods_StyleRent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StyleRent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +291,7 @@
 		0F1387DF20BB8FB800E78B25 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				0FFE8FD820ECBF92002E9D8F /* Services.swift */,
 				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
 				0F1387E520BB952800E78B25 /* APICalls.swift */,
 				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
@@ -891,6 +894,7 @@
 				0F98F9C220D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.swift in Sources */,
 				0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */,
 				0FD0F97C20E0C28D00FE56AE /* TextViewCell.swift in Sources */,
+				0FFE8FD920ECBF92002E9D8F /* Services.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F98F9FE20D1FEA10054E14C /* MemberListViewController.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
