@@ -8,8 +8,11 @@
 
 import Foundation
 
-var gblUserId : String!
-var gblUserName : String!
+var gblUser : User! {
+	didSet {
+		Defaults.standard.set(gblUser?._id, forKey: Defaults.userIdKey)
+	}
+}
 
 enum ListingCategory : String {
 	case jewelry = "Jewelry"
@@ -26,6 +29,12 @@ enum ListingCategory : String {
 	case tops = "Tops"
 
 	static let allValues : [ListingCategory] = [.jewelry, .accessories, .bags, .shoes, .dresses, .jacketsCoats, .jeans, .pants, .shorts, .skirts, .sweaters, .tops]
+}
+
+enum AuthType : String {
+	case facebook = "Facebook"
+	case google = "Google"
+	case manual = "Manual"
 }
 
 class ListingDetail {
@@ -46,4 +55,10 @@ struct ClothingUtils {
 			return ["23", "24", "25", "26", "27", "28", "29", "30", "31", "00", "0", "2", "4", "6", "8", "10", "12", "XXS", "XS", "S", "M", "L", "XL", "23P", "24P", "25P", "26P", "27P", "28P", "29P", "30P", "31P", "32P", "33P", "34P", "00P", "0P", "2P", "4P", "6P", "8P", "10P", "12P", "XXSP", "XSP", "SP", "MP", "LP", "XLP"]
 		}
 	}
+}
+
+struct Defaults {
+	static let standard = UserDefaults.standard
+
+	static let userIdKey = "user_id"
 }

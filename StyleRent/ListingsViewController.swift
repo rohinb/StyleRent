@@ -65,9 +65,15 @@ class ListingsViewController: UIViewController {
 			self.performFreshPull()
 		}
 
-		title = onlyMyListings ? "\(listingsOwnerName!)'s Closet" : "Listings"
+		title = onlyMyListings ? (listingsOwnerId! == gblUser._id! ? "My Closet" : "\(listingsOwnerName!)'s Closet") : "Listings"
 
+		let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
+		navigationItem.leftBarButtonItem = settingsButton
     }
+
+	@objc fileprivate func settingsButtonPressed() {
+		self.performSegue(withIdentifier: "listingsToSettings", sender: nil)
+	}
 
 	fileprivate func performFreshPull() {
 		freshPull = true
@@ -79,7 +85,7 @@ class ListingsViewController: UIViewController {
 	}
 
 	fileprivate func fetchListings() {
-		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUserId, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey)
+		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey)
 	}
 
 	fileprivate func loadImage(index : Int) {
@@ -205,11 +211,11 @@ extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.bounds.size.width / 2 - 16, height: CGFloat(ListingsViewController.kCellHeight))
+		return CGSize(width: collectionView.bounds.size.width / 2 - 10, height: CGFloat(ListingsViewController.kCellHeight))
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 8
+		return 20
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

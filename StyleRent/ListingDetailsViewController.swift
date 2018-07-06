@@ -34,7 +34,7 @@ class ListingDetailsViewController: UIViewController {
 
 		update()
 
-		if listing._sellerId! == gblUserId {
+		if listing._sellerId! == gblUser._id! {
 			let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editPressed))
 			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
 			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
@@ -154,7 +154,7 @@ class ListingDetailsViewController: UIViewController {
     }
 
 	@IBAction func messageOwner(_ sender: Any) {
-		let userIds = [gblUserId!, listing._sellerId!]
+		let userIds = [gblUser._id!, listing._sellerId!]
 		//SBDGroupChannel.createChannel(withName: <#T##String?#>, isDistinct: <#T##Bool#>, users: <#T##[SBDUser]#>, coverUrl: <#T##String?#>, data: <#T##String?#>, completionHandler: <#T##(SBDGroupChannel?, SBDError?) -> Void#>)
 		SBDGroupChannel.createChannel(withUserIds: userIds, isDistinct: true) { (channel, error) in
 			if error != nil {

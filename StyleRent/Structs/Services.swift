@@ -8,6 +8,8 @@
 
 import Foundation
 import FBSDKLoginKit
+import AWSDynamoDB
+
 class Services {
 	var delegate : ServicesDelegate?
 	private let PAGE_AMOUNT = 6
@@ -29,9 +31,8 @@ class Services {
 			if err != nil {
 				self.delegate?.fbLoginResponse?(success: false, id: nil, name: nil, email: nil)
 			} else {
-				let user = User()
 				if let results = result as? [String : String] {
-					self.delegate?.fbLoginResponse?(success: true, id: results["id"], name: results["email"], email: results["name"])
+					self.delegate?.fbLoginResponse?(success: true, id: results["id"], name: results["name"], email: results["email"])
 				} else {
 					self.delegate?.fbLoginResponse?(success: false, id: nil, name: nil, email: nil)
 				}

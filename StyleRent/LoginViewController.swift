@@ -13,6 +13,8 @@ import SendBirdSDK
 
 class LoginViewController: UIViewController {
 
+	@IBOutlet weak var passwordField: UITextField!
+	@IBOutlet weak var idField: UITextField!
 	var firstTime = true
 
 	override func viewDidLoad() {
@@ -26,20 +28,24 @@ class LoginViewController: UIViewController {
 		loginButton.center = self.view.center
 		self.view.addSubview(loginButton)
 		// Do any additional setup after loading the view, typically from a nib.
-		attemptLogin()
+		attemptFbLogin()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		if !firstTime {
-			attemptLogin()
+			attemptFbLogin()
 		}
 		firstTime = false
 	}
 
-	func attemptLogin() {
+	@IBAction func manualLogin() {
+		DB.shared().validateUser(id: idField.text!, authType: .manual, password: passwordField.text!)
+	}
+
+	func attemptFbLogin() {
 		if FBSDKAccessToken.current() != nil {
-			
+			Services.shared().fbLogin()
 		}
 	}
 
@@ -57,13 +63,22 @@ extension LoginViewController : DBDelegate {
 			popupAlert(title: "User Creations failed!", message: error, actionTitles: ["Ok"], actions: [nil])
 		}
 	}
+
+	func validateUserResponse(success: Bool, user : User?, error: String?) {
+		if success {
+			gblUser = user!
+			self.performSegue(withIdentifier: "loginSegue", sender: nil)
+		} else {
+			singleActionPopup(title: error, message: nil)
+		}
+	}
 }
 
 extension LoginViewController : ServicesDelegate {
 	func fbLoginResponse(success: Bool, id: String?, name: String?, email: String?) {
 		if success {
 			// TODO: Handle image
-			let profileImageUrl = "http://graph.facebook.com/\(id)/picture?type=square"
+			let profileImageUrl = "http://graph.facebook.com/\(String(describing: id))/picture?type=square"
 			// TODO: Move Send Bird connection into Services class with delegate response callback
 			SBDMain.connect(withUserId: email!, completionHandler: { (newUser, error) in
 				SBDMain.updateCurrentUserInfo(withNickname: name!, profileUrl: profileImageUrl, completionHandler: { (error) in
@@ -71,13 +86,10 @@ extension LoginViewController : ServicesDelegate {
 				})
 			})
 			//DB.shared().createUser(user: user!)
-			//TODO: Make sure user email exists and authType is Facebook
-			gblUserId = email!
-			gblUserName = name!
-			print("FB Login Success!")
+			DB.shared().validateUser(id: email!, authType: AuthType.facebook, password: nil)
 		} else {
 			self.popupAlert(title: "Failed to login through Facebook", message: "Would you like to try again?", actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
-				self.attemptLogin()
+				self.attemptFbLogin()
 				}, nil])
 		}
 	}

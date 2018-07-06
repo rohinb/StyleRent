@@ -123,7 +123,7 @@ class DB {
 	func deleteListing(_ listing : Listing) {
 		dynamoDbObjectMapper.remove(listing).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
 			DispatchQueue.main.async {
-				if let error = task.error as? NSError {
+				if let error = task.error as NSError? {
 					print("The request failed. Error: \(error)")
 					self.delegate?.deleteListingResponse?(success: false)
 				} else {
@@ -133,6 +133,64 @@ class DB {
 		})
 		// TODO: Delete images associated with listing
 	}
+
+	func validateUser(id : String, authType : AuthType, password : String?) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.keyConditionExpression = "id = :id"
+		queryExpression.expressionAttributeValues = [":id" : id]
+
+		dynamoDbObjectMapper.query(User.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+			DispatchQueue.main.async {
+				if let error = task.error as NSError? {
+					print("The request failed. Error: \(error)")
+					self.delegate?.validateUserResponse?(success: false, user: nil, error: "Failed to connect to the server.")
+				} else if let result = task.result {
+					if let user = result.items.first as? User {
+						if authType == .manual {
+							if user._password == password {
+								self.delegate?.validateUserResponse?(success: true, user : user, error: nil)
+							} else {
+								self.delegate?.validateUserResponse?(success: false, user : nil, error: "Incorrect password.")
+							}
+						} else {
+							if user._authType == authType.rawValue {
+								self.delegate?.validateUserResponse?(success: true, user: user, error: nil)
+							} else {
+								self.delegate?.validateUserResponse?(success: false, user : nil, error: "A user with this email address was previously registered with \(user._authType!)")
+							}
+						}
+					} else {
+						self.delegate?.validateUserResponse?(success: false, user : nil, error: "User with email address not found.")
+					}
+				}
+			}
+			return nil
+		})
+	}
+
+	func getUser(with id : String) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.keyConditionExpression = "id = :id"
+		queryExpression.expressionAttributeValues = [":id" : id]
+
+		dynamoDbObjectMapper.query(User.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+			DispatchQueue.main.async {
+				if let error = task.error as NSError? {
+					print("The request failed. Error: \(error)")
+					self.delegate?.getUserResponse?(success: false, user: nil, error: "Failed to connect to the server.")
+				} else if let result = task.result {
+					if let user = result.items.first as? User {
+						self.delegate?.getUserResponse?(success: true, user: user, error: nil)
+					} else {
+						self.delegate?.getUserResponse?(success: false, user : nil, error: "User with email address not found.")
+					}
+				}
+			}
+			return nil
+		})
+	}
 }
 
 @objc protocol DBDelegate {
@@ -140,4 +198,6 @@ class DB {
 	@objc optional func createListingResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
 	@objc optional func deleteListingResponse(success : Bool)
+	@objc optional func validateUserResponse(success : Bool, user : User?, error : String?)
+	@objc optional func getUserResponse(success : Bool, user : User?, error : String?)
 }

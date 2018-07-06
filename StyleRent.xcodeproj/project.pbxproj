@@ -36,6 +36,8 @@
 		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
 		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
+		0F981A7320EF5A9000A6133B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7220EF5A9000A6133B /* HomeViewController.swift */; };
+		0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7620EF606900A6133B /* SettingsViewController.swift */; };
 		0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */; };
 		0F98F9BF20D1FE7E0054E14C /* OutgoingVideoFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98F99B20D1FE7E0054E14C /* OutgoingVideoFileMessageTableViewCell.swift */; };
 		0F98F9C020D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F98F99C20D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.xib */; };
@@ -179,6 +181,8 @@
 		0F47BF4720B7EFB400C2CA55 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
+		0F981A7220EF5A9000A6133B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0F981A7620EF606900A6133B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
 		0F98F99B20D1FE7E0054E14C /* OutgoingVideoFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingVideoFileMessageTableViewCell.swift; sourceTree = "<group>"; };
 		0F98F99C20D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingFileMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -540,7 +544,9 @@
 				0F1387DF20BB8FB800E78B25 /* Structs */,
 				0F1387F320BB9CF300E78B25 /* Extensions */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
+				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
 				0F47BF4520B7EFA800C2CA55 /* ListingsViewController.swift */,
+				0F981A7620EF606900A6133B /* SettingsViewController.swift */,
 				0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
 				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
@@ -884,6 +890,7 @@
 				0F98F9D520D1FE7E0054E14C /* OutgoingGeneralUrlPreviewMessageTableViewCell.swift in Sources */,
 				0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */,
 				0F98F9C520D1FE7E0054E14C /* IncomingGeneralUrlPreviewMessageTableViewCell.swift in Sources */,
+				0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */,
 				0F98FA0D20D1FEA10054E14C /* SelectedUserListCollectionViewCell.swift in Sources */,
 				0F98FA0620D1FEA10054E14C /* MemberListTableViewCell.swift in Sources */,
 				0F98FA0820D1FEA10054E14C /* CreateGroupChannelUserListTableViewCell.swift in Sources */,
@@ -899,6 +906,7 @@
 				0F98F9FE20D1FEA10054E14C /* MemberListViewController.swift in Sources */,
 				0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */,
 				0F98F9CA20D1FE7E0054E14C /* IncomingVideoFileMessageTableViewCell.swift in Sources */,
+				0F981A7320EF5A9000A6133B /* HomeViewController.swift in Sources */,
 				0F98F9DD20D1FE7E0054E14C /* Utils.swift in Sources */,
 				0F98F9D420D1FE7E0054E14C /* NeutralMessageTableViewCell.swift in Sources */,
 				0F98F9C720D1FE7E0054E14C /* IncomingUserMessageTableViewCell.swift in Sources */,

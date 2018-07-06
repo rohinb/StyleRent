@@ -203,7 +203,7 @@ class CreateListingViewController: UIViewController {
 		newListing?._latitude = 37.2657536962002
 		newListing?._longitude = -121.971246711695
 		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
-		newListing?._sellerId = gblUserId!
+		newListing?._sellerId = gblUser._id!
 		DB.shared().createListing(listing: newListing!)
 	}
 
