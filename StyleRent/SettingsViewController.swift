@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class SettingsViewController: UITableViewController {
 
@@ -51,11 +52,11 @@ class SettingsViewController: UITableViewController {
 		switch type {
 		case .terms: break
 		case .privacy: break
-		case .logout: performLogout()
+		case .logout: logout()
 		}
 	}
 
-	fileprivate func performLogout() {
+	fileprivate func logout() {
 		popupAlert(title: "Are you sure you want to log out?", message: nil, actionTitles: ["Log out", "Cancel"], actions: [{ (action) in
 			self.actuallyLogout()
 		}, nil])
@@ -63,6 +64,8 @@ class SettingsViewController: UITableViewController {
 
 	fileprivate func actuallyLogout() {
 		gblUser = nil
+		FBSDKAccessToken.setCurrent(nil)
+		FBSDKLoginManager().logOut()
 		self.dismiss(animated: true, completion: nil)
 	}
     /*
