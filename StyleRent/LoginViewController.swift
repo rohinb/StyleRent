@@ -27,8 +27,6 @@ class LoginViewController: UIViewController {
 		loginButton.readPermissions = ["email"]
 		loginButton.center = self.view.center
 		self.view.addSubview(loginButton)
-		// Do any additional setup after loading the view, typically from a nib.
-		attemptFbLogin()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -56,14 +54,6 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController : DBDelegate {
-	func createUserResponse(success: Bool, error: String?) {
-		if success {
-			self.performSegue(withIdentifier: "loginSegue", sender: nil)
-		} else {
-			popupAlert(title: "User Creations failed!", message: error, actionTitles: ["Ok"], actions: [nil])
-		}
-	}
-
 	func validateUserResponse(success: Bool, user : User?, error: String?) {
 		if success {
 			gblUser = user!

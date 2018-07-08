@@ -9,6 +9,7 @@
 import Foundation
 import FBSDKLoginKit
 import AWSDynamoDB
+import AWSS3
 
 class Services {
 	var delegate : ServicesDelegate?
@@ -39,8 +40,38 @@ class Services {
 			}
 		}
 	}
+
+	func uploadImageToS3(image : UIImage, key : String) {
+		let data = UIImageJPEGRepresentation(image, 0.7)!
+
+		let expression = AWSS3TransferUtilityUploadExpression()
+		expression.progressBlock = nil
+
+		var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
+		completionHandler = { (task, error) -> Void in
+			DispatchQueue.main.async(execute: {
+				if error != nil {
+					self.delegate?.uploadImageResponse?(success: false)
+				} else {
+					self.delegate?.uploadImageResponse?(success: true)
+				}
+			})
+		}
+
+		let transferUtility = AWSS3TransferUtility.default()
+
+		transferUtility.uploadData(data,
+								   key: key,
+			contentType: "image/jpg",
+			expression: expression,
+			completionHandler: completionHandler).continueWith {
+				(task) -> AnyObject? in
+				return nil
+		}
+	}
 }
 
 @objc protocol ServicesDelegate {
 	@objc optional func fbLoginResponse(success : Bool, id : String?, name : String?, email : String?)
+	@objc optional func uploadImageResponse(success : Bool)
 }

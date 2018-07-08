@@ -34,7 +34,7 @@ enum ListingCategory : String {
 enum AuthType : String {
 	case facebook = "Facebook"
 	case google = "Google"
-	case manual = "Manual"
+	case manual = "Manual Login"
 }
 
 class ListingDetail {

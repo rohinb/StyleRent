@@ -78,7 +78,6 @@ class CreateListingViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		DB.shared().delegate = self
 
 		//hideKeyboardWhenTappedAround()
 
@@ -101,6 +100,7 @@ class CreateListingViewController: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		DB.shared().delegate = self
+		Services.shared().delegate = self
 	}
     
 	func takeImage() {
@@ -151,55 +151,13 @@ class CreateListingViewController: UIViewController {
 		images.insert(firstImage.resizeImageWith(newSize: thumbnailSize), at: 0)
 
 		let newListingId = isEditView ? newListing!._id! : UUID().uuidString
+		newListing?._id = newListingId
 		for (index, image) in images.enumerated() {
-			let data = UIImageJPEGRepresentation(image, 0.7)!
-
-			let expression = AWSS3TransferUtilityUploadExpression()
-			expression.progressBlock = {(task, progress) in
-				DispatchQueue.main.async(execute: {
-					print("Progress upload image \(index + 1) / \(self.images.count): \(progress.fractionCompleted)")
-				})
-			}
-
-			var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
-			completionHandler = { (task, error) -> Void in
-				DispatchQueue.main.async(execute: {
-					if error != nil {
-						SVProgressHUD.dismiss()
-						self.popupAlert(title: "Uh-oh, we failed to the upload images of your listing.", message: "Please try again later.", actionTitles: ["Ok"], actions: [nil])
-						self.uploadFailed = true
-					} else {
-						self.uploadedCount += 1
-						if !self.uploadFailed && self.uploadedCount == self.images.count {
-							print("Last image uploaded!")
-							self.writeListing(id: newListingId)
-						}
-					}
-				})
-			}
-
-			let transferUtility = AWSS3TransferUtility.default()
-
-			transferUtility.uploadData(data,
-									   key: "listing-images/\(newListingId)-\(index + 1)",
-									   contentType: "image/jpg",
-									   expression: expression,
-									   completionHandler: completionHandler).continueWith {
-										(task) -> AnyObject? in
-										if let error = task.error {
-											print("Error: \(error.localizedDescription)")
-										}
-
-										if let _ = task.result {
-											print(task)
-										}
-										return nil;
-			}
+			Services.shared().uploadImageToS3(image: image, key: "listing-images/\(newListingId)-\(index + 1)")
 		}
 	}
 
-	func writeListing(id : String) {
-		newListing?._id = id
+	func writeListing() {
 		newListing?._latitude = 37.2657536962002
 		newListing?._longitude = -121.971246711695
 		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
@@ -261,6 +219,22 @@ extension CreateListingViewController : DBDelegate {
 			}
 		} else {
 			singleActionPopup(title: "Failed to save your listing", message: "Please try again soon.")
+		}
+	}
+}
+
+extension CreateListingViewController : ServicesDelegate {
+	func uploadImageResponse(success: Bool) {
+		if !success {
+			SVProgressHUD.dismiss()
+			popupAlert(title: "Uh-oh, we failed to the upload images of your listing.", message: "Please try again later.", actionTitles: ["Ok"], actions: [nil])
+			uploadFailed = true
+		} else {
+			uploadedCount += 1
+			if !uploadFailed && uploadedCount == images.count {
+				print("Last image uploaded!")
+				writeListing()
+			}
 		}
 	}
 }

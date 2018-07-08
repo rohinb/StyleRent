@@ -84,18 +84,16 @@ class ListingsViewController: UIViewController {
 		fetchListings()
 	}
 
-	fileprivate func fetchListings() {
-		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey)
+	fileprivate func fetchListings(count: Int = DB.PAGE_AMOUNT) {
+		guard count > 0 else { return }
+		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
 	}
 
 	fileprivate func loadImage(index : Int) {
 		let listing = listings[index]
 		let fileName = "listing-images/\(listing._id!)-1"
 		let expression = AWSS3TransferUtilityDownloadExpression()
-		expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
-			print(progress.fractionCompleted)
-		})
-		}
+		expression.progressBlock = nil
 
 		var completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock?
 		completionHandler = { (task, URL, data, error) -> Void in
@@ -118,16 +116,8 @@ class ListingsViewController: UIViewController {
 			expression: expression,
 			completionHandler: completionHandler
 			).continueWith {
-				(task) -> AnyObject? in if let error = task.error {
-					print("Error: \(error.localizedDescription)")
-				}
-
-				if let _ = task.result {
-					// Do something with downloadTask.
-					print(task.result)
-
-				}
-				return nil;
+				(task) -> AnyObject? in
+				return nil
 		}
 	}
 
@@ -162,20 +152,34 @@ class ListingsViewController: UIViewController {
 extension ListingsViewController : DBDelegate {
 	func getListingsResponse(success: Bool, listings: [Listing], error: String?, lastEval: [String : AWSDynamoDBAttributeValue]?) {
 		print(success, listings)
-		let initialCount = self.listings.count
-		self.listings += listings
-		lastEvalKey = lastEval
-		freshPull = false
-		let newIndexes = initialCount..<(listings.count + initialCount)
-		for index in newIndexes { // load only new images
-			loadImage(index: index)
+		if success {
+			let initialCount = self.listings.count
+			self.listings += listings
+			lastEvalKey = lastEval
+			freshPull = false
+			let newIndexes = initialCount..<(listings.count + initialCount)
+			for index in newIndexes { // load only new images
+				loadImage(index: index)
+			}
+			let indexPathsToReload = newIndexes.map { (index) -> IndexPath in
+				return IndexPath(item: index, section: 0)
+			}
+			collectionView.insertItems(at: indexPathsToReload)
+			// continue fetching if not enough have been found
+			if lastEval != nil && self.listings.count % DB.PAGE_AMOUNT != 0 {
+				let remaining = DB.PAGE_AMOUNT - (self.listings.count % DB.PAGE_AMOUNT)
+				print("Continuing to fetch. Received: \(listings.count). Have: \(self.listings.count) Want \(remaining) more.")
+				fetchListings(count: remaining)
+			} else {
+				print("done fetching")
+				collectionView.finishInfiniteScroll()
+				collectionView.es.stopPullToRefresh()
+			}
+		} else {
+			collectionView.finishInfiniteScroll()
+			collectionView.es.stopPullToRefresh()
+			singleActionPopup(title: "Failed to fetch listings", message: "Please try again later.")
 		}
-		let indexPathsToReload = newIndexes.map { (index) -> IndexPath in
-			return IndexPath(item: index, section: 0)
-		}
-		collectionView.insertItems(at: indexPathsToReload)
-		collectionView.finishInfiniteScroll()
-		collectionView.es.stopPullToRefresh()
 	}
 }
 

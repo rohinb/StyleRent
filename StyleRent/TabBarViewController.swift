@@ -24,7 +24,7 @@ class TabBarViewController: UITabBarController {
 		// add my listings page
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let vc2 = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingsViewController
-		vc2.listingsOwnerName = gblUser._name!
+		vc2.listingsOwnerName = gblUser._name ?? gblUser._id!
 		vc2.onlyMyListings = true
 		vc2.listingsOwnerId = gblUser._id!
 		let navController2 = UINavigationController()

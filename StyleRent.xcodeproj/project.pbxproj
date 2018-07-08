@@ -36,6 +36,9 @@
 		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
 		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
+		0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */; };
+		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
+		0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */; };
 		0F981A7320EF5A9000A6133B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7220EF5A9000A6133B /* HomeViewController.swift */; };
 		0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7620EF606900A6133B /* SettingsViewController.swift */; };
 		0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */; };
@@ -181,6 +184,9 @@
 		0F47BF4720B7EFB400C2CA55 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
+		0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectionViewController.swift; sourceTree = "<group>"; };
+		0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		0F981A7220EF5A9000A6133B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0F981A7620EF606900A6133B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
@@ -292,15 +298,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F1387DF20BB8FB800E78B25 /* Structs */ = {
+		0F1387DF20BB8FB800E78B25 /* General */ = {
 			isa = PBXGroup;
 			children = (
 				0FFE8FD820ECBF92002E9D8F /* Services.swift */,
+				0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */,
 				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
 				0F1387E520BB952800E78B25 /* APICalls.swift */,
 				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
 			);
-			path = Structs;
+			path = General;
 			sourceTree = "<group>";
 		};
 		0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */ = {
@@ -541,11 +548,13 @@
 				0F98FA3C20D25A710054E14C /* SendBird UI */,
 				0F1387F020BB9A0B00E78B25 /* API */,
 				0F47BF4420B7E7EE00C2CA55 /* Models */,
-				0F1387DF20BB8FB800E78B25 /* Structs */,
+				0F1387DF20BB8FB800E78B25 /* General */,
 				0F1387F320BB9CF300E78B25 /* Extensions */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
+				0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */,
 				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
 				0F47BF4520B7EFA800C2CA55 /* ListingsViewController.swift */,
+				0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */,
 				0F981A7620EF606900A6133B /* SettingsViewController.swift */,
 				0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */,
 				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
@@ -867,11 +876,13 @@
 				0F1C5CC020E8BB3600A320AF /* FiltersViewController.swift in Sources */,
 				0F98FA2A20D24BA90054E14C /* ReusableViewFromXib.swift in Sources */,
 				0F98F9DC20D1FE7E0054E14C /* CustomNavigationBar.swift in Sources */,
+				0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */,
 				0F98F9C120D1FE7E0054E14C /* OutgoingUserMessageTableViewCell.swift in Sources */,
 				0F1C5CBE20E4268B00A320AF /* SelectionViewController.swift in Sources */,
 				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,
 				0F98F9FD20D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift in Sources */,
 				0F98FA3E20D25E130054E14C /* TabBarViewController.swift in Sources */,
+				0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */,
 				0F98FA0520D1FEA10054E14C /* GroupChannelListTableViewCell.swift in Sources */,
 				0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */,
 				0F98FA0E20D1FEA10054E14C /* GroupChannelListViewController.swift in Sources */,
@@ -914,6 +925,7 @@
 				0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */,
 				0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */,
 				0F98F9D820D1FE7E0054E14C /* ChattingView.swift in Sources */,
+				0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */,
 				0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */,
 				0F98F9D720D1FE7E0054E14C /* OutgoingGeneralUrlPreviewTempModel.swift in Sources */,
 				0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */,
