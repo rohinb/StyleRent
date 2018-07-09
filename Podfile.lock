@@ -29,6 +29,7 @@ PODS:
   - FLAnimatedImage (1.0.12)
   - HTMLKit (2.1.4)
   - MGSwipeTableCell (1.6.7)
+  - Nuke (7.0.1)
   - NYTPhotoViewer (1.1.0):
     - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
     - NYTPhotoViewer/Core (= 1.1.0)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - HTMLKit (~> 2.1)
   - MGSwipeTableCell
+  - Nuke
   - NYTPhotoViewer (~> 1.1.0)
   - SendBirdSDK
   - SVProgressHUD
@@ -78,6 +80,7 @@ SPEC REPOS:
     - FLAnimatedImage
     - HTMLKit
     - MGSwipeTableCell
+    - Nuke
     - NYTPhotoViewer
     - SendBirdSDK
     - SVProgressHUD
@@ -101,12 +104,13 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HTMLKit: 2f4c7d3e14906cdfc2d3d51b85dfdf29ad9ae65f
   MGSwipeTableCell: fb20e983988bde2b8d0df29c2d9e1d8ffd10b74a
+  Nuke: 0944b2e721c8f21857028d980dc3d6a249df8b3e
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   SendBirdSDK: 6e9212f86ebd2b95bb98b670332b1b59b0e7ca2c
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: ffcc2fd0d42ce96e040712d3c5191537023b4ad6
+PODFILE CHECKSUM: 9e8e16a79a73e09518fb09db8611d4c764fc8b2c
 
 COCOAPODS: 1.5.2

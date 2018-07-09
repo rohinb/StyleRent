@@ -87,7 +87,7 @@ class ListingsViewController: UIViewController {
 
 	fileprivate func fetchListings(count: Int = DB.PAGE_AMOUNT) {
 		guard count > 0 else { return }
-		DB.shared().getNearbyListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
+		DB.shared().getListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
 	}
 
 	fileprivate func loadImage(index : Int) {
@@ -167,7 +167,7 @@ extension ListingsViewController : DBDelegate {
 			}
 			collectionView.insertItems(at: indexPathsToReload)
 			// continue fetching if not enough have been found
-			if lastEval != nil && self.listings.count % DB.PAGE_AMOUNT != 0 {
+			if lastEval != nil && (self.listings.count % DB.PAGE_AMOUNT != 0 || self.listings.count == 0) {
 				let remaining = DB.PAGE_AMOUNT - (self.listings.count % DB.PAGE_AMOUNT)
 				print("Continuing to fetch. Received: \(listings.count). Have: \(self.listings.count) Want \(remaining) more.")
 				fetchListings(count: remaining)

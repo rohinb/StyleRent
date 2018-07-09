@@ -19,8 +19,8 @@ extension UIViewController {
 		self.present(alert, animated: true, completion: nil)
 	}
 
-	func singleActionPopup(title : String?, message : String?) {
-		popupAlert(title: title, message: message, actionTitles: ["Ok"], actions: [nil])
+	func singleActionPopup(title : String?, message : String?, action : ((UIAlertAction) -> Void)? = nil) {
+		popupAlert(title: title, message: message, actionTitles: ["Ok"], actions: [action])
 	}
 
 	func hideKeyboardWhenTappedAround() {

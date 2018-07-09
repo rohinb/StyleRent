@@ -9,8 +9,10 @@
 import UIKit
 import AWSS3
 import SendBirdSDK
+import Nuke
 
 class ListingDetailsViewController: UIViewController {
+	@IBOutlet weak var sellerImageView: UIImageView!
 	@IBOutlet weak var sellerNameLabel: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
@@ -21,6 +23,7 @@ class ListingDetailsViewController: UIViewController {
 	@IBOutlet weak var sizeLabel: UILabel!
 	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var categoryLabel: UILabel!
+	@IBOutlet weak var messageButton: UIButton!
 	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 
 	fileprivate let imagePadding = CGFloat(20)
@@ -28,10 +31,20 @@ class ListingDetailsViewController: UIViewController {
 
 	var listing : Listing!
 	var images = [UIImage]()
+	fileprivate var seller : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		Nuke.loadImage(
+			with: Utilities.getUrlForUserPicture(userId: listing._sellerId!),
+			options: ImageLoadingOptions(
+				placeholder: #imageLiteral(resourceName: "placeholder"),
+				transition: .fadeIn(duration: 0.33)
+			),
+			into: sellerImageView
+		)
+		DB.shared().delegate = self
+		DB.shared().getUser(with: listing._sellerId!)
 		update()
 
 		if listing._sellerId! == gblUser._id! {
@@ -39,7 +52,22 @@ class ListingDetailsViewController: UIViewController {
 			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
 			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
 		}
+
+		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showSeller))
+		sellerImageView.isUserInteractionEnabled = true
+		sellerImageView.addGestureRecognizer(tapGestureRecognizer)
+
+		let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(showSeller))
+		sellerNameLabel.isUserInteractionEnabled = true
+		sellerNameLabel.addGestureRecognizer(tapGestureRecognizer2)
     }
+
+	@objc fileprivate func showSeller() {
+		if let user = seller {
+			let vc = Utilities.getClosetVcFor(user: user)
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+	}
 
 	func update() {
 		for sub in imageContainerView.subviews {
@@ -154,6 +182,10 @@ class ListingDetailsViewController: UIViewController {
     }
 
 	@IBAction func messageOwner(_ sender: Any) {
+		if gblUser._id! == listing._sellerId! {
+			singleActionPopup(title: "You can't message yourself!", message: nil)
+			return
+		}
 		let userIds = [gblUser._id!, listing._sellerId!]
 		//SBDGroupChannel.createChannel(withName: <#T##String?#>, isDistinct: <#T##Bool#>, users: <#T##[SBDUser]#>, coverUrl: <#T##String?#>, data: <#T##String?#>, completionHandler: <#T##(SBDGroupChannel?, SBDError?) -> Void#>)
 		SBDGroupChannel.createChannel(withUserIds: userIds, isDistinct: true) { (channel, error) in
@@ -188,6 +220,18 @@ extension ListingDetailsViewController : DBDelegate {
 			self.navigationController?.popViewController(animated: true)
 		} else {
 			singleActionPopup(title: "Failed to delete your listing.", message: "Please try again later.")
+		}
+	}
+
+	func getUserResponse(success: Bool, user: User?, error: String?) {
+		if success {
+			seller = user
+			sellerNameLabel.text = user!._name!
+			messageButton.setTitle("Message \(user!._name!)", for: UIControlState())
+		} else {
+			singleActionPopup(title: "Failed to load seller information.", message: "Please try this listing again later.") { (action) in
+				self.navigationController?.popViewController(animated: true)
+			}
 		}
 	}
 }

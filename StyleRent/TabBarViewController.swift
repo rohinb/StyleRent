@@ -22,11 +22,7 @@ class TabBarViewController: UITabBarController {
 		self.viewControllers?.append(navController)
 
 		// add my listings page
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let vc2 = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingsViewController
-		vc2.listingsOwnerName = gblUser._name ?? gblUser._id!
-		vc2.onlyMyListings = true
-		vc2.listingsOwnerId = gblUser._id!
+		let vc2 = Utilities.getClosetVcFor(user: gblUser)
 		let navController2 = UINavigationController()
 		navController2.viewControllers = [vc2]
 		let item2 = UITabBarItem(title: "My Listings", image: nil, selectedImage: nil)

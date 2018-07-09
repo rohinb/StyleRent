@@ -14,4 +14,18 @@ struct Utilities {
 			completion(data, response, error)
 			}.resume()
 	}
+
+	static func getClosetVcFor(user: User) -> ListingsViewController {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingsViewController
+		vc.listingsOwnerName = user._name ?? user._id!
+		vc.onlyMyListings = true
+		vc.listingsOwnerId = user._id!
+		return vc
+	}
+
+	static func getUrlForUserPicture(userId : String) -> URL {
+		let bucketName = "stylerentbackend-userfiles-mobilehub-1070684980"
+		return URL(string: "https://\(bucketName).s3.amazonaws.com/profile-images/\(userId)")!
+	}
 }
