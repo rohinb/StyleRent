@@ -10,6 +10,7 @@ import UIKit
 import AWSAuthCore
 import FBSDKLoginKit
 import SendBirdSDK
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -38,11 +39,13 @@ class LoginViewController: UIViewController {
 	}
 
 	@IBAction func manualLogin() {
+		SVProgressHUD.show(withStatus: "Logging in...")
 		DB.shared().validateUser(id: idField.text!, authType: .manual, password: passwordField.text!)
 	}
 
 	func attemptFbLogin() {
 		if FBSDKAccessToken.current() != nil {
+			SVProgressHUD.show(withStatus: "Logging in...")
 			Services.shared().fbLogin()
 		}
 	}
@@ -55,10 +58,14 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController : DBDelegate {
 	func validateUserResponse(success: Bool, user : User?, error: String?) {
+		SVProgressHUD.dismiss()
 		if success {
 			gblUser = user!
 			self.performSegue(withIdentifier: "loginSegue", sender: nil)
 		} else {
+			// login did not go through, so log out of services
+			FBSDKAccessToken.setCurrent(nil)
+			FBSDKLoginManager().logOut()
 			singleActionPopup(title: error, message: nil)
 		}
 	}
@@ -67,17 +74,9 @@ extension LoginViewController : DBDelegate {
 extension LoginViewController : ServicesDelegate {
 	func fbLoginResponse(success: Bool, id: String?, name: String?, email: String?) {
 		if success {
-			// TODO: Handle image
-			let profileImageUrl = "http://graph.facebook.com/\(String(describing: id))/picture?type=square"
-			// TODO: Move Send Bird connection into Services class with delegate response callback
-			SBDMain.connect(withUserId: email!, completionHandler: { (newUser, error) in
-				SBDMain.updateCurrentUserInfo(withNickname: name!, profileUrl: profileImageUrl, completionHandler: { (error) in
-					print("Connected to SendBird and set up user")
-				})
-			})
-			//DB.shared().createUser(user: user!)
 			DB.shared().validateUser(id: email!, authType: AuthType.facebook, password: nil)
 		} else {
+			SVProgressHUD.dismiss()
 			self.popupAlert(title: "Failed to login through Facebook", message: "Would you like to try again?", actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
 				self.attemptFbLogin()
 				}, nil])

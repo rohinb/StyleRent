@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,15 +74,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGW-n7-hMF">
-                                <rect key="frame" x="128" y="143" width="118" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0g-9D-bOu">
-                                <rect key="frame" x="159" y="246" width="57" height="30"/>
+                                <rect key="frame" x="159" y="292" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
@@ -89,7 +83,21 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sau-ct-IhX">
-                                <rect key="frame" x="128" y="186" width="118" height="35"/>
+                                <rect key="frame" x="128" y="236" width="118" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QK3-CV-C6J">
+                                <rect key="frame" x="128" y="138" width="118" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGW-n7-hMF">
+                                <rect key="frame" x="128" y="181" width="118" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -102,6 +110,7 @@
                     <connections>
                         <outlet property="confirmPasswordField" destination="sau-ct-IhX" id="klO-6W-LEv"/>
                         <outlet property="idField" destination="4cX-c7-mTF" id="hmW-eg-oCu"/>
+                        <outlet property="nameField" destination="QK3-CV-C6J" id="14I-I6-UWx"/>
                         <outlet property="passwordField" destination="QGW-n7-hMF" id="pme-rv-lri"/>
                         <segue destination="2Wc-NR-oxI" kind="modal" identifier="registerSegue" id="XJ2-hX-oPA"/>
                     </connections>
@@ -125,9 +134,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIl-pf-gt7">
-                                <rect key="frame" x="121" y="278" width="133" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SIl-pf-gt7">
+                                <rect key="frame" x="121" y="277" width="133" height="133"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SIl-pf-gt7" secondAttribute="height" multiplier="1:1" id="UlF-O5-Fkg"/>
+                                    <constraint firstAttribute="width" constant="133" id="mzy-cz-Zgz"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mr-5S-wNX">
                                 <rect key="frame" x="112" y="617" width="161" height="30"/>
@@ -139,6 +151,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SIl-pf-gt7" firstAttribute="centerY" secondItem="WIr-mz-tVF" secondAttribute="centerY" id="cVE-Og-jyD"/>
+                            <constraint firstItem="SIl-pf-gt7" firstAttribute="centerX" secondItem="WIr-mz-tVF" secondAttribute="centerX" id="p9O-mO-gVE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WIr-mz-tVF"/>
                     </view>
                     <connections>
@@ -857,7 +873,7 @@
         <image name="cross" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zBe-y1-RDj"/>
+        <segue reference="Vei-op-9lr"/>
         <segue reference="K5r-Wl-X7S"/>
     </inferredMetricsTieBreakers>
 </document>

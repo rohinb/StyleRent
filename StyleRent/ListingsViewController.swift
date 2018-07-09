@@ -66,9 +66,10 @@ class ListingsViewController: UIViewController {
 		}
 
 		title = onlyMyListings ? (listingsOwnerId! == gblUser._id! ? "My Closet" : "\(listingsOwnerName!)'s Closet") : "Listings"
-
-		let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
-		navigationItem.leftBarButtonItem = settingsButton
+		if onlyMyListings && listingsOwnerId! == gblUser._id! {
+			let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
+			navigationItem.leftBarButtonItem = settingsButton
+		}
     }
 
 	@objc fileprivate func settingsButtonPressed() {

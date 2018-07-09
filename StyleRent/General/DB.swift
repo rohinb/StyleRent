@@ -34,7 +34,7 @@ class DB {
 
 	}
 
- 	func createUser(id : String, authType : AuthType, password : String?) {
+	func createUser(id : String, name : String, authType : AuthType, password : String?) {
 		// first check if user exists
 		let queryExpression = AWSDynamoDBQueryExpression()
 
@@ -47,18 +47,19 @@ class DB {
 					print("The request failed. Error: \(error)")
 					self.delegate?.createUserResponse?(success: false, user: nil, error: "Failed to connect to the server.")
 				} else if let result = task.result {
-					if let user = result.items.first as? User {
+					if result.items.first != nil {
 						// user already made, error
 						self.delegate?.createUserResponse?(success: false, user : nil, error: "A user with this email address was previously registered")
 					} else {
 						// user not made yet, so create user
 						let user = User()!
 						user._id = id
+						user._name = name
 						user._authType = authType.rawValue
 						user._password = password
 						self.dynamoDbObjectMapper.save(user, completionHandler: { (error: Error?) -> Void in
 							DispatchQueue.main.async {
-								if let error = error {
+								if error != nil {
 									self.delegate?.createUserResponse?(success: false, user: nil, error: "Failed to connect to the server.")
 								} else {
 									self.delegate?.createUserResponse?(success: true, user: user, error: nil)

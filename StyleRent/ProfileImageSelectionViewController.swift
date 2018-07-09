@@ -16,6 +16,7 @@ class ProfileImageSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		Services.shared().delegate = self
 		imageView.image = placeholderImage
 		if let url = startingUrl {
 			SVProgressHUD.show(withStatus: "Downloading image...")
@@ -36,6 +37,13 @@ class ProfileImageSelectionViewController: UIViewController {
 		imageView.isUserInteractionEnabled = true
 		imageView.addGestureRecognizer(tapGestureRecognizer)
     }
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if gblUser == nil {
+			self.dismiss(animated: false, completion: nil)
+		}
+	}
 
 	@objc fileprivate func imageViewTapped() {
 		let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -77,8 +85,9 @@ class ProfileImageSelectionViewController: UIViewController {
     
 	@IBAction func done(_ sender: Any) {
 		if imageView.image != placeholderImage {
+			SVProgressHUD.show(withStatus: "Saving your profile photo...")
 			let image = imageView.image!
-			
+			Services.shared().uploadImageToS3(image: image, key: "profile-images/\(gblUser._id!)")
 		} else {
 			singleActionPopup(title: "You must choose a profile picture", message: nil)
 		}
@@ -97,9 +106,21 @@ class ProfileImageSelectionViewController: UIViewController {
 
 }
 
+extension ProfileImageSelectionViewController : ServicesDelegate {
+	func uploadImageResponse(success: Bool) {
+		SVProgressHUD.dismiss()
+		if success {
+			performSegue(withIdentifier: "finishRegistrationSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to upload your profile image", message: "Please try again.")
+		}
+	}
+}
+
 extension ProfileImageSelectionViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		let image = info[UIImagePickerControllerEditedImage] as! UIImage
 		imageView.image = image
+		picker.dismiss(animated: true, completion: nil)
 	}
 }
