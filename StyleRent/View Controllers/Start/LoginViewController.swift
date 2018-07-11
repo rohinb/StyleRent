@@ -61,7 +61,7 @@ extension LoginViewController : DBDelegate {
 		SVProgressHUD.dismiss()
 		if success {
 			gblUser = user!
-			self.performSegue(withIdentifier: "loginSegue", sender: nil)
+			Services.shared().connectSendBird(user: user!, imageUrlString: Utilities.getUrlForUserPicture(userId: user!._id!).absoluteString)
 		} else {
 			// login did not go through, so log out of services
 			FBSDKAccessToken.setCurrent(nil)
@@ -80,6 +80,14 @@ extension LoginViewController : ServicesDelegate {
 			self.popupAlert(title: "Failed to login through Facebook", message: "Would you like to try again?", actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
 				self.attemptFbLogin()
 				}, nil])
+		}
+	}
+
+	func connectSendBirdResponse(success: Bool) {
+		if success {
+			performSegue(withIdentifier: "loginSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to connect send bird.", message: nil)
 		}
 	}
 }

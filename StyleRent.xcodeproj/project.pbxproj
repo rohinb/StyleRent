@@ -383,10 +383,10 @@
 		0F5418AF20F5C97C00F6FB08 /* Start */ = {
 			isa = PBXGroup;
 			children = (
-				0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */,
+				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
 				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
 				0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */,
-				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
+				0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";

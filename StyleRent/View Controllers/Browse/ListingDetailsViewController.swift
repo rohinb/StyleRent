@@ -70,7 +70,7 @@ class ListingDetailsViewController: UIViewController {
 		}
 	}
 
-	fileprivate func update() {
+	func update() {
 		for sub in imageContainerView.subviews {
 			sub.removeFromSuperview()
 		}

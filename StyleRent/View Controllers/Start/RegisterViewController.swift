@@ -104,7 +104,7 @@ extension RegisterViewController : DBDelegate {
 		SVProgressHUD.dismiss()
 		if success {
 			gblUser = user!
-			self.performSegue(withIdentifier: "registerSegue", sender: nil)
+			Services.shared().connectSendBird(user: user!, imageUrlString: profileImageUrl!)
 		} else {
 			FBSDKAccessToken.setCurrent(nil)
 			FBSDKLoginManager().logOut()
@@ -117,18 +117,20 @@ extension RegisterViewController : ServicesDelegate {
 	func fbLoginResponse(success: Bool, id: String?, name: String?, email: String?) {
 		if success {
 			profileImageUrl = "http://graph.facebook.com/\(id!)/picture?type=large"
-			// TODO: Move Send Bird connection into Services class with delegate response callback
-			SBDMain.connect(withUserId: email!, completionHandler: { (newUser, error) in
-				SBDMain.updateCurrentUserInfo(withNickname: name!, profileUrl: self.profileImageUrl!, completionHandler: { (error) in
-					print("Connected to SendBird and set up user")
-				})
-			})
 			DB.shared().createUser(id: email!, name : name!, authType: .facebook, password: nil)
 		} else {
 			SVProgressHUD.dismiss()
 			self.popupAlert(title: "Failed to register through Facebook", message: "Would you like to try again?", actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
 				self.attemptFbRegistration()
 				}, nil])
+		}
+	}
+
+	func connectSendBirdResponse(success: Bool) {
+		if success {
+			self.performSegue(withIdentifier: "registerSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to connect send bird", message: nil)
 		}
 	}
 }

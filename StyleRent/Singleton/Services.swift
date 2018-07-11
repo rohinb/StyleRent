@@ -10,6 +10,7 @@ import Foundation
 import FBSDKLoginKit
 import AWSDynamoDB
 import AWSS3
+import SendBirdSDK
 
 class Services {
 	var delegate : ServicesDelegate?
@@ -69,9 +70,18 @@ class Services {
 				return nil
 		}
 	}
+
+	func connectSendBird(user : User, imageUrlString : String) {
+		SBDMain.connect(withUserId: user._id!, completionHandler: { (newUser, error) in
+			SBDMain.updateCurrentUserInfo(withNickname: user._name!, profileUrl: imageUrlString, completionHandler: { (error) in
+				self.delegate?.connectSendBirdResponse?(success: error == nil)
+			})
+		})
+	}
 }
 
 @objc protocol ServicesDelegate {
 	@objc optional func fbLoginResponse(success : Bool, id : String?, name : String?, email : String?)
 	@objc optional func uploadImageResponse(success : Bool)
+	@objc optional func connectSendBirdResponse(success : Bool)
 }
