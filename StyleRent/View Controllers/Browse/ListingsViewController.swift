@@ -15,6 +15,9 @@ import ESPullToRefresh
 class ListingsViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
 
+	fileprivate let reuseIdentifier = "ListingCell"
+	static let kCellHeight = 200.0
+
 	fileprivate var locManager = CLLocationManager()
 	fileprivate var currentLocation: CLLocation!
 	fileprivate var listings = [Listing]()
@@ -26,9 +29,6 @@ class ListingsViewController: UIViewController {
 	var listingsOwnerName : String?
 	var listingsOwnerId : String?
 	var onlyMyListings = false
-
-	fileprivate let reuseIdentifier = "ListingCell"
-	static let kCellHeight = 200.0
 
 	override func viewDidLoad() {
         super.viewDidLoad()

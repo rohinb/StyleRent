@@ -25,7 +25,6 @@
 		0F384A7820CF95300036141B /* ListingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7720CF95300036141B /* ListingDetailsViewController.swift */; };
 		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
-		0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */; };
 		0F47BF3520B6553A00C2CA55 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F47BF3420B6553A00C2CA55 /* Bolts.framework */; };
 		0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3C20B7E7E500C2CA55 /* User.swift */; };
@@ -298,16 +297,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F1387DF20BB8FB800E78B25 /* General */ = {
+		0F1387DF20BB8FB800E78B25 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				0FFE8FD820ECBF92002E9D8F /* Services.swift */,
 				0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */,
-				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
 				0F1387E520BB952800E78B25 /* APICalls.swift */,
 				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
 			);
-			path = General;
+			path = Global;
 			sourceTree = "<group>";
 		};
 		0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */ = {
@@ -368,6 +365,76 @@
 			);
 			name = Models;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		0F5418AE20F5C95E00F6FB08 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
+				0F5418AF20F5C97C00F6FB08 /* Start */,
+				0F5418B020F5C99F00F6FB08 /* Browse */,
+				0F5418B120F5C9D000F6FB08 /* Post */,
+				0F5418B320F5CB1300F6FB08 /* Settings */,
+				0F5418B420F5CB1F00F6FB08 /* From tutorial */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0F5418AF20F5C97C00F6FB08 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */,
+				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
+				0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */,
+				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		0F5418B020F5C99F00F6FB08 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				0F47BF4520B7EFA800C2CA55 /* ListingsViewController.swift */,
+				0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */,
+				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		0F5418B120F5C9D000F6FB08 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
+				0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */,
+				0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		0F5418B220F5CA3000F6FB08 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
+				0FFE8FD820ECBF92002E9D8F /* Services.swift */,
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
+		0F5418B320F5CB1300F6FB08 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0F981A7620EF606900A6133B /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0F5418B420F5CB1F00F6FB08 /* From tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
+				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
+			);
+			path = "From tutorial";
 			sourceTree = "<group>";
 		};
 		0F98F99520D1FE7E0054E14C /* Chatting */ = {
@@ -541,33 +608,21 @@
 		0FA2D17C20B5FBA500D7F243 /* StyleRent */ = {
 			isa = PBXGroup;
 			children = (
-				0F98FA1120D21A4E0054E14C /* CommonCrypto.xcconfig */,
 				0FA2D18120B5FBA500D7F243 /* Main.storyboard */,
+				0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */,
 				0FA2D17D20B5FBA500D7F243 /* AppDelegate.swift */,
+				0FA2D18420B5FBA800D7F243 /* Assets.xcassets */,
+				0FA2D18920B5FBA800D7F243 /* Info.plist */,
+				0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */,
 				0F1387E220BB93B800E78B25 /* Bridging_Header.h */,
+				0F98FA1120D21A4E0054E14C /* CommonCrypto.xcconfig */,
 				0F98FA3C20D25A710054E14C /* SendBird UI */,
 				0F1387F020BB9A0B00E78B25 /* API */,
 				0F47BF4420B7E7EE00C2CA55 /* Models */,
-				0F1387DF20BB8FB800E78B25 /* General */,
+				0F5418B220F5CA3000F6FB08 /* Singleton */,
+				0F1387DF20BB8FB800E78B25 /* Global */,
 				0F1387F320BB9CF300E78B25 /* Extensions */,
-				0FA2D17F20B5FBA500D7F243 /* LoginViewController.swift */,
-				0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */,
-				0F981A7220EF5A9000A6133B /* HomeViewController.swift */,
-				0F47BF4520B7EFA800C2CA55 /* ListingsViewController.swift */,
-				0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */,
-				0F981A7620EF606900A6133B /* SettingsViewController.swift */,
-				0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */,
-				0F384A7720CF95300036141B /* ListingDetailsViewController.swift */,
-				0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */,
-				0F1C5CBD20E4268B00A320AF /* SelectionViewController.swift */,
-				0FD0F98220E0D31B00FE56AE /* TextEntryViewController.swift */,
-				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
-				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
-				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
-				0FA2D18420B5FBA800D7F243 /* Assets.xcassets */,
-				0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */,
-				0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */,
-				0FA2D18920B5FBA800D7F243 /* Info.plist */,
+				0F5418AE20F5C95E00F6FB08 /* View Controllers */,
 				0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */,
 			);
 			path = StyleRent;
@@ -851,7 +906,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */,
-				0F47BF2F20B63DBC00C2CA55 /* DB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

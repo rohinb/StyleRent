@@ -27,11 +27,12 @@ class ListingDetailsViewController: UIViewController {
 	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 
 	fileprivate let imagePadding = CGFloat(20)
+
 	fileprivate var isLoadingImages = false
+	fileprivate var seller : User?
 
 	var listing : Listing!
 	var images = [UIImage]()
-	fileprivate var seller : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()

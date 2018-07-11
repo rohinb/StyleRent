@@ -11,6 +11,7 @@ import UIKit
 class TextEntryViewController: UIViewController {
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var charsLabel: UILabel!
+
 	var type : DetailType!
 	var delegate : SelectionDelegate!
 	var charsAllowed : Int?

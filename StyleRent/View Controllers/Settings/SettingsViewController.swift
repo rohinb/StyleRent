@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 class SettingsViewController: UITableViewController {
 
-	enum SettingsType : String {
+	fileprivate enum SettingsType : String {
 		case terms = "Terms of Service"
 		case privacy = "Privacy Policy"
 		case logout = "Logout"

@@ -66,10 +66,11 @@ class CreateListingViewController: UIViewController {
 	@IBOutlet weak var imageCollectionView: UICollectionView!
 	@IBOutlet weak var tableView: UITableView!
 
-	fileprivate var uploadFailed = false
-	fileprivate var uploadedCount = 0
 	fileprivate let MAX_IMAGE_COUNT = 5
 	fileprivate let reuseIdentifier = "listingImageCell"
+
+	fileprivate var uploadFailed = false
+	fileprivate var uploadedCount = 0
 
 	var newListing = Listing()
 	var images = [UIImage]()

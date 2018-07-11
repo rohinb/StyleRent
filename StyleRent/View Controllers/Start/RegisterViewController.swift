@@ -17,8 +17,9 @@ class RegisterViewController: UIViewController {
 	@IBOutlet weak var idField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var confirmPasswordField: UITextField!
-	var firstTime = true
-	var profileImageUrl : String?
+
+	fileprivate var firstTime = true
+	fileprivate var profileImageUrl : String?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()

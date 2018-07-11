@@ -12,6 +12,8 @@ import AWSCore
 import AWSMobileClient
 import AWSAPIGateway
 
+
+// for testing communication with Lambda
 struct API {
 	static func doInvokeAPI() {
 		// change the method name, or path or the query string parameters here as desired
