@@ -104,7 +104,7 @@ class CreateListingViewController: UIViewController {
 		Services.shared().delegate = self
 	}
     
-	func takeImage() {
+	fileprivate func takeImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self
@@ -114,7 +114,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	func uploadImage() {
+	fileprivate func uploadImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self
@@ -124,7 +124,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	@objc func donePressed() {
+	@objc fileprivate func donePressed() {
 		let isValidated = newListing!._category != nil &&
 							newListing!._description != nil &&
 							newListing!._name != nil &&
@@ -138,7 +138,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	func saveListing() {
+	fileprivate func saveListing() {
 		// start uploading images to S3
 		guard let firstImage = images.first else {
 			singleActionPopup(title: "You must upload at least one image!", message: nil)
@@ -158,7 +158,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	func writeListing() {
+	fileprivate func writeListing() {
 		newListing?._latitude = 37.2657536962002
 		newListing?._longitude = -121.971246711695
 		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
@@ -166,7 +166,7 @@ class CreateListingViewController: UIViewController {
 		DB.shared().createListing(listing: newListing!)
 	}
 
-	func getCurrInfo(for type: DetailType) -> String? {
+	fileprivate func getCurrInfo(for type: DetailType) -> String? {
 		switch type {
 		case .category: return newListing!._category
 		case .description: return newListing!._description
@@ -178,7 +178,7 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
-	func setCurrInfo(info value : String?, for type: DetailType) {
+	fileprivate func setCurrInfo(info value : String?, for type: DetailType) {
 		switch type {
 		case .category: newListing!._category = value
 		case .description: newListing!._description = value
@@ -261,12 +261,10 @@ extension CreateListingViewController : UICollectionViewDelegate, UICollectionVi
 		if indexPath.row == images.count {
 			let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
 			alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-			alert.addAction(UIAlertAction(title: PhotoOptionType.take.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
-				self.takeImage()
-			}))
-			alert.addAction(UIAlertAction(title: PhotoOptionType.upload.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
-				self.uploadImage()
-			}))
+			alert.addAction(UIAlertAction(title: PhotoOptionType.take.rawValue, style: UIAlertActionStyle.default,
+										  handler: { (action) in self.takeImage() }))
+			alert.addAction(UIAlertAction(title: PhotoOptionType.upload.rawValue, style: UIAlertActionStyle.default,
+										  handler: { (action) in self.uploadImage() }))
 
 			self.present(alert, animated: true, completion: nil)
 		} else {

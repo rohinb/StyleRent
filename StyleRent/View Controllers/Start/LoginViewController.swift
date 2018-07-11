@@ -13,9 +13,9 @@ import SendBirdSDK
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
-
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var idField: UITextField!
+
 	var firstTime = true
 
 	override func viewDidLoad() {
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
 		DB.shared().validateUser(id: idField.text!, authType: .manual, password: passwordField.text!)
 	}
 
-	func attemptFbLogin() {
+	fileprivate func attemptFbLogin() {
 		if FBSDKAccessToken.current() != nil {
 			SVProgressHUD.show(withStatus: "Logging in...")
 			Services.shared().fbLogin()

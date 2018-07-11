@@ -48,17 +48,15 @@ class ProfileImageSelectionViewController: UIViewController {
 	@objc fileprivate func imageViewTapped() {
 		let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
 		alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-		alert.addAction(UIAlertAction(title: PhotoOptionType.take.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
-			self.takeImage()
-		}))
-		alert.addAction(UIAlertAction(title: PhotoOptionType.upload.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
-			self.uploadImage()
-		}))
+		alert.addAction(UIAlertAction(title: PhotoOptionType.take.rawValue, style: UIAlertActionStyle.default,
+									  handler: { (action) in self.takeImage() }))
+		alert.addAction(UIAlertAction(title: PhotoOptionType.upload.rawValue, style: UIAlertActionStyle.default,
+									  handler: { (action) in self.uploadImage() }))
 
 		self.present(alert, animated: true, completion: nil)
 	}
 
-	func takeImage() {
+	fileprivate func takeImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self
@@ -68,7 +66,7 @@ class ProfileImageSelectionViewController: UIViewController {
 		}
 	}
 
-	func uploadImage() {
+	fileprivate func uploadImage() {
 		if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
 			let imagePicker = UIImagePickerController()
 			imagePicker.delegate = self

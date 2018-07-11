@@ -70,7 +70,7 @@ class ListingDetailsViewController: UIViewController {
 		}
 	}
 
-	func update() {
+	fileprivate func update() {
 		for sub in imageContainerView.subviews {
 			sub.removeFromSuperview()
 		}
@@ -103,7 +103,7 @@ class ListingDetailsViewController: UIViewController {
 		DB.shared().delegate = self
 	}
 
-	@objc func editPressed() {
+	@objc fileprivate func editPressed() {
 		if isLoadingImages {
 			singleActionPopup(title: "Please wait", message: "Images must finish loading before you edit this listing.")
 			return
@@ -111,13 +111,13 @@ class ListingDetailsViewController: UIViewController {
 		performSegue(withIdentifier: "toEditListing", sender: nil)
 	}
 
-	@objc func deletePressed() {
+	@objc fileprivate func deletePressed() {
 		popupAlert(title: "Are you sure you want to delete your listing?", message: "This action cannot be undone.", actionTitles: ["Delete", "Cancel"], actions: [{ (action) in
 			DB.shared().deleteListing(self.listing)
 		}, nil])
 	}
 
-	func addImage(_ image : UIImage) {
+	fileprivate func addImage(_ image : UIImage) {
 		images.append(image)
 
 		let index = CGFloat(imageContainerView.subviews.count)

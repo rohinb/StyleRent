@@ -375,7 +375,7 @@
 				0F5418B020F5C99F00F6FB08 /* Browse */,
 				0F5418B120F5C9D000F6FB08 /* Post */,
 				0F5418B320F5CB1300F6FB08 /* Settings */,
-				0F5418B420F5CB1F00F6FB08 /* From tutorial */,
+				0F5418B420F5CB1F00F6FB08 /* From QR tutorial */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -428,13 +428,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		0F5418B420F5CB1F00F6FB08 /* From tutorial */ = {
+		0F5418B420F5CB1F00F6FB08 /* From QR tutorial */ = {
 			isa = PBXGroup;
 			children = (
 				0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */,
 				0F1387DB20BB861400E78B25 /* HandoffViewController.swift */,
 			);
-			path = "From tutorial";
+			path = "From QR tutorial";
 			sourceTree = "<group>";
 		};
 		0F98F99520D1FE7E0054E14C /* Chatting */ = {

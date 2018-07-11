@@ -32,12 +32,12 @@ class TextEntryViewController: UIViewController {
 		}
     }
 
-	func updateCharsRemaining() {
+	fileprivate func updateCharsRemaining() {
 		let remainingChars = charsAllowed! - textView.text.count
 		charsLabel.text = "\(remainingChars)"
 	}
 
-	@objc func done() {
+	@objc fileprivate func done() {
 		if type == .name {
 			if textView.text.count > charsAllowed! {
 				singleActionPopup(title: "Input too long", message: "Input must be under \(charsAllowed!) characters.")
