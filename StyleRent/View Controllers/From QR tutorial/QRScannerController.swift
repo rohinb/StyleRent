@@ -10,9 +10,10 @@ class QRScannerController: UIViewController {
     @IBOutlet var topbar: UIView!
     
     var captureSession = AVCaptureSession()
-    
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
+
+	fileprivate var scannedListing : Listing!
 
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
@@ -30,7 +31,7 @@ class QRScannerController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		DB.shared().delegate = self
         // Get the back-facing camera for capturing videos
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         
@@ -120,6 +121,11 @@ class QRScannerController: UIViewController {
         present(alertPrompt, animated: true, completion: nil)
     }
 
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "scannedSegue", let dest = segue.destination as? ConfirmViewController {
+			dest.listing = scannedListing
+		}
+	}
 }
 
 extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
@@ -141,10 +147,21 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                let lenderId = metadataObj.stringValue!
-				// TODO: Do something with that user id
+                let listingId = metadataObj.stringValue!
+				DB.shared().getListing(with: listingId)
             }
         }
     }
     
+}
+
+extension QRScannerController : DBDelegate {
+	func getListingResponse(success: Bool, listing: Listing?, error: String?) {
+		if success {
+			scannedListing = listing
+			performSegue(withIdentifier: "scannedSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to fetch listing.", message: error)
+		}
+	}
 }

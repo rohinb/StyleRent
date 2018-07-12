@@ -13,7 +13,8 @@ class HandoffViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		let data = gblUser._id!.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+		let listingId = "3566A17A-F845-4B67-A686-A9E0C42891C8"
+		let data = listingId.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
 
 		let filter = CIFilter(name: "CIQRCodeGenerator")!
 

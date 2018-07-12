@@ -219,6 +219,29 @@ class DB {
 			return nil
 		})
 	}
+
+	func getListing(with id : String) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.keyConditionExpression = "id = :id"
+		queryExpression.expressionAttributeValues = [":id" : id]
+
+		dynamoDbObjectMapper.query(Listing.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+			DispatchQueue.main.async {
+				if let error = task.error as NSError? {
+					print("The request failed. Error: \(error)")
+					self.delegate?.getListingResponse?(success: false, listing: nil, error: "Failed to connect to the server.")
+				} else if let result = task.result {
+					if let listing = result.items.first as? Listing {
+						self.delegate?.getListingResponse?(success: true, listing: listing, error: nil)
+					} else {
+						self.delegate?.getListingResponse?(success: false, listing: nil, error: "Listing with id not found.")
+					}
+				}
+			}
+			return nil
+		})
+	}
 }
 
 @objc protocol DBDelegate {
@@ -228,4 +251,5 @@ class DB {
 	@objc optional func deleteListingResponse(success : Bool)
 	@objc optional func validateUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func getUserResponse(success : Bool, user : User?, error : String?)
+	@objc optional func getListingResponse(success : Bool, listing : Listing?, error : String?)
 }
