@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		API.doInvokeAPI()
 		DB.shared().delegate = self
 		Services.shared().delegate = self
 

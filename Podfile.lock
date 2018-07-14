@@ -38,6 +38,7 @@ PODS:
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.1.0)
   - SendBirdSDK (3.0.99)
+  - Stripe (13.0.1)
   - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
   - UIScrollView-InfiniteScroll (1.1.0)
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - Nuke
   - NYTPhotoViewer (~> 1.1.0)
   - SendBirdSDK
+  - Stripe
   - SVProgressHUD
   - TTTAttributedLabel
   - UIScrollView-InfiniteScroll (~> 1.1.0)
@@ -83,6 +85,7 @@ SPEC REPOS:
     - Nuke
     - NYTPhotoViewer
     - SendBirdSDK
+    - Stripe
     - SVProgressHUD
     - TTTAttributedLabel
     - UIScrollView-InfiniteScroll
@@ -107,10 +110,11 @@ SPEC CHECKSUMS:
   Nuke: 0944b2e721c8f21857028d980dc3d6a249df8b3e
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   SendBirdSDK: 6e9212f86ebd2b95bb98b670332b1b59b0e7ca2c
+  Stripe: b3c69e4a269d5ae707916a090ee54b1f6011ccd9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 9e8e16a79a73e09518fb09db8611d4c764fc8b2c
+PODFILE CHECKSUM: 50b2b6ff0970b1c3f26dbce1095f686ea404c825
 
 COCOAPODS: 1.5.2

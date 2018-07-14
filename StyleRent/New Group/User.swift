@@ -22,6 +22,7 @@ class User: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _name: String?
 	var _authType: String?
 	var _password: String?
+	var _stripeId: String?
     
     class func dynamoDBTableName() -> String {
 
@@ -39,6 +40,7 @@ class User: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_name" : "name",
 			   "_authType" : "authType",
 			   "_password" : "password",
+			   "_stripeId" : "stripeId"
         ]
     }
 }

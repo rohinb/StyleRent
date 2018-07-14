@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387DB20BB861400E78B25 /* HandoffViewController.swift */; };
 		0F1387DE20BB8AF500E78B25 /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */; };
-		0F1387E620BB952800E78B25 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E520BB952800E78B25 /* APICalls.swift */; };
+		0F1387E620BB952800E78B25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E520BB952800E78B25 /* API.swift */; };
 		0F1387E820BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E720BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m */; };
 		0F1387EA20BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387E920BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m */; };
 		0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1387EB20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m */; };
@@ -153,7 +153,7 @@
 		0F1387DB20BB861400E78B25 /* HandoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandoffViewController.swift; sourceTree = "<group>"; };
 		0F1387DD20BB8AF500E78B25 /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		0F1387E220BB93B800E78B25 /* Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging_Header.h; sourceTree = "<group>"; };
-		0F1387E520BB952800E78B25 /* APICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
+		0F1387E520BB952800E78B25 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0F1387E720BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSAPI_DI8UQ5E635_RequestSchema.m; sourceTree = "<group>"; };
 		0F1387E920BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSAPI_DI8UQ5E635_ResponseSchema.m; sourceTree = "<group>"; };
 		0F1387EB20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m; sourceTree = "<group>"; };
@@ -303,7 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */,
-				0F1387E520BB952800E78B25 /* APICalls.swift */,
 				0F47BF4720B7EFB400C2CA55 /* Globals.swift */,
 			);
 			path = Global;
@@ -417,6 +416,7 @@
 		0F5418B220F5CA3000F6FB08 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
+				0F1387E520BB952800E78B25 /* API.swift */,
 				0F47BF1B20B63C4C00C2CA55 /* DB.swift */,
 				0FFE8FD820ECBF92002E9D8F /* Services.swift */,
 			);
@@ -857,6 +857,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework",
 				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UIScrollView-InfiniteScroll/UIScrollView_InfiniteScroll.framework",
 			);
@@ -883,6 +884,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendBirdSDK.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/SendBirdSDK.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIScrollView_InfiniteScroll.framework",
 			);
@@ -954,7 +956,7 @@
 				0F98FA0520D1FEA10054E14C /* GroupChannelListTableViewCell.swift in Sources */,
 				0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */,
 				0F98FA0E20D1FEA10054E14C /* GroupChannelListViewController.swift in Sources */,
-				0F1387E620BB952800E78B25 /* APICalls.swift in Sources */,
+				0F1387E620BB952800E78B25 /* API.swift in Sources */,
 				0F1387E820BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m in Sources */,
 				0F98F9C320D1FE7E0054E14C /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
 				0F1387EA20BB99D100E78B25 /* AWSAPI_DI8UQ5E635_ResponseSchema.m in Sources */,

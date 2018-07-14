@@ -9,16 +9,9 @@
 import UIKit
 import AWSMobileClient
 import FBSDKCoreKit
+import Stripe
 import SendBirdSDK
 
-//class FacebookProvider: NSObject, AWSIdentityProviderManager {
-//	func logins() -> AWSTask<NSDictionary> {
-//		if let token = AccessToken.current?.authenticationToken {
-//			return AWSTask(result: [AWSIdentityProviderFacebook:token])
-//		}
-//		return AWSTask(error:NSError(domain: "Facebook Login", code: -1 , userInfo: ["Facebook" : "No current Facebook access token"]))
-//	}
-//}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 		SBDMain.initWithApplicationId("64DBE184-31A5-421E-BC58-CA2E3A34E5D5")
+		STPPaymentConfiguration.shared().publishableKey = "pk_test_O7WymMY05Cpb7FIInhdDyFHL"
+		// TODO: Set up Apple pay through apple developer website
+		//STPPaymentConfiguration.shared().appleMerchantIdentifier = "your apple merchant identifier"
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)

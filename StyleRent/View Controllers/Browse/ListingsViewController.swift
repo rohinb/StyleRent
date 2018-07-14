@@ -12,7 +12,7 @@ import AWSS3
 import AWSDynamoDB
 import ESPullToRefresh
 
-class ListingsViewController: UIViewController {
+class ListingsViewController: UIViewController, APIDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	fileprivate let reuseIdentifier = "ListingCell"
@@ -33,6 +33,8 @@ class ListingsViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		DB.shared().delegate = self
+		API.shared.delegate = self
+		API.shared.getStripeEphemeralKey(for: gblUser)
 
 		collectionView.delegate = self
 		collectionView.dataSource = self
