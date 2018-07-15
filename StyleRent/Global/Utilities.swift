@@ -32,4 +32,20 @@ struct Utilities {
 	static func getUrlForListingPicture(listingId : String, imageNumber : Int) -> URL {
 		return URL(string: "https://\(bucketName).s3.amazonaws.com/listing-images/\(listingId)-\(imageNumber)")!
 	}
+
+	static let dateFormatString = "MM/dd/yyyy"
+
+	static func getApiDateFor(date : Date) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = dateFormatString
+		let dateString = dateFormatter.string(from:date)
+		return dateString
+	}
+
+	static func getDateFor(apiDate : String) -> Date {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = dateFormatString
+		let date = dateFormatter.date(from: apiDate)
+		return date!
+	}
 }

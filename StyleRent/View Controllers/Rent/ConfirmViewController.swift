@@ -32,13 +32,17 @@ class ConfirmViewController: UIViewController {
 
 	@IBAction func acceptPressed(_ sender: Any) {
 		// TODO: Trigger payment through stripe sdk
-		// then create rental in DB.
+		// then create rental in DB. - DONE
 		// Create trigger in Dynamo to call a lambda every time a rental is created
 		// The lambda should notify both users of payment success
+		let checkoutViewController = CheckoutViewController(listing: listing,
+															price: listing._price!.intValue * 100)
+		checkoutViewController.confirmVc = self
+		self.present(checkoutViewController, animated: true, completion: nil)
 	}
 
 	@IBAction func rejectPressed(_ sender: Any) {
-		// TODO: Reject and notify seller of rejection
+		// TODO: notify seller of rejection?
 		self.dismiss(animated: true, completion: nil)
 	}
 

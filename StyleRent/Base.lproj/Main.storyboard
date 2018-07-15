@@ -762,15 +762,19 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-Cf-U1Y">
-                                        <rect key="frame" x="15" y="39" width="18" height="18"/>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-Cf-U1Y">
+                                        <rect key="frame" x="0.0" y="25" width="45" height="45"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="MxZ-eX-kmH"/>
-                                            <constraint firstAttribute="height" constant="18" id="vkX-z7-EFF"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="wji-zY-iC8"/>
+                                            <constraint firstAttribute="width" constant="45" id="MxZ-eX-kmH"/>
+                                            <constraint firstAttribute="height" constant="45" id="vkX-z7-EFF"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="cross"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="dismiss:" destination="A1G-mZ-Zop" eventType="touchUpInside" id="Umd-hV-6p9"/>
                                             <segue destination="N6K-yg-lx3" kind="unwind" unwindAction="unwindToHomeScreenWithSegue:" id="VdW-Af-sVa"/>
@@ -781,9 +785,9 @@
                                 <constraints>
                                     <constraint firstItem="fOy-Lw-TOT" firstAttribute="centerX" secondItem="EVh-uA-quG" secondAttribute="centerX" id="KP2-jb-FNw"/>
                                     <constraint firstAttribute="height" constant="70" id="bMt-Td-nc5"/>
-                                    <constraint firstAttribute="bottom" secondItem="jSC-Cf-U1Y" secondAttribute="bottom" constant="13" id="juF-m8-a07"/>
+                                    <constraint firstAttribute="bottom" secondItem="jSC-Cf-U1Y" secondAttribute="bottom" id="juF-m8-a07"/>
                                     <constraint firstAttribute="bottom" secondItem="fOy-Lw-TOT" secondAttribute="bottom" constant="8" id="wss-3T-fjH"/>
-                                    <constraint firstItem="jSC-Cf-U1Y" firstAttribute="leading" secondItem="EVh-uA-quG" secondAttribute="leading" constant="15" id="zrA-yw-ZYW"/>
+                                    <constraint firstItem="jSC-Cf-U1Y" firstAttribute="leading" secondItem="EVh-uA-quG" secondAttribute="leading" id="zrA-yw-ZYW"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfa-zM-vy0">

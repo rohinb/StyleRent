@@ -122,6 +122,20 @@ class DB {
 		})
 	}
 
+	func createRental(rental : Rental) {
+
+		dynamoDbObjectMapper.save(rental, completionHandler: {
+			(error: Error?) -> Void in
+
+			DispatchQueue.main.async {
+				if let error = error {
+					self.delegate?.createRentalResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+				}
+				self.delegate?.createRentalResponse?(success: true, error: nil)
+			}
+		})
+	}
+
 	func getListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, category : String?, size : String?, showMyListings: Bool, lastEvalKey : [String : AWSDynamoDBAttributeValue]?, limit : Int) {
 		let boundingRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: lon), radius, radius)
 		let latDelta = boundingRegion.span.latitudeDelta
@@ -247,6 +261,7 @@ class DB {
 @objc protocol DBDelegate {
 	@objc optional func createUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func createListingResponse(success : Bool, error : String?)
+	@objc optional func createRentalResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
 	@objc optional func deleteListingResponse(success : Bool)
 	@objc optional func validateUserResponse(success : Bool, user : User?, error : String?)

@@ -109,6 +109,10 @@
 		0FA2D18320B5FBA500D7F243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18120B5FBA500D7F243 /* Main.storyboard */; };
 		0FA2D18520B5FBA800D7F243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18420B5FBA800D7F243 /* Assets.xcassets */; };
 		0FA2D18820B5FBA800D7F243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D18620B5FBA800D7F243 /* LaunchScreen.storyboard */; };
+		0FD0076020FB0A230039B4B4 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0075F20FB0A230039B4B4 /* CheckoutViewController.swift */; };
+		0FD0076320FB0A7E0039B4B4 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0076120FB0A7D0039B4B4 /* Buttons.swift */; };
+		0FD0076420FB0A7E0039B4B4 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0076220FB0A7E0039B4B4 /* CheckoutRowView.swift */; };
+		0FD0076820FB114C0039B4B4 /* PaymentContextFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0076720FB114B0039B4B4 /* PaymentContextFooterView.swift */; };
 		0FD0F97C20E0C28D00FE56AE /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */; };
 		0FD0F97D20E0C28D00FE56AE /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */; };
 		0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */; };
@@ -260,6 +264,10 @@
 		0FA2D18420B5FBA800D7F243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FA2D18720B5FBA800D7F243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FA2D18920B5FBA800D7F243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FD0075F20FB0A230039B4B4 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		0FD0076120FB0A7D0039B4B4 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		0FD0076220FB0A7E0039B4B4 /* CheckoutRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
+		0FD0076720FB114B0039B4B4 /* PaymentContextFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentContextFooterView.swift; sourceTree = "<group>"; };
 		0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
@@ -371,6 +379,7 @@
 		0F5418AE20F5C95E00F6FB08 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FD0076620FB0A910039B4B4 /* Stripe */,
 				0F98FA3D20D25E130054E14C /* TabBarViewController.swift */,
 				0F5418AF20F5C97C00F6FB08 /* Start */,
 				0F5418B020F5C99F00F6FB08 /* Browse */,
@@ -637,6 +646,17 @@
 				0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */,
 			);
 			path = StyleRent;
+			sourceTree = "<group>";
+		};
+		0FD0076620FB0A910039B4B4 /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+				0FD0076720FB114B0039B4B4 /* PaymentContextFooterView.swift */,
+				0FD0076120FB0A7D0039B4B4 /* Buttons.swift */,
+				0FD0076220FB0A7E0039B4B4 /* CheckoutRowView.swift */,
+				0FD0075F20FB0A230039B4B4 /* CheckoutViewController.swift */,
+			);
+			path = Stripe;
 			sourceTree = "<group>";
 		};
 		B7A79CD2EA7DC9DCAC30519D /* Frameworks */ = {
@@ -956,6 +976,7 @@
 				0F98FA0520D1FEA10054E14C /* GroupChannelListTableViewCell.swift in Sources */,
 				0F1387DC20BB861400E78B25 /* HandoffViewController.swift in Sources */,
 				0F98FA0E20D1FEA10054E14C /* GroupChannelListViewController.swift in Sources */,
+				0FD0076020FB0A230039B4B4 /* CheckoutViewController.swift in Sources */,
 				0F1387E620BB952800E78B25 /* API.swift in Sources */,
 				0F1387E820BB99CD00E78B25 /* AWSAPI_DI8UQ5E635_RequestSchema.m in Sources */,
 				0F98F9C320D1FE7E0054E14C /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
@@ -994,9 +1015,12 @@
 				0F384A7620CF41C70036141B /* ImageCell.swift in Sources */,
 				0F1387F220BB9CE000E78B25 /* StringExtension.swift in Sources */,
 				0F47BF4220B7E7E600C2CA55 /* Rental.swift in Sources */,
+				0FD0076820FB114C0039B4B4 /* PaymentContextFooterView.swift in Sources */,
 				0F98F9D820D1FE7E0054E14C /* ChattingView.swift in Sources */,
+				0FD0076320FB0A7E0039B4B4 /* Buttons.swift in Sources */,
 				0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */,
 				0F47BF4020B7E7E600C2CA55 /* User.swift in Sources */,
+				0FD0076420FB0A7E0039B4B4 /* CheckoutRowView.swift in Sources */,
 				0F98F9D720D1FE7E0054E14C /* OutgoingGeneralUrlPreviewTempModel.swift in Sources */,
 				0F47BF4120B7E7E600C2CA55 /* Ratings.swift in Sources */,
 				0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */,

@@ -31,7 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 		SBDMain.initWithApplicationId("64DBE184-31A5-421E-BC58-CA2E3A34E5D5")
-		STPPaymentConfiguration.shared().publishableKey = "pk_test_O7WymMY05Cpb7FIInhdDyFHL"
+		let config = STPPaymentConfiguration.shared()
+		config.publishableKey = "pk_test_O7WymMY05Cpb7FIInhdDyFHL"
+		config.companyName = "Style Rent"
+		// Create card sources instead of card tokens
+		config.createCardSources = true;
+		config.requiredBillingAddressFields = .zip
+		config.requiredShippingAddressFields = []
+		config.additionalPaymentMethods = .all
 		// TODO: Set up Apple pay through apple developer website
 		//STPPaymentConfiguration.shared().appleMerchantIdentifier = "your apple merchant identifier"
 		return AWSMobileClient.sharedInstance().interceptApplication(
