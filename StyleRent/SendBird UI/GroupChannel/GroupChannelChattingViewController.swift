@@ -178,24 +178,15 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
     
     @objc private func openMoreMenu() {
         let vc = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        let seeMemberListAction = UIAlertAction(title: Bundle.sbLocalizedStringForKey(key: "SeeMemberListButton"), style: UIAlertActionStyle.default) { (action) in
-            DispatchQueue.main.async {
-                let mlvc = MemberListViewController(nibName: "MemberListViewController", bundle: Bundle.main)
-                mlvc.channel = self.groupChannel
-                self.present(mlvc, animated: true, completion: nil)
-            }
+        let reportAction = UIAlertAction(title: "Report User", style: UIAlertActionStyle.default) { (action) in
+			print("Reported User")
         }
-        let inviteUserListAction = UIAlertAction(title: Bundle.sbLocalizedStringForKey(key: "InviteUserButton"), style: UIAlertActionStyle.default) { (action) in
-            DispatchQueue.main.async {
-                let vc = CreateGroupChannelUserListViewController(nibName: "CreateGroupChannelUserListViewController", bundle: Bundle.main)
-                vc.userSelectionMode = 1
-                vc.groupChannel = self.groupChannel
-                self.present(vc, animated: true, completion: nil)
-            }
+		let handoffAction = UIAlertAction(title: /*TODO: say give or receive*/"Handoff", style: UIAlertActionStyle.default) { (action) in
+			//TODO: Initiate handoff for this listing based on status
         }
-        let closeAction = UIAlertAction(title: Bundle.sbLocalizedStringForKey(key: "CloseButton"), style: UIAlertActionStyle.cancel, handler: nil)
-        vc.addAction(seeMemberListAction)
-        vc.addAction(inviteUserListAction)
+        let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil)
+        vc.addAction(reportAction)
+        vc.addAction(handoffAction)
         vc.addAction(closeAction)
         
         self.present(vc, animated: true, completion: nil)

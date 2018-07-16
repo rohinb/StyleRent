@@ -11,12 +11,16 @@ import AWSMobileClient
 import FBSDKCoreKit
 import Stripe
 import SendBirdSDK
+import AWSCore
+import AWSPinpoint
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	var pinpoint: AWSPinpoint?
+
 	static let instance: NSCache<AnyObject, AnyObject> = NSCache()
 
 	static func imageCache() -> NSCache<AnyObject, AnyObject>! {
@@ -39,8 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		config.requiredBillingAddressFields = .zip
 		config.requiredShippingAddressFields = []
 		config.additionalPaymentMethods = .all
-		// TODO: Set up Apple pay through apple developer website
-		//STPPaymentConfiguration.shared().appleMerchantIdentifier = "your apple merchant identifier"
+		STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.StyleRent"
+
+		pinpoint =
+			AWSPinpoint(configuration:
+				AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)
@@ -48,6 +56,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 		return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+	}
+
+	func application(
+		_ application: UIApplication,
+		didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+		pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
+			withDeviceToken: deviceToken)
+	}
+
+	func application(
+		_ application: UIApplication,
+		didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+		fetchCompletionHandler completionHandler:
+		@escaping (UIBackgroundFetchResult) -> Void) {
+
+		pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(
+			userInfo, fetchCompletionHandler: completionHandler)
+
+		if (application.applicationState == .active) {
+			let alert = UIAlertController(title: "Notification Received",
+										  message: userInfo.description,
+										  preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+			UIApplication.shared.keyWindow?.rootViewController?.present(
+				alert, animated: true, completion:nil)
+		}
 	}
 
 	func application(_ application: UIApplication, open url: URL,

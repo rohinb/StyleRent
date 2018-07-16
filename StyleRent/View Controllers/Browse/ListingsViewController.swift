@@ -70,6 +70,12 @@ class ListingsViewController: UIViewController {
 			let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
 			navigationItem.leftBarButtonItem = settingsButton
 		}
+
+		var userNotificationTypes : UIUserNotificationType
+		userNotificationTypes = [.alert , .badge , .sound]
+		let notificationSettings = UIUserNotificationSettings.init(types: userNotificationTypes, categories: nil)
+		UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+		UIApplication.shared.registerForRemoteNotifications()
     }
 
 	@objc fileprivate func settingsButtonPressed() {

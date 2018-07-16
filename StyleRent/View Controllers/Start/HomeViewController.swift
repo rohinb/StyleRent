@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomeViewController: UIViewController {
 
@@ -14,6 +15,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 		DB.shared().delegate = self
 		Services.shared().delegate = self
+		CLLocationManager().requestWhenInUseAuthorization()
 		tryLogin()
         // Do any additional setup after loading the view.
     }

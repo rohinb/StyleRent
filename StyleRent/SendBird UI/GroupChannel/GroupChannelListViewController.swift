@@ -228,7 +228,7 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
             let vc = GroupChannelChattingViewController(nibName: "GroupChannelChattingViewController", bundle: Bundle.main)
             vc.groupChannel = self.channels[indexPath.row]
 
-			self.navigationController?.pushViewController(vc, animated: true)
+			self.present(vc, animated: true, completion: nil)
         }
         else {
             let cell = tableView.cellForRow(at: indexPath) as! MGSwipeTableCell

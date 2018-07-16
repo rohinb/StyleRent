@@ -7,6 +7,7 @@ target 'StyleRent' do
   pod 'AWSMobileClient'
   pod 'AWSDynamoDB'
   pod 'AWSS3'
+  pod  'AWSPinpoint', '~> 2.6.13'
   pod 'AWSAuthCore', '~> 2.6.13'
   pod 'AWSAPIGateway', '~> 2.6.13'
   pod 'FBSDKLoginKit'

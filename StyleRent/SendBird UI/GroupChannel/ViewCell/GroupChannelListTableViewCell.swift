@@ -12,7 +12,6 @@ import AlamofireImage
 
 class GroupChannelListTableViewCell: UITableViewCell {
     @IBOutlet weak var channelNameLabel: UILabel!
-    @IBOutlet weak var memberCountLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var unreadMessageCountLabel: UILabel!
@@ -95,9 +94,7 @@ class GroupChannelListTableViewCell: UITableViewCell {
     
     func setModel(aChannel: SBDGroupChannel) {
         self.channel = aChannel
-        
-        self.memberCountLabel.text = String(format: "%ld", self.channel.memberCount)
-        
+
         self.typingImageView.isHidden = true
         self.typingLabel.isHidden = true
         
