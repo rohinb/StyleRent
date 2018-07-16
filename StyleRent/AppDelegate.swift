@@ -49,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			AWSPinpoint(configuration:
 				AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
 
+		logEvent()
+		sendMonetizationEvent()
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)
@@ -64,6 +66,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
 			withDeviceToken: deviceToken)
+	}
+
+	// TODO: Move event logging into its own class and actually implement
+	func logEvent() {
+
+		let pinpointAnalyticsClient =
+			AWSPinpoint(configuration:
+				AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: nil)).analyticsClient
+
+		let event = pinpointAnalyticsClient.createEvent(withEventType: "TestEvent")
+		event.addAttribute("DemoAttributeValue1", forKey: "DemoAttribute1")
+		event.addAttribute("DemoAttributeValue2", forKey: "DemoAttribute2")
+		event.addMetric(NSNumber.init(value: arc4random() % 65535), forKey: "RandomMetric")
+		pinpointAnalyticsClient.record(event)
+		pinpointAnalyticsClient.submitEvents()
+
+	}
+
+	// TODO: Move revenue logging into its own class and actually implement
+	func sendMonetizationEvent()
+	{
+		let pinpointClient = AWSPinpoint(configuration:
+			AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: nil))
+
+		let pinpointAnalyticsClient = pinpointClient.analyticsClient
+
+		let event =
+			pinpointAnalyticsClient.createVirtualMonetizationEvent(withProductId:
+				"DEMO_PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
+		pinpointAnalyticsClient.record(event)
+		pinpointAnalyticsClient.submitEvents()
 	}
 
 	func application(
