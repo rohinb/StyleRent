@@ -7,12 +7,12 @@
 		<key>CommonCrypto.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>28</integer>
+			<integer>30</integer>
 		</dict>
 		<key>StyleRent.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>29</integer>
 		</dict>
 	</dict>
 </dict>

@@ -6,6 +6,8 @@ PODS:
     - AWSCore (= 2.6.18)
   - AWSAuthCore (2.6.18):
     - AWSCore (= 2.6.18)
+  - AWSCognito (2.6.18):
+    - AWSCore (= 2.6.18)
   - AWSCore (2.6.18)
   - AWSDynamoDB (2.6.18):
     - AWSCore (= 2.6.18)
@@ -14,6 +16,8 @@ PODS:
   - AWSPinpoint (2.6.18):
     - AWSCore (= 2.6.18)
   - AWSS3 (2.6.18):
+    - AWSCore (= 2.6.18)
+  - AWSSNS (2.6.18):
     - AWSCore (= 2.6.18)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -49,10 +53,12 @@ DEPENDENCIES:
   - AlamofireImage
   - AWSAPIGateway (~> 2.6.13)
   - AWSAuthCore (~> 2.6.13)
+  - AWSCognito
   - AWSDynamoDB
   - AWSMobileClient
   - AWSPinpoint (~> 2.6.13)
   - AWSS3
+  - AWSSNS
   - ESPullToRefresh
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -73,11 +79,13 @@ SPEC REPOS:
     - AlamofireImage
     - AWSAPIGateway
     - AWSAuthCore
+    - AWSCognito
     - AWSCore
     - AWSDynamoDB
     - AWSMobileClient
     - AWSPinpoint
     - AWSS3
+    - AWSSNS
     - Bolts
     - ESPullToRefresh
     - FBSDKCoreKit
@@ -99,11 +107,13 @@ SPEC CHECKSUMS:
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   AWSAPIGateway: fbde9d6b4959e81b55f4097e7b9ba44e36970a9b
   AWSAuthCore: 32c8b728338fb54b0b1723f4be5be3777d5ca0ae
+  AWSCognito: aab248bf535c2f33240d3e952d0af88332d36af7
   AWSCore: 5594f02730a821907d155ac28e96593d1caa6f64
   AWSDynamoDB: 8071c225bb409a3ff5b2ca3e8e64aa41ef24d806
   AWSMobileClient: 7e6786ec708698aa3b25f12376464db1820afaed
   AWSPinpoint: c86ee8f152debb5be774351588f94fc7c652af42
   AWSS3: 659953f91bf85f62b6290625e86c45e3b9dd8dee
+  AWSSNS: 61489248e52b0c96d5db8493131eb85fc01215a0
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
@@ -120,6 +130,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: e9dc4a06bb8fef960ac6dbcf54115b865359d14f
+PODFILE CHECKSUM: 4943b3eb6df2fe640e8ccfdc01ba2bcbeb27e369
 
 COCOAPODS: 1.5.2

@@ -5,8 +5,10 @@ target 'StyleRent' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'AWSMobileClient'
+  pod 'AWSCognito'
   pod 'AWSDynamoDB'
   pod 'AWSS3'
+  pod 'AWSSNS'
   pod  'AWSPinpoint', '~> 2.6.13'
   pod 'AWSAuthCore', '~> 2.6.13'
   pod 'AWSAPIGateway', '~> 2.6.13'

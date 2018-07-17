@@ -8,18 +8,22 @@
 
 import UIKit
 import AWSMobileClient
+import AWSCognito
 import FBSDKCoreKit
 import Stripe
 import SendBirdSDK
+import AWSSNS
 import AWSCore
 import AWSPinpoint
+import UserNotifications
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 	var window: UIWindow?
 	var pinpoint: AWSPinpoint?
+	let SNSPlatformApplicationArn = "arn:aws:sns:us-east-1:235814408369:app/APNS_SANDBOX/StyleRent"
 
 	static let instance: NSCache<AnyObject, AnyObject> = NSCache()
 
@@ -45,12 +49,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		config.additionalPaymentMethods = .all
 		STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.StyleRent"
 
+		let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
+																identityPoolId:"us-east-1:1e730877-8ae1-42c1-990c-310863a4e5f2")
+
+		let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
+
+		AWSServiceManager.default().defaultServiceConfiguration = configuration
+
 		pinpoint =
 			AWSPinpoint(configuration:
 				AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
 
 		logEvent()
 		sendMonetizationEvent()
+		registerForPushNotifications(application: application)
 		return AWSMobileClient.sharedInstance().interceptApplication(
 			application,
 			didFinishLaunchingWithOptions: launchOptions)
@@ -64,8 +76,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		_ application: UIApplication,
 		didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 
+		/// Attach the device token to the user defaults
+		var token = ""
+		for i in 0..<deviceToken.count {
+			token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+		}
+		print(token)
+		UserDefaults.standard.set(token, forKey: "deviceTokenForSNS")
+		/// Create a platform endpoint. In this case, the endpoint is a
+		/// device endpoint ARN
+		let sns = AWSSNS.default()
+		let request = AWSSNSCreatePlatformEndpointInput()
+		request?.token = token
+		request?.customUserData = gblUser?._id!
+		request?.platformApplicationArn = SNSPlatformApplicationArn
+		sns.createPlatformEndpoint(request!).continueWith(executor: AWSExecutor.mainThread(), block: { (task: AWSTask!) -> AnyObject? in
+			if task.error != nil {
+				print("Error: \(String(describing: task.error))")
+			} else {
+				let createEndpointResponse = task.result! as AWSSNSCreateEndpointResponse
+				if let endpointArnForSNS = createEndpointResponse.endpointArn {
+					print("endpointArn: \(endpointArnForSNS)")
+					UserDefaults.standard.set(endpointArnForSNS, forKey: "endpointArnForSNS")
+				}
+			}
+			return nil
+		})
 		pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
 			withDeviceToken: deviceToken)
+	}
+
+	// Called when a notification is delivered to a foreground app.
+	@available(iOS 10.0, *)
+	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+		print("User Info = ",notification.request.content.userInfo)
+		completionHandler([.alert, .badge, .sound])
+	}
+	// Called to let your app know which action was selected by the user for a given notification.
+	@available(iOS 10.0, *)
+	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+		print("User Info = ",response.notification.request.content.userInfo)
+		completionHandler()
+	}
+
+	func registerForPushNotifications(application: UIApplication) {
+		/// The notifications settings
+		if #available(iOS 10.0, *) {
+			UNUserNotificationCenter.current().delegate = self
+			UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: {(granted, error) in
+				if (granted)
+				{
+					UIApplication.shared.registerForRemoteNotifications()
+				}
+				else{
+					//Do stuff if unsuccessful…
+				}
+			})
+		} else {
+			let settings = UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound], categories: nil)
+			application.registerUserNotificationSettings(settings)
+			application.registerForRemoteNotifications()
+		}
+	}
+
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print(error.localizedDescription)
 	}
 
 	// TODO: Move event logging into its own class and actually implement
