@@ -71,11 +71,8 @@ class ListingsViewController: UIViewController {
 			navigationItem.leftBarButtonItem = settingsButton
 		}
 
-		var userNotificationTypes : UIUserNotificationType
-		userNotificationTypes = [.alert , .badge , .sound]
-		let notificationSettings = UIUserNotificationSettings.init(types: userNotificationTypes, categories: nil)
-		UIApplication.shared.registerUserNotificationSettings(notificationSettings)
-		UIApplication.shared.registerForRemoteNotifications()
+		gblUser._pushEndpoint = UserDefaults.standard.value(forKey: "endpointArnForSNS") as? String
+		DB.shared().updateUser(gblUser)
     }
 
 	@objc fileprivate func settingsButtonPressed() {

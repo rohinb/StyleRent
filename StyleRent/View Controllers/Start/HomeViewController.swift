@@ -16,8 +16,12 @@ class HomeViewController: UIViewController {
 		DB.shared().delegate = self
 		Services.shared().delegate = self
 		CLLocationManager().requestWhenInUseAuthorization()
+		var userNotificationTypes : UIUserNotificationType
+		userNotificationTypes = [.alert , .badge , .sound]
+		let notificationSettings = UIUserNotificationSettings.init(types: userNotificationTypes, categories: nil)
+		UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+		UIApplication.shared.registerForRemoteNotifications()
 		tryLogin()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

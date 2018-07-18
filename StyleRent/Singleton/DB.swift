@@ -34,6 +34,19 @@ class DB {
 
 	}
 
+	func updateUser(_ user : User) {
+		dynamoDbObjectMapper.save(user, completionHandler: {
+			(error: Error?) -> Void in
+
+			DispatchQueue.main.async {
+				if let error = error {
+					self.delegate?.updateUserResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+				}
+				self.delegate?.updateUserResponse?(success: true, error: nil)
+			}
+		})
+	}
+
 	func createUser(id : String, name : String, authType : AuthType, password : String?) {
 		// first check if user exists
 		let queryExpression = AWSDynamoDBQueryExpression()
@@ -281,6 +294,7 @@ class DB {
 @objc protocol DBDelegate {
 	@objc optional func createUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func createListingResponse(success : Bool, error : String?)
+	@objc optional func updateUserResponse(success : Bool, error : String?)
 	@objc optional func createRentalResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
 	@objc optional func getRentalsResponse(success : Bool, rentals : [Rental], error : String?)
