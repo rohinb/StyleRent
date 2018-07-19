@@ -48,4 +48,29 @@ struct Utilities {
 		let date = dateFormatter.date(from: apiDate)
 		return date!
 	}
+
+	static let blockSize = 0.2
+	static func getBlockIdFor(lat: Double, long : Double) -> String {
+		// roughly 20 km chunks
+		let latId = Int(lat / blockSize)
+		let longId = Int(long / blockSize)
+		return "\(latId),\(longId)"
+	}
+
+	static func getBlockIdsInRange(startLat: Double, endLat : Double, startLong : Double, endLong : Double) -> [String] {
+		// TODO: Unit test this
+		print("Getting block ids for range: \(startLat),\(endLat) to \(startLong),\(endLong)")
+		var res = [String]()
+		var lat = startLat
+		while lat < endLat {
+			var long = startLong
+			while long < endLong {
+				res.append(getBlockIdFor(lat: lat, long: long))
+				print("Got block id for (\(lat), \(long))")
+				long += blockSize
+			}
+			lat += blockSize
+		}
+		return res
+	}
 }

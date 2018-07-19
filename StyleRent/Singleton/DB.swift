@@ -160,55 +160,70 @@ class DB {
 		let	lonStart = lon - lonDelta
 		let	lonEnd = lon + lonDelta
 
-		let expression = AWSDynamoDBScanExpression()
-		expression.limit = limit as NSNumber
-		expression.exclusiveStartKey = lastEvalKey
-
-		var attrValues = [String : Any]()
-		var filterExpression = "latitude BETWEEN :latStart AND :latEnd AND longitude BETWEEN :lonStart AND :lonEnd"
-		attrValues[":latStart"] = latStart
-		attrValues[":latEnd"] = latEnd
-		attrValues[":lonStart"] = lonStart
-		attrValues[":lonEnd"] = lonEnd
-
-		if minPrice != nil {
-			filterExpression += " AND price BETWEEN :minPrice AND :maxPrice"
-			attrValues[":maxPrice"] = maxPrice ?? 99999
-			attrValues[":minPrice"] = minPrice ?? 0
-		}
-		if category != nil {
-			filterExpression += " AND category = :category"
-			attrValues[":category"] = category
-		}
-
-		if size != nil {
-			filterExpression += " AND size = :size"
-			attrValues[":size"] = size
-		}
-
-		if showMyListings {
-			filterExpression += " AND sellerId = :userId"
+		for blockId in Utilities.getBlockIdsInRange(startLat: latStart, endLat: latEnd, startLong: lonStart, endLong: lonEnd) {
+			print("fetching block id: " + blockId)
+			let expression = AWSDynamoDBQueryExpression()
+			var attrValues = [String : Any]()
+			var filterExpressions = [String]()
 			attrValues[":userId"] = userId
-		} else {
-			filterExpression += " AND sellerId <> :userId" // only show other users' listings
-			attrValues[":userId"] = userId
-		}
 
-		expression.filterExpression = filterExpression
+			if showMyListings {
+				expression.indexName = "sellerId-index"
+				expression.keyConditionExpression = "sellerId = :userId"
+			} else {
+				expression.indexName = "blockId-longitude-index"
+				expression.keyConditionExpression = "blockId = :blockId AND longitude BETWEEN :lonStart AND :lonEnd"
+				attrValues[":latStart"] = latStart
+				attrValues[":latEnd"] = latEnd
+				attrValues[":lonStart"] = lonStart
+				attrValues[":lonEnd"] = lonEnd
+				attrValues[":blockId"] = blockId
 
-		expression.expressionAttributeValues = attrValues
-
-		dynamoDbObjectMapper.scan(Listing.self, expression: expression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
-			DispatchQueue.main.async {
-				if let error = task.error as NSError? {
-					print("The request failed. Error: \(error)")
-					self.delegate?.getListingsResponse?(success: false, listings: [], error: error.localizedDescription, lastEval: nil)
-				} else if let paginatedOutput = task.result {
-					self.delegate?.getListingsResponse?(success: true, listings: paginatedOutput.items as! [Listing], error: nil, lastEval: paginatedOutput.lastEvaluatedKey)
-				}
+				filterExpressions.append("latitude BETWEEN :latStart AND :latEnd")
+				filterExpressions.append("sellerId <> :userId") // only show other users' listings
 			}
-			return nil
-		})
+
+			expression.limit = limit as NSNumber
+			expression.exclusiveStartKey = lastEvalKey
+
+			if minPrice != nil {
+				filterExpressions.append("price BETWEEN :minPrice AND :maxPrice")
+				attrValues[":maxPrice"] = maxPrice ?? 99999
+				attrValues[":minPrice"] = minPrice ?? 0
+			}
+			if category != nil {
+				filterExpressions.append("category = :category")
+				attrValues[":category"] = category
+			}
+
+			if size != nil {
+				filterExpressions.append("size = :size")
+				attrValues[":size"] = size
+			}
+
+			if !filterExpressions.isEmpty {
+				var filterExpression = filterExpressions[0]
+				for i in 1..<filterExpressions.count {
+					let clause = filterExpressions[i]
+					filterExpression += " AND " + clause
+				}
+				expression.filterExpression = filterExpression
+			}
+
+			expression.expressionAttributeValues = attrValues
+
+			dynamoDbObjectMapper.query(Listing.self, expression: expression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+				DispatchQueue.main.async {
+					if let error = task.error as NSError? {
+						print("The request failed. Error: \(error)")
+						self.delegate?.getListingsResponse?(success: false, listings: [], error: error.localizedDescription, lastEval: nil)
+					} else if let paginatedOutput = task.result {
+						self.delegate?.getListingsResponse?(success: true, listings: paginatedOutput.items as! [Listing], error: nil, lastEval: paginatedOutput.lastEvaluatedKey)
+					}
+				}
+				return nil
+			})
+		}
 	}
 
 	func deleteListing(_ listing : Listing) {
@@ -272,6 +287,7 @@ class DB {
 	}
 
 	func getRentals(userId : String, rentedOut : Bool) {
+		// TODO: Create GSIs in DynamoDB console before calling.
 		let queryExpression = AWSDynamoDBQueryExpression()
 
 		queryExpression.keyConditionExpression = ":key = :id"

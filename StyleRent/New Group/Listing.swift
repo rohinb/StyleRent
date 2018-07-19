@@ -22,6 +22,7 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _description: String?
     var _latitude: NSNumber?
     var _longitude: NSNumber?
+	var _blockId: String?
     var _name: String?
     var _price: NSNumber?
 	var _originalPrice: NSNumber?
@@ -53,6 +54,7 @@ class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_sellerId" : "sellerId",
                "_size" : "size",
                "_category" : "category",
+			   "_blockId" : "blockId"
         ]
     }
 }

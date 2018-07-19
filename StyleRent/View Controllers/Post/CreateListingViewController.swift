@@ -9,6 +9,7 @@
 import UIKit
 import AWSS3
 import SVProgressHUD
+import CoreLocation
 
 enum PhotoOptionType : String {
 	case upload = "Upload"
@@ -159,8 +160,10 @@ class CreateListingViewController: UIViewController {
 	}
 
 	fileprivate func writeListing() {
-		newListing?._latitude = 37.2657536962002
-		newListing?._longitude = -121.971246711695
+		// use real coords
+		newListing?._latitude = NSNumber(value: gblCurrentLocation.coordinate.latitude)
+		newListing?._longitude = NSNumber(value: gblCurrentLocation.coordinate.longitude)
+		newListing?._blockId = Utilities.getBlockIdFor(lat: gblCurrentLocation.coordinate.latitude, long: gblCurrentLocation.coordinate.longitude)
 		newListing?._imageCount = NSNumber(integerLiteral: self.images.count - 1)
 		newListing?._sellerId = gblUser._id!
 		DB.shared().createListing(listing: newListing!)

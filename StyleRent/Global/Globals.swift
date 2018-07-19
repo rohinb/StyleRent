@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import CoreLocation
 
+var gblCurrentLocation : CLLocation!
 var gblUser : User! {
 	didSet {
 		Defaults.standard.set(gblUser?._id, forKey: Defaults.userIdKey)

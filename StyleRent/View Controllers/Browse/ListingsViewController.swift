@@ -19,7 +19,6 @@ class ListingsViewController: UIViewController {
 	static let kCellHeight = 200.0
 
 	fileprivate var locManager = CLLocationManager()
-	fileprivate var currentLocation: CLLocation!
 	fileprivate var listings = [Listing]()
 	fileprivate var listingImages = [String : UIImage]()
 	fileprivate var freshPull = true
@@ -44,10 +43,10 @@ class ListingsViewController: UIViewController {
 
 		if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
 			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
-			currentLocation = locManager.location
-			print(currentLocation.coordinate.latitude)
-			print(currentLocation.coordinate.longitude)
-			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), 1000, 1000)
+			gblCurrentLocation = locManager.location
+			print(gblCurrentLocation.coordinate.latitude)
+			print(gblCurrentLocation.coordinate.longitude)
+			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: gblCurrentLocation.coordinate.latitude, longitude: gblCurrentLocation.coordinate.longitude), 1000, 1000)
 			print(region)
 		}
 		collectionView.addInfiniteScroll { (collectionView) in
@@ -90,7 +89,7 @@ class ListingsViewController: UIViewController {
 
 	fileprivate func fetchListings(count: Int = DB.PAGE_AMOUNT) {
 		guard count > 0 else { return }
-		DB.shared().getListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: currentLocation.coordinate.latitude, lon: currentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
+		DB.shared().getListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
 	}
 
 	fileprivate func loadImage(index : Int) {
