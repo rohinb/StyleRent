@@ -82,7 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
 		}
 		print(token)
-		UserDefaults.standard.set(token, forKey: "deviceTokenForSNS")
 		/// Create a platform endpoint. In this case, the endpoint is a
 		/// device endpoint ARN
 		let sns = AWSSNS.default()
@@ -97,7 +96,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 				let createEndpointResponse = task.result! as AWSSNSCreateEndpointResponse
 				if let endpointArnForSNS = createEndpointResponse.endpointArn {
 					print("endpointArn: \(endpointArnForSNS)")
-					UserDefaults.standard.set(endpointArnForSNS, forKey: "endpointArnForSNS")
+					Defaults.standard.set(endpointArnForSNS, forKey: Defaults.pushEndpointKey)
+					if var user = gblUser {
+						user._pushEndpoint = endpointArnForSNS
+						DB.shared().updateUser(user)
+					}
 				}
 			}
 			return nil

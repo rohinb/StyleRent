@@ -61,4 +61,5 @@ struct Defaults {
 	static let standard = UserDefaults.standard
 
 	static let userIdKey = "user_id"
+	static let pushEndpointKey = "user_push_endpoint"
 }

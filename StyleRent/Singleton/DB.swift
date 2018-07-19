@@ -70,6 +70,7 @@ class DB {
 						user._name = name
 						user._authType = authType.rawValue
 						user._password = password
+						user._pushEndpoint = Defaults.standard.string(forKey: Defaults.pushEndpointKey)
 						self.dynamoDbObjectMapper.save(user, completionHandler: { (error: Error?) -> Void in
 							DispatchQueue.main.async {
 								if error != nil {

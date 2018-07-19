@@ -71,7 +71,7 @@ class ListingsViewController: UIViewController {
 			navigationItem.leftBarButtonItem = settingsButton
 		}
 
-		gblUser._pushEndpoint = UserDefaults.standard.value(forKey: "endpointArnForSNS") as? String
+		gblUser._pushEndpoint = Defaults.standard.string(forKey: Defaults.pushEndpointKey)
 		DB.shared().updateUser(gblUser)
     }
 

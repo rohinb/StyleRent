@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import CoreLocation
 
 class HomeViewController: UIViewController {
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
 
 	fileprivate func tryLogin() {
 		if let userId = Defaults.standard.string(forKey: Defaults.userIdKey) {
+			SVProgressHUD.show(withStatus: "Logging you in...")
 			DB.shared().getUser(with: userId)
 		}
 	}
@@ -42,6 +44,7 @@ extension HomeViewController : DBDelegate {
 			gblUser = user!
 			Services.shared().connectSendBird(user: user!, imageUrlString: Utilities.getUrlForUserPicture(userId: user!._id!).absoluteString)
 		} else {
+			SVProgressHUD.dismiss()
 			popupAlert(title: "Failed to log you in automatically", message: error, actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
 				self.tryLogin()
 			}, nil])
@@ -51,6 +54,7 @@ extension HomeViewController : DBDelegate {
 
 extension HomeViewController : ServicesDelegate {
 	func connectSendBirdResponse(success: Bool) {
+		SVProgressHUD.dismiss()
 		if success {
 			performSegue(withIdentifier: "autoLoginSegue", sender: nil)
 		} else {
