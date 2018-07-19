@@ -76,6 +76,12 @@ class Services {
 			SBDMain.updateCurrentUserInfo(withNickname: user._name!, profileUrl: imageUrlString, completionHandler: { (error) in
 				self.delegate?.connectSendBirdResponse?(success: error == nil)
 			})
+
+			if let pendingToken = SBDMain.getPendingPushToken() {
+				SBDMain.registerDevicePushToken(pendingToken, unique: true, completionHandler: { (status, error) in
+					print("Completed pending push registration with send bird")
+				})
+			}
 		})
 	}
 }

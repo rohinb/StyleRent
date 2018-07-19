@@ -82,8 +82,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
 		}
 		print(token)
-		/// Create a platform endpoint. In this case, the endpoint is a
-		/// device endpoint ARN
+		Defaults.standard.set(token, forKey: Defaults.deviceTokenKey)
+
+		SBDMain.registerDevicePushToken(deviceToken, unique: true) { (status, error) in
+			if error == nil {
+				if status == SBDPushTokenRegistrationStatus.pending {
+					print("Pending registration with send bird")
+				}
+				else {
+					print("Succeeded registration with send bird")
+				}
+			}
+			else {
+				print("Failed registration with send bird")
+			}
+		}
+
+		/// Create a platform endpoint
 		let sns = AWSSNS.default()
 		let request = AWSSNSCreatePlatformEndpointInput()
 		request?.token = token

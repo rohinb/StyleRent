@@ -62,4 +62,5 @@ struct Defaults {
 
 	static let userIdKey = "user_id"
 	static let pushEndpointKey = "user_push_endpoint"
+	static let deviceTokenKey = "device_token"
 }
