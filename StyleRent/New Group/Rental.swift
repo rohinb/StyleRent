@@ -21,6 +21,7 @@ class Rental: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _id: String?
     var _borrowerId: String?
     var _isActive: NSNumber?
+	var _price: NSNumber?
     var _lenderId: String?
     var _listingId: String?
     var _returnDate: String?
@@ -41,6 +42,7 @@ class Rental: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_id" : "id",
                "_borrowerId" : "borrowerId",
                "_isActive" : "isActive",
+			   "_price" : "price",
                "_lenderId" : "lenderId",
                "_listingId" : "listingId",
                "_returnDate" : "returnDate",

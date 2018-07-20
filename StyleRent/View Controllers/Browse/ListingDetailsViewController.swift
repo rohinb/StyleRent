@@ -9,6 +9,7 @@
 import UIKit
 import AWSS3
 import SendBirdSDK
+import SVProgressHUD
 import Nuke
 
 class ListingDetailsViewController: UIViewController {
@@ -36,6 +37,31 @@ class ListingDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		DB.shared().delegate = self
+
+		if listing._description != nil {
+			renderListing()
+		} else {
+			SVProgressHUD.show(withStatus: "Loading listing details...")
+			DB.shared().getListing(with: listing._id!)
+		}
+
+		if listing._sellerId! == gblUser._id! {
+			let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editPressed))
+			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
+			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
+		}
+
+		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showSellerCloset))
+		sellerImageView.isUserInteractionEnabled = true
+		sellerImageView.addGestureRecognizer(tapGestureRecognizer)
+
+		let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(showSellerCloset))
+		sellerNameLabel.isUserInteractionEnabled = true
+		sellerNameLabel.addGestureRecognizer(tapGestureRecognizer2)
+    }
+
+	fileprivate func renderListing() {
 		Nuke.loadImage(
 			with: Utilities.getUrlForUserPicture(userId: listing._sellerId!),
 			options: ImageLoadingOptions(
@@ -44,26 +70,16 @@ class ListingDetailsViewController: UIViewController {
 			),
 			into: sellerImageView
 		)
-		DB.shared().delegate = self
 		DB.shared().getUser(with: listing._sellerId!)
 		update()
+	}
 
-		if listing._sellerId! == gblUser._id! {
-			let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editPressed))
-			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
-			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
-		}
+	fileprivate func renderSeller() {
+		sellerNameLabel.text = seller!._name!
+		messageButton.setTitle("Message \(seller!._name!)", for: UIControlState())
+	}
 
-		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showSeller))
-		sellerImageView.isUserInteractionEnabled = true
-		sellerImageView.addGestureRecognizer(tapGestureRecognizer)
-
-		let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(showSeller))
-		sellerNameLabel.isUserInteractionEnabled = true
-		sellerNameLabel.addGestureRecognizer(tapGestureRecognizer2)
-    }
-
-	@objc fileprivate func showSeller() {
+	@objc fileprivate func showSellerCloset() {
 		if let user = seller {
 			let vc = Utilities.getClosetVcFor(user: user)
 			self.navigationController?.pushViewController(vc, animated: true)
@@ -227,10 +243,21 @@ extension ListingDetailsViewController : DBDelegate {
 	func getUserResponse(success: Bool, user: User?, error: String?) {
 		if success {
 			seller = user
-			sellerNameLabel.text = user!._name!
-			messageButton.setTitle("Message \(user!._name!)", for: UIControlState())
+			renderSeller()
 		} else {
 			singleActionPopup(title: "Failed to load seller information.", message: "Please try this listing again later.") { (action) in
+				self.navigationController?.popViewController(animated: true)
+			}
+		}
+	}
+
+	func getListingResponse(success: Bool, listing: Listing?, error: String?) {
+		SVProgressHUD.dismiss()
+		if success {
+			self.listing = listing!
+			renderListing()
+		} else {
+			singleActionPopup(title: "Failed to fetch listing details.", message: "Please try entering this page again.") { (action) in
 				self.navigationController?.popViewController(animated: true)
 			}
 		}

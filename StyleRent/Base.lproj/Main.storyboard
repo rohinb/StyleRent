@@ -711,10 +711,10 @@
             </objects>
             <point key="canvasLocation" x="2382" y="-1981"/>
         </scene>
-        <!--View Controller-->
+        <!--Rent Root View Controller-->
         <scene sceneID="RDs-k4-SBf">
             <objects>
-                <viewController id="kkj-SZ-AwZ" sceneMemberID="viewController">
+                <viewController id="kkj-SZ-AwZ" customClass="RentRootViewController" customModule="StyleRent" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KwK-lL-Uln">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -733,6 +733,22 @@
                                 <state key="normal" title="Receive Rental"/>
                                 <connections>
                                     <segue destination="A1G-mZ-Zop" kind="presentation" id="Y98-qU-SL2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6u-ne-nUe">
+                                <rect key="frame" x="35" y="236" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="My Rentals"/>
+                                <connections>
+                                    <action selector="viewMyRentals:" destination="kkj-SZ-AwZ" eventType="touchUpInside" id="W0n-NB-i48"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UHn-KP-erO">
+                                <rect key="frame" x="213" y="232" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="My Rented Out"/>
+                                <connections>
+                                    <action selector="viewMyRentedOut:" destination="kkj-SZ-AwZ" eventType="touchUpInside" id="KQ6-Kp-wch"/>
                                 </connections>
                             </button>
                         </subviews>

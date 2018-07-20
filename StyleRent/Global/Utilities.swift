@@ -33,7 +33,7 @@ struct Utilities {
 		return URL(string: "https://\(bucketName).s3.amazonaws.com/listing-images/\(listingId)-\(imageNumber)")!
 	}
 
-	static let dateFormatString = "MM/dd/yyyy"
+	static let dateFormatString = "yyyy/MM/dd"
 
 	static func getApiDateFor(date : Date) -> String {
 		let dateFormatter = DateFormatter()

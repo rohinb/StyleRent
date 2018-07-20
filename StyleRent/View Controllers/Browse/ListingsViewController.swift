@@ -25,6 +25,7 @@ class ListingsViewController: UIViewController {
 	fileprivate var currentFilter = ListingDetail()
 	fileprivate var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
 
+	var listingIds : [String]?
 	var listingsOwnerName : String?
 	var listingsOwnerId : String?
 	var onlyMyListings = false

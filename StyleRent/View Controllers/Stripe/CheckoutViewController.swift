@@ -149,6 +149,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 		rental._borrowerId = gblUser._id!
 		rental._isActive = 1
 		rental._lenderId = listing._sellerId!
+		rental._listingId = listing._id!
+		rental._price = listing._price! //save the agreed upon price
 		let startDate = Date()
 		// TODO: Edit rental period, rn it's always 4 days
 		let endDate = startDate.addingTimeInterval(4 * 60 * 60 * 24)

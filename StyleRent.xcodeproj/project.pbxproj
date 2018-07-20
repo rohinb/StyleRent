@@ -23,6 +23,7 @@
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
 		0F384A7620CF41C70036141B /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7520CF41C70036141B /* ImageCell.swift */; };
 		0F384A7820CF95300036141B /* ListingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A7720CF95300036141B /* ListingDetailsViewController.swift */; };
+		0F39A5602101C3E0001403F9 /* RentRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F39A55F2101C3E0001403F9 /* RentRootViewController.swift */; };
 		0F47BF1C20B63C4C00C2CA55 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF1B20B63C4C00C2CA55 /* DB.swift */; };
 		0F47BF2420B63D3500C2CA55 /* StyleRentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */; };
 		0F47BF3120B642B000C2CA55 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF3020B642B000C2CA55 /* UIViewControllerExtension.swift */; };
@@ -174,6 +175,7 @@
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		0F384A7520CF41C70036141B /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		0F384A7720CF95300036141B /* ListingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailsViewController.swift; sourceTree = "<group>"; };
+		0F39A55F2101C3E0001403F9 /* RentRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentRootViewController.swift; sourceTree = "<group>"; };
 		0F47BF1B20B63C4C00C2CA55 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		0F47BF2120B63D3500C2CA55 /* StyleRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StyleRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F47BF2320B63D3500C2CA55 /* StyleRentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleRentTests.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				0F5418B620F6D7EA00F6FB08 /* ConfirmViewController.swift */,
+				0F39A55F2101C3E0001403F9 /* RentRootViewController.swift */,
 			);
 			path = Rent;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				0FD0F98320E0D31B00FE56AE /* TextEntryViewController.swift in Sources */,
 				0F98FA0320D1FEA10054E14C /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 				0FA2D18020B5FBA500D7F243 /* LoginViewController.swift in Sources */,
+				0F39A5602101C3E0001403F9 /* RentRootViewController.swift in Sources */,
 				0F98FA0B20D1FEA10054E14C /* GroupChannelListEditableTableViewCell.swift in Sources */,
 				0F98F9D520D1FE7E0054E14C /* OutgoingGeneralUrlPreviewMessageTableViewCell.swift in Sources */,
 				0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */,

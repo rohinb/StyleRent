@@ -212,7 +212,8 @@ class DB {
 
 			expression.expressionAttributeValues = attrValues
 
-			dynamoDbObjectMapper.query(Listing.self, expression: expression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+			dynamoDbObjectMapper.query(Listing.self, expression: expression)
+				.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
 				DispatchQueue.main.async {
 					if let error = task.error as NSError? {
 						print("The request failed. Error: \(error)")
@@ -246,7 +247,8 @@ class DB {
 		queryExpression.keyConditionExpression = "id = :id"
 		queryExpression.expressionAttributeValues = [":id" : id]
 
-		dynamoDbObjectMapper.query(User.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+		dynamoDbObjectMapper.query(User.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
 			DispatchQueue.main.async {
 				if let error = task.error as NSError? {
 					print("The request failed. Error: \(error)")
@@ -269,7 +271,8 @@ class DB {
 		queryExpression.keyConditionExpression = "id = :id"
 		queryExpression.expressionAttributeValues = [":id" : id]
 
-		dynamoDbObjectMapper.query(Listing.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+		dynamoDbObjectMapper.query(Listing.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
 			DispatchQueue.main.async {
 				if let error = task.error as NSError? {
 					print("The request failed. Error: \(error)")
@@ -286,21 +289,24 @@ class DB {
 		})
 	}
 
-	func getRentals(userId : String, rentedOut : Bool) {
+	func getRentals(userId : String, lended : Bool) {
 		// TODO: Create GSIs in DynamoDB console before calling.
 		let queryExpression = AWSDynamoDBQueryExpression()
 
-		queryExpression.keyConditionExpression = ":key = :id"
-		queryExpression.expressionAttributeNames = [":key" : rentedOut ? "lenderId" : "borrowerId"]
+		queryExpression.keyConditionExpression = "#key = :id"
+		queryExpression.scanIndexForward = 0
+		queryExpression.indexName = lended ? "lenderId-returnDate-index" : "borrowerId-returnDate-index"
+		queryExpression.expressionAttributeNames = ["#key" : lended ? "lenderId" : "borrowerId"]
 		queryExpression.expressionAttributeValues = [":id" : userId]
 
-		dynamoDbObjectMapper.query(Rental.self, expression: queryExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+		dynamoDbObjectMapper.query(Rental.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
 			DispatchQueue.main.async {
 				if let error = task.error as NSError? {
 					print("The request failed. Error: \(error)")
-					self.delegate?.getRentalsResponse?(success: false, rentals: [], error: "Failed to fetch rentals.")
+					self.delegate?.getRentalsResponse?(success: false, rentals: [], lended: lended, error: "Failed to fetch rentals.")
 				} else if let result = task.result {
-					self.delegate?.getRentalsResponse?(success: true, rentals: result.items as! [Rental], error: nil)
+					self.delegate?.getRentalsResponse?(success: true, rentals: result.items as! [Rental], lended: lended, error: nil)
 				}
 			}
 			return nil
@@ -314,7 +320,7 @@ class DB {
 	@objc optional func updateUserResponse(success : Bool, error : String?)
 	@objc optional func createRentalResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
-	@objc optional func getRentalsResponse(success : Bool, rentals : [Rental], error : String?)
+	@objc optional func getRentalsResponse(success : Bool, rentals : [Rental], lended : Bool, error : String?)
 	@objc optional func deleteListingResponse(success : Bool)
 	@objc optional func validateUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func getUserResponse(success : Bool, user : User?, error : String?)
