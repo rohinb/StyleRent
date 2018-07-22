@@ -40,12 +40,16 @@ class RentRootViewController: UIViewController {
 }
 
 extension RentRootViewController : DBDelegate {
-	func getRentalsResponse(success: Bool, rentals: [Rental], purchased: Bool, error: String?) {
+	func getRentalsResponse(success: Bool, rentals: [Rental], lended: Bool, error: String?) {
 		SVProgressHUD.dismiss()
 		if success {
-			//TODO: present populated listings vc
-			// then update the listings vc code to handle listing fetching based on ids from rentals list
-			// and have a boolean for isRentalVC and a variable to hold rentals list
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingsViewController
+			vc.rentals = rentals
+			vc.config = .rentals
+			vc.iAmLender = lended
+			vc.listingIds = rentals.map({ (rental) -> String in return rental._listingId! })
+			navigationController?.pushViewController(vc, animated: true)
 			print(rentals)
 		} else {
 			singleActionPopup(title: "Failed to fetch rentals.", message: "Please try again.")

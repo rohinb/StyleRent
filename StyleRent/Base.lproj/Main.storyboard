@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HV5-4w-CLV">
-                                <rect key="frame" x="98" y="566" width="178" height="55"/>
+                                <rect key="frame" x="98" y="566" width="179" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="YSu-gV-Eai"/>
                                 </constraints>
@@ -840,16 +840,16 @@
             </objects>
             <point key="canvasLocation" x="4082" y="312"/>
         </scene>
-        <!--Confirm View Controller-->
+        <!--Rental View Controller-->
         <scene sceneID="Isv-hu-rjc">
             <objects>
-                <viewController id="UHf-3y-x9f" customClass="ConfirmViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RentalVC" id="UHf-3y-x9f" customClass="RentalViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IqN-vy-4GX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Purchase?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-On-uGN">
-                                <rect key="frame" x="114" y="46" width="146" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Purchase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-On-uGN">
+                                <rect key="frame" x="114" y="46" width="147" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -912,15 +912,17 @@
                         <viewLayoutGuide key="safeArea" id="qkd-bx-7dp"/>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="wj0-ap-Jln" id="RLj-74-FH2"/>
                         <outlet property="listingImageView" destination="u7P-Xl-W9E" id="vg2-oc-tUd"/>
                         <outlet property="listingNameLabel" destination="3qF-GV-sa4" id="9rP-Zz-Lgx"/>
                         <outlet property="priceLabel" destination="AnZ-7Q-Rix" id="2ne-7L-Ao3"/>
+                        <outlet property="rejectButton" destination="AWx-GB-h0g" id="g85-c7-lU7"/>
                         <outlet property="titleLabel" destination="wz2-On-uGN" id="3CM-4w-ZES"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqp-CQ-26u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4848.8000000000002" y="313.49325337331339"/>
+            <point key="canvasLocation" x="4786" y="312"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="TZ4-7L-TI1">

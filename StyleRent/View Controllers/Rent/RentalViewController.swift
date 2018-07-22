@@ -9,13 +9,25 @@
 import UIKit
 import Nuke
 
-class ConfirmViewController: UIViewController {
+enum RentalViewControllerConfig {
+	case confirm
+	case history
+}
+
+class RentalViewController: UIViewController {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var listingImageView: UIImageView!
 	@IBOutlet weak var listingNameLabel: UILabel!
 	@IBOutlet weak var priceLabel: UILabel!
+	@IBOutlet weak var acceptButton: UIButton!
+	@IBOutlet weak var rejectButton: UIButton!
 
 	var listing : Listing!
+	var config = RentalViewControllerConfig.confirm
+
+	//history config vars
+	var rental : Rental!
+	var isMyListing : Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +40,19 @@ class ConfirmViewController: UIViewController {
 			into: listingImageView
 		)
 		listingNameLabel.text = listing._name!
+
+		if config == .confirm {
+			// TODO: use listing object to populate UI
+		} else if config == .history {
+			acceptButton.isHidden = true
+			rejectButton.isHidden = true
+			titleLabel.isHidden = true
+			// TODO: use rental object to populate UI
+			// create a return/collect button based on isMyListing that takes them to give/receive page
+		}
     }
 
 	@IBAction func acceptPressed(_ sender: Any) {
-		// TODO: Trigger payment through stripe sdk
-		// then create rental in DB. - DONE
-		// Create trigger in Dynamo to call a lambda every time a rental is created
-		// The lambda should notify both users of payment success
 		let checkoutViewController = CheckoutViewController(listing: listing,
 															price: listing._price!.intValue * 100)
 		checkoutViewController.confirmVc = self
@@ -42,7 +60,7 @@ class ConfirmViewController: UIViewController {
 	}
 
 	@IBAction func rejectPressed(_ sender: Any) {
-		// TODO: notify seller of rejection?
+		// TODO: notify seller of rejection? -- nahhhhh
 		self.dismiss(animated: true, completion: nil)
 	}
 

@@ -20,7 +20,7 @@ struct Utilities {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let vc = storyboard.instantiateViewController(withIdentifier: "ListingsVC") as! ListingsViewController
 		vc.listingsOwnerName = user._name ?? user._id!
-		vc.onlyMyListings = true
+		vc.config = .closet
 		vc.listingsOwnerId = user._id!
 		return vc
 	}

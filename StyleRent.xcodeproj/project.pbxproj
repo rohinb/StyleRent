@@ -36,7 +36,7 @@
 		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
 		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
-		0F5418B720F6D7EA00F6FB08 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5418B620F6D7EA00F6FB08 /* ConfirmViewController.swift */; };
+		0F5418B720F6D7EA00F6FB08 /* RentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */; };
 		0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */; };
 		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
 		0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */; };
@@ -191,7 +191,7 @@
 		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
 		0F51E3FE20FD609100CAFB41 /* StyleRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StyleRent.entitlements; sourceTree = "<group>"; };
-		0F5418B620F6D7EA00F6FB08 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectionViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -455,7 +455,7 @@
 		0F5418B520F6D79E00F6FB08 /* Rent */ = {
 			isa = PBXGroup;
 			children = (
-				0F5418B620F6D7EA00F6FB08 /* ConfirmViewController.swift */,
+				0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */,
 				0F39A55F2101C3E0001403F9 /* RentRootViewController.swift */,
 			);
 			path = Rent;
@@ -980,7 +980,7 @@
 				0F98F9C620D1FE7E0054E14C /* IncomingFileMessageTableViewCell.swift in Sources */,
 				0F47BF4620B7EFA800C2CA55 /* ListingsViewController.swift in Sources */,
 				0F1387EC20BB99D900E78B25 /* AWSAPI_DI8UQ5E635_StyleRentAPIMobileHubClient.m in Sources */,
-				0F5418B720F6D7EA00F6FB08 /* ConfirmViewController.swift in Sources */,
+				0F5418B720F6D7EA00F6FB08 /* RentalViewController.swift in Sources */,
 				0F98F9DE20D1FE7E0054E14C /* FLAnimatedImageView+ImageCache.swift in Sources */,
 				0F98F9BF20D1FE7E0054E14C /* OutgoingVideoFileMessageTableViewCell.swift in Sources */,
 				0F1C5CC320E8CBA700A320AF /* DetailCell.swift in Sources */,

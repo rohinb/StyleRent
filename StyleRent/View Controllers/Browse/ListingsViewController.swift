@@ -12,6 +12,12 @@ import AWSS3
 import AWSDynamoDB
 import ESPullToRefresh
 
+enum ListingsVCConfig {
+	case browse
+	case closet
+	case rentals
+}
+
 class ListingsViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
 
@@ -24,11 +30,17 @@ class ListingsViewController: UIViewController {
 	fileprivate var freshPull = true
 	fileprivate var currentFilter = ListingDetail()
 	fileprivate var lastEvalKey : [String : AWSDynamoDBAttributeValue]?
+	fileprivate var numListingCallbacksReceived = 0
+	fileprivate var listingsById = [String : Listing]()
 
+	var config = ListingsVCConfig.browse
+	// if rental
+	var rentals : [Rental]?
+	var iAmLender = false
 	var listingIds : [String]?
+	// if closet
 	var listingsOwnerName : String?
 	var listingsOwnerId : String?
-	var onlyMyListings = false
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,23 +62,28 @@ class ListingsViewController: UIViewController {
 			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: gblCurrentLocation.coordinate.latitude, longitude: gblCurrentLocation.coordinate.longitude), 1000, 1000)
 			print(region)
 		}
-		collectionView.addInfiniteScroll { (collectionView) in
-			self.fetchListings()
-		}
 
-		collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
-			return self.freshPull || self.lastEvalKey != nil
-		}
-		collectionView.infiniteScrollTriggerOffset = 100.0 // TODO: Fine tune
-		collectionView.beginInfiniteScroll(true)
+		if config != .rentals {
+			collectionView.addInfiniteScroll { (collectionView) in
+				self.fetchListings()
+			}
 
-		self.collectionView.es.addPullToRefresh {
-			[unowned self] in
+			collectionView.setShouldShowInfiniteScrollHandler { _ -> Bool in
+				return self.freshPull || self.lastEvalKey != nil
+			}
+			collectionView.infiniteScrollTriggerOffset = 100.0 // TODO: Fine tune
+			collectionView.beginInfiniteScroll(true)
+
+			self.collectionView.es.addPullToRefresh {
+				[unowned self] in
+				self.performFreshPull()
+			}
+		} else {
 			self.performFreshPull()
 		}
 
-		title = onlyMyListings ? (listingsOwnerId! == gblUser._id! ? "My Closet" : "\(listingsOwnerName!)'s Closet") : "Listings"
-		if onlyMyListings && listingsOwnerId! == gblUser._id! {
+		title = getTitle()
+		if config == .closet && listingsOwnerId! == gblUser._id! {
 			let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
 			navigationItem.leftBarButtonItem = settingsButton
 		}
@@ -74,6 +91,14 @@ class ListingsViewController: UIViewController {
 		gblUser._pushEndpoint = Defaults.standard.string(forKey: Defaults.pushEndpointKey)
 		DB.shared().updateUser(gblUser)
     }
+
+	fileprivate func getTitle() -> String {
+		switch config {
+		case .browse: return "Listings"
+		case .closet: return (listingsOwnerId! == gblUser._id! ? "My Closet" : "\(listingsOwnerName!)'s Closet")
+		case .rentals: return iAmLender ? "Currently Rented Out" : "My Current Rentals"
+		}
+	}
 
 	@objc fileprivate func settingsButtonPressed() {
 		self.performSegue(withIdentifier: "listingsToSettings", sender: nil)
@@ -90,7 +115,13 @@ class ListingsViewController: UIViewController {
 
 	fileprivate func fetchListings(count: Int = DB.PAGE_AMOUNT) {
 		guard count > 0 else { return }
-		DB.shared().getListings(userId: onlyMyListings ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: onlyMyListings, lastEvalKey: self.lastEvalKey, limit: count)
+		if config != .rentals {
+			DB.shared().getListings(userId: config == .closet ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: config == .closet, lastEvalKey: self.lastEvalKey, limit: count)
+		} else {
+			for rental in rentals! {
+				DB.shared().getListing(with: rental._listingId!)
+			}
+		}
 	}
 
 	fileprivate func loadImage(index : Int) {
@@ -185,6 +216,22 @@ extension ListingsViewController : DBDelegate {
 			singleActionPopup(title: "Failed to fetch listings", message: "Please try again later.")
 		}
 	}
+
+	func getListingResponse(success: Bool, listing: Listing?, error: String?) {
+		numListingCallbacksReceived += 1
+		if success {
+			listingsById[listing!._id!] = listing!
+		} else {
+			singleActionPopup(title: "Failed to fetch all listings", message: "Please try again later.")
+		}
+		if numListingCallbacksReceived == rentals!.count {
+			for (index, rental) in rentals!.enumerated() { // maintain order of sorted rentals
+				listings.append(listingsById[rental._listingId!]!)
+				loadImage(index: index)
+			}
+			collectionView.reloadData()
+		}
+	}
 }
 
 extension ListingsViewController : FiltersDelegate {
@@ -212,7 +259,17 @@ extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDat
 	}
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "toListingDetails", sender: indexPath.row)
+		if config == .rentals {
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateViewController(withIdentifier: "RentalVC") as! RentalViewController
+			vc.config = .history
+			vc.rental = rentals![indexPath.row]
+			vc.listing = listings[indexPath.row]
+			vc.isMyListing = iAmLender
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else {
+			performSegue(withIdentifier: "toListingDetails", sender: indexPath.row)
+		}
 	}
 
 	//make sure that it's two columns of cells

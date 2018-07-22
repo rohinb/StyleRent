@@ -290,11 +290,10 @@ class DB {
 	}
 
 	func getRentals(userId : String, lended : Bool) {
-		// TODO: Create GSIs in DynamoDB console before calling.
 		let queryExpression = AWSDynamoDBQueryExpression()
 
 		queryExpression.keyConditionExpression = "#key = :id"
-		queryExpression.scanIndexForward = 0
+		queryExpression.scanIndexForward = true
 		queryExpression.indexName = lended ? "lenderId-returnDate-index" : "borrowerId-returnDate-index"
 		queryExpression.expressionAttributeNames = ["#key" : lended ? "lenderId" : "borrowerId"]
 		queryExpression.expressionAttributeValues = [":id" : userId]

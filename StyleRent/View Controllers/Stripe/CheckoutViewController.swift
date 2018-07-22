@@ -25,7 +25,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 	fileprivate let shippingString: String
 
 	var listing : Listing!
-	var confirmVc : ConfirmViewController?
+	var confirmVc : RentalViewController?
 	var paymentInProgress: Bool = false {
 		didSet {
 			UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
@@ -147,7 +147,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 		let rental = Rental()!
 		rental._id = UUID().uuidString
 		rental._borrowerId = gblUser._id!
-		rental._isActive = 1
+		rental._isActive = NSNumber(booleanLiteral: true)
 		rental._lenderId = listing._sellerId!
 		rental._listingId = listing._id!
 		rental._price = listing._price! //save the agreed upon price

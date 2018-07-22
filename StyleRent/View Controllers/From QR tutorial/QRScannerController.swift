@@ -122,7 +122,7 @@ class QRScannerController: UIViewController {
     }
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "scannedSegue", let dest = segue.destination as? ConfirmViewController {
+		if segue.identifier == "scannedSegue", let dest = segue.destination as? RentalViewController {
 			dest.listing = scannedListing
 		}
 	}
