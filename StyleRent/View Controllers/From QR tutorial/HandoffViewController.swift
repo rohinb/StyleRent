@@ -8,13 +8,22 @@
 
 import UIKit
 
+enum HandoffType : String {
+	case pickup = "pickup"
+	case dropoff = "dropoff"
+}
 class HandoffViewController: UIViewController {
 	@IBOutlet weak var qrImageView: UIImageView!
 
+	var config : HandoffType!
+	var listing : Listing!
+	var rental : Rental!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-		let listingId = "3566A17A-F845-4B67-A686-A9E0C42891C8"
-		let data = listingId.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+		let dict = ["type" : config.rawValue, "id" : rental._id ?? listing._id!]
+
+		let data = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
 
 		let filter = CIFilter(name: "CIQRCodeGenerator")!
 
@@ -36,6 +45,9 @@ class HandoffViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+	@IBAction func dismiss(_ sender: Any) {
+		self.dismiss(animated: true, completion: nil)
+	}
 
 
 }

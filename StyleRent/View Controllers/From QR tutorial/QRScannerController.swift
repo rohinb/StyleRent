@@ -14,6 +14,7 @@ class QRScannerController: UIViewController {
     var qrCodeFrameView: UIView?
 
 	fileprivate var scannedListing : Listing!
+	fileprivate var scannedRental : Rental!
 
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
@@ -123,7 +124,12 @@ class QRScannerController: UIViewController {
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "scannedSegue", let dest = segue.destination as? RentalViewController {
-			dest.listing = scannedListing
+			if scannedListing != nil {
+				dest.listing = scannedListing
+			} else {
+				dest.config = .confirmDropoff
+				dest.rental = scannedRental
+			}
 		}
 	}
 }
@@ -147,8 +153,17 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                let listingId = metadataObj.stringValue!
-				DB.shared().getListing(with: listingId)
+				let dict = metadataObj.stringValue!.toJSON() as! [String : String]
+				let type = HandoffType(rawValue: dict["type"]!)!
+				switch type {
+				case .pickup:
+					let listingId = dict["id"]!
+					DB.shared().getListing(with: listingId)
+				case .dropoff:
+					let rentalId = dict["id"]!
+					DB.shared().getRental(with: rentalId)
+					break
+				}
             }
         }
     }
@@ -159,6 +174,15 @@ extension QRScannerController : DBDelegate {
 	func getListingResponse(success: Bool, listing: Listing?, error: String?) {
 		if success {
 			scannedListing = listing
+			performSegue(withIdentifier: "scannedSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to fetch listing.", message: error)
+		}
+	}
+
+	func getRentalResponse(success: Bool, rental: Rental?, error: String?) {
+		if success {
+			scannedRental = rental
 			performSegue(withIdentifier: "scannedSegue", sender: nil)
 		} else {
 			singleActionPopup(title: "Failed to fetch listing.", message: error)

@@ -147,7 +147,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 		let rental = Rental()!
 		rental._id = UUID().uuidString
 		rental._borrowerId = gblUser._id!
-		rental._isActive = NSNumber(booleanLiteral: true)
+		rental._isActive = true
 		rental._lenderId = listing._sellerId!
 		rental._listingId = listing._id!
 		rental._price = listing._price! //save the agreed upon price

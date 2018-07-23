@@ -289,14 +289,40 @@ class DB {
 		})
 	}
 
-	func getRentals(userId : String, lended : Bool) {
+	func getRental(with id : String) {
 		let queryExpression = AWSDynamoDBQueryExpression()
 
+		queryExpression.keyConditionExpression = "id = :id"
+		queryExpression.expressionAttributeValues = [":id" : id]
+
+		dynamoDbObjectMapper.query(Rental.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+				DispatchQueue.main.async {
+					if let error = task.error as NSError? {
+						print("The request failed. Error: \(error)")
+						self.delegate?.getRentalResponse?(success: false, rental: nil, error: "Failed to connect to the server.")
+					} else if let result = task.result {
+						if let rental = result.items.first as? Rental {
+							self.delegate?.getRentalResponse?(success: true, rental: rental, error: nil)
+						} else {
+							self.delegate?.getRentalResponse?(success: false, rental: nil, error: "Rental with id not found.")
+						}
+					}
+				}
+				return nil
+			})
+	}
+
+	func getRentals(userId : String, lended : Bool, active : Bool = true) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.indexName = lended ? "lenderId-returnDate-index" : "borrowerId-returnDate-index"
 		queryExpression.keyConditionExpression = "#key = :id"
 		queryExpression.scanIndexForward = true
-		queryExpression.indexName = lended ? "lenderId-returnDate-index" : "borrowerId-returnDate-index"
+		queryExpression.filterExpression = "isActive = :active"
 		queryExpression.expressionAttributeNames = ["#key" : lended ? "lenderId" : "borrowerId"]
-		queryExpression.expressionAttributeValues = [":id" : userId]
+		queryExpression.expressionAttributeValues = [":id" : userId, ":active" : active]
+
 
 		dynamoDbObjectMapper.query(Rental.self, expression: queryExpression)
 			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
@@ -324,4 +350,5 @@ class DB {
 	@objc optional func validateUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func getUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func getListingResponse(success : Bool, listing : Listing?, error : String?)
+	@objc optional func getRentalResponse(success : Bool, rental : Rental?, error : String?)
 }

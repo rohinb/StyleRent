@@ -689,7 +689,7 @@
         <!--Item-->
         <scene sceneID="dV0-Zq-jwH">
             <objects>
-                <viewController id="7d2-Cf-wkr" customClass="HandoffViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HandoffVC" id="7d2-Cf-wkr" customClass="HandoffViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5vh-1a-fix">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -698,6 +698,14 @@
                                 <rect key="frame" x="67" y="203" width="240" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipF-RZ-lyX">
+                                <rect key="frame" x="20" y="20" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="7d2-Cf-wkr" eventType="touchUpInside" id="VDm-Js-g5Q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="umF-KZ-12o"/>
@@ -719,14 +727,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onX-Ae-hk7">
-                                <rect key="frame" x="212" y="117" width="78" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Give Rental"/>
-                                <connections>
-                                    <segue destination="7d2-Cf-wkr" kind="presentation" id="fCe-3G-L1D"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTE-zY-YfA">
                                 <rect key="frame" x="22" y="110" width="136" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -764,7 +764,7 @@
         <!--Item-->
         <scene sceneID="RQo-ZQ-Tka">
             <objects>
-                <viewController id="A1G-mZ-Zop" customClass="QRScannerController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanningVC" id="A1G-mZ-Zop" customClass="QRScannerController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BJI-lT-lmZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -793,7 +793,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="dismiss:" destination="A1G-mZ-Zop" eventType="touchUpInside" id="Umd-hV-6p9"/>
-                                            <segue destination="N6K-yg-lx3" kind="unwind" unwindAction="unwindToHomeScreenWithSegue:" id="VdW-Af-sVa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -836,7 +835,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2z-Rr-KzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="N6K-yg-lx3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4082" y="312"/>
         </scene>
@@ -891,6 +889,16 @@
                                     <action selector="acceptPressed:" destination="UHf-3y-x9f" eventType="touchUpInside" id="3rK-c1-lGe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXa-2L-ozm">
+                                <rect key="frame" x="30" y="607" width="315" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="N6J-Jt-pDS"/>
+                                </constraints>
+                                <state key="normal" title="Handoff Button"/>
+                                <connections>
+                                    <action selector="initiateHandoff:" destination="UHf-3y-x9f" eventType="touchUpInside" id="yUw-pm-gJM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -903,9 +911,12 @@
                             <constraint firstItem="wz2-On-uGN" firstAttribute="centerX" secondItem="qkd-bx-7dp" secondAttribute="centerX" id="MNl-Fx-lPp"/>
                             <constraint firstItem="3qF-GV-sa4" firstAttribute="centerX" secondItem="u7P-Xl-W9E" secondAttribute="centerX" id="Mdn-MP-wAe"/>
                             <constraint firstItem="u7P-Xl-W9E" firstAttribute="centerX" secondItem="qkd-bx-7dp" secondAttribute="centerX" id="SMa-sE-YbN"/>
+                            <constraint firstItem="YXa-2L-ozm" firstAttribute="bottom" secondItem="AWx-GB-h0g" secondAttribute="bottom" id="Y3I-nU-sfv"/>
                             <constraint firstItem="qkd-bx-7dp" firstAttribute="trailing" secondItem="wj0-ap-Jln" secondAttribute="trailing" constant="30" id="YsV-rA-tqt"/>
+                            <constraint firstItem="YXa-2L-ozm" firstAttribute="centerX" secondItem="qkd-bx-7dp" secondAttribute="centerX" id="flD-xo-s3o"/>
                             <constraint firstItem="u7P-Xl-W9E" firstAttribute="top" secondItem="wz2-On-uGN" secondAttribute="bottom" constant="30" id="hc8-ot-i0R"/>
                             <constraint firstItem="AWx-GB-h0g" firstAttribute="centerY" secondItem="wj0-ap-Jln" secondAttribute="centerY" id="lZY-ak-0Il"/>
+                            <constraint firstItem="YXa-2L-ozm" firstAttribute="leading" secondItem="qkd-bx-7dp" secondAttribute="leading" constant="30" id="nsR-cR-90g"/>
                             <constraint firstItem="AWx-GB-h0g" firstAttribute="leading" secondItem="qkd-bx-7dp" secondAttribute="leading" constant="30" id="r16-YW-KbO"/>
                             <constraint firstItem="AWx-GB-h0g" firstAttribute="width" secondItem="wj0-ap-Jln" secondAttribute="width" id="ur7-Rm-NBk"/>
                         </constraints>
@@ -913,6 +924,7 @@
                     </view>
                     <connections>
                         <outlet property="acceptButton" destination="wj0-ap-Jln" id="RLj-74-FH2"/>
+                        <outlet property="handoffButton" destination="YXa-2L-ozm" id="D6v-r3-793"/>
                         <outlet property="listingImageView" destination="u7P-Xl-W9E" id="vg2-oc-tUd"/>
                         <outlet property="listingNameLabel" destination="3qF-GV-sa4" id="9rP-Zz-Lgx"/>
                         <outlet property="priceLabel" destination="AnZ-7Q-Rix" id="2ne-7L-Ao3"/>
