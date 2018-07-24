@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		gblTabBarController = self
 		// Add messages view
 		let vc = GroupChannelListViewController()
 		let navController = UINavigationController()
@@ -20,6 +22,7 @@ class TabBarViewController: UITabBarController {
 		navController.tabBarItem = item
 		navController.title = "Conversations"
 		self.viewControllers?.append(navController)
+		let _ = vc.view // pre-load the messages ui
 
 		// add my listings page
 		let vc2 = Utilities.getClosetVcFor(user: gblUser)
@@ -35,16 +38,19 @@ class TabBarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	func receivedMessage(text : String) {
+		let message = MDCSnackbarMessage()
+		message.text = text
+		let action = MDCSnackbarMessageAction()
+		let actionHandler = {() in
+			self.selectedIndex = 3 // go to conversations page
+		}
+		action.handler = actionHandler
+		action.title = "View"
+		message.action = action
+		MDCSnackbarManager.setBottomOffset(50)
+		MDCSnackbarManager.show(message)
+	}
 
 }

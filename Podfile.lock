@@ -34,6 +34,43 @@ PODS:
     - FBSDKCoreKit (~> 4.33.0)
   - FLAnimatedImage (1.0.12)
   - HTMLKit (2.1.4)
+  - MaterialComponents/AnimationTiming (55.2.0)
+  - MaterialComponents/Buttons (55.2.0):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Shapes
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Ink (55.2.0):
+    - MaterialComponents/private/Math
+  - MaterialComponents/OverlayWindow (55.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Application (55.2.0)
+  - MaterialComponents/private/KeyboardWatcher (55.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (55.2.0)
+  - MaterialComponents/private/Overlay (55.2.0)
+  - MaterialComponents/private/Shapes (55.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/ShadowElevations (55.2.0)
+  - MaterialComponents/ShadowLayer (55.2.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Snackbar (55.2.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (55.2.0):
+    - MaterialComponents/private/Application
+  - MDFInternationalization (1.0.4)
+  - MDFTextAccessibility (1.2.0)
   - MGSwipeTableCell (1.6.7)
   - Nuke (7.0.1)
   - NYTPhotoViewer (1.1.0):
@@ -64,6 +101,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - HTMLKit (~> 2.1)
+  - MaterialComponents/Snackbar
   - MGSwipeTableCell
   - Nuke
   - NYTPhotoViewer (~> 1.1.0)
@@ -93,6 +131,9 @@ SPEC REPOS:
     - FBSDKShareKit
     - FLAnimatedImage
     - HTMLKit
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - MGSwipeTableCell
     - Nuke
     - NYTPhotoViewer
@@ -121,6 +162,9 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 1869cb24db2cea90666a50cb9d568deb38e2d16e
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HTMLKit: 2f4c7d3e14906cdfc2d3d51b85dfdf29ad9ae65f
+  MaterialComponents: b321a90d9746ac7be2e5da3f8497c5aa15b1f761
+  MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   MGSwipeTableCell: fb20e983988bde2b8d0df29c2d9e1d8ffd10b74a
   Nuke: 0944b2e721c8f21857028d980dc3d6a249df8b3e
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
@@ -130,6 +174,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 4943b3eb6df2fe640e8ccfdc01ba2bcbeb27e369
+PODFILE CHECKSUM: 5564acf8366a2c125cb54ffde355d0fdc470ebcb
 
 COCOAPODS: 1.5.2

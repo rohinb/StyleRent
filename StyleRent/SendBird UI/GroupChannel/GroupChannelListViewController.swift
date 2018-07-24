@@ -38,8 +38,7 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(refreshChannelList), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl!)
-        
-        
+
         self.noChannelLabel.isHidden = true
 
 		self.addDelegates()
@@ -56,11 +55,22 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
             self.showList()
         }
     }
+
+	private func updateBadge() {
+		let totalUnread = self.channels.reduce(0, { (ongoingSum, channel) -> Int in
+			return ongoingSum + Int(channel.unreadMessageCount)
+		})
+		DispatchQueue.main.async {
+			self.navigationController?.tabBarItem.badgeValue = totalUnread == 0 ? nil : "\(totalUnread)"
+			UIApplication.shared.applicationIconBadgeNumber = totalUnread
+		}
+	}
     
     private func showList() {
         let dumpLoadQueue: DispatchQueue = DispatchQueue(label: "com.sendbird.dumploadqueue", attributes: .concurrent)
         dumpLoadQueue.async {
             self.channels = Utils.loadGroupChannels()
+			self.updateBadge()
             if self.channels.count > 0 {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -83,7 +93,7 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		UIApplication.shared.applicationIconBadgeNumber = 0
+		self.updateBadge()
 	}
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -373,6 +383,8 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
                 self.tableView.reloadData()
             }
         }
+		gblTabBarController.receivedMessage(text: "You have a new message")
+		self.updateBadge()
     }
     
     func channelDidUpdateReadReceipt(_ sender: SBDGroupChannel) {
@@ -413,11 +425,9 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func channel(_ sender: SBDOpenChannel, userDidEnter user: SBDUser) {
-        
     }
     
     func channel(_ sender: SBDOpenChannel, userDidExit user: SBDUser) {
-        
     }
     
     func channel(_ sender: SBDBaseChannel, userWasMuted user: SBDUser) {

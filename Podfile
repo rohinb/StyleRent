@@ -16,6 +16,7 @@ target 'StyleRent' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
 
+  pod 'MaterialComponents/Snackbar'
   pod 'Stripe'
   pod 'Nuke'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
