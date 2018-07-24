@@ -50,17 +50,13 @@ class ListingsViewController: UIViewController {
 		collectionView.dataSource = self
 		collectionView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 		collectionView.backgroundColor = UIColor.clear
-
+		locManager.delegate = self
 		locManager.requestWhenInUseAuthorization()
-
+		locManager.startUpdatingLocation()
 
 		if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
-			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
 			gblCurrentLocation = locManager.location
-			print(gblCurrentLocation.coordinate.latitude)
-			print(gblCurrentLocation.coordinate.longitude)
-			let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: gblCurrentLocation.coordinate.latitude, longitude: gblCurrentLocation.coordinate.longitude), 1000, 1000)
-			print(region)
 		}
 
 		if config != .rentals {
@@ -116,7 +112,12 @@ class ListingsViewController: UIViewController {
 	fileprivate func fetchListings(count: Int = DB.PAGE_AMOUNT) {
 		guard count > 0 else { return }
 		if config != .rentals {
-			DB.shared().getListings(userId: config == .closet ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: config == .closet, lastEvalKey: self.lastEvalKey, limit: count)
+			if gblCurrentLocation != nil {
+				DB.shared().getListings(userId: config == .closet ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: config == .closet, lastEvalKey: self.lastEvalKey, limit: count)
+			} else {
+				collectionView.finishInfiniteScroll()
+				collectionView.es.stopPullToRefresh()
+			}
 		} else {
 			for rental in rentals! {
 				DB.shared().getListing(with: rental._listingId!)
@@ -286,6 +287,23 @@ extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 		return CGSize(width: self.view.frame.width, height: 24)
 	}
+}
+
+extension ListingsViewController : CLLocationManagerDelegate {
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		if status == .authorizedAlways || status == .authorizedWhenInUse {
+			gblCurrentLocation = manager.location
+			self.performFreshPull()
+		}
+	}
+
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		print("updated locations")
+		gblCurrentLocation = locations.last
+		self.performFreshPull()
+		locManager.stopUpdatingLocation() // i don't need anymore locations
+	}
+
 }
 
 

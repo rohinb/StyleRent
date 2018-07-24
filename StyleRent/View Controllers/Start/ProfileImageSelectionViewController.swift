@@ -108,9 +108,18 @@ extension ProfileImageSelectionViewController : ServicesDelegate {
 	func uploadImageResponse(success: Bool) {
 		SVProgressHUD.dismiss()
 		if success {
+			Services.shared().connectSendBird(user: gblUser, imageUrlString: Utilities.getUrlForUserPicture(userId: gblUser._id!).absoluteString)
 			performSegue(withIdentifier: "finishRegistrationSegue", sender: nil)
 		} else {
 			singleActionPopup(title: "Failed to upload your profile image", message: "Please try again.")
+		}
+	}
+
+	func connectSendBirdResponse(success: Bool) {
+		if success {
+			performSegue(withIdentifier: "finishRegistrationSegue", sender: nil)
+		} else {
+			singleActionPopup(title: "Failed to connect send bird", message: nil)
 		}
 	}
 }
@@ -122,3 +131,4 @@ extension ProfileImageSelectionViewController : UIImagePickerControllerDelegate,
 		picker.dismiss(animated: true, completion: nil)
 	}
 }
+

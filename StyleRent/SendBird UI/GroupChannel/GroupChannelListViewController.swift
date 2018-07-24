@@ -41,7 +41,8 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
         
         
         self.noChannelLabel.isHidden = true
-        
+
+		self.addDelegates()
         ConnectionManager.add(connectionObserver: self as ConnectionManagerDelegate)
         if SBDMain.getConnectState() == .closed {
             ConnectionManager.login { (user, error) in
@@ -79,6 +80,11 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
     deinit {
         ConnectionManager.remove(connectionObserver: self as ConnectionManagerDelegate)
     }
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		UIApplication.shared.applicationIconBadgeNumber = 0
+	}
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

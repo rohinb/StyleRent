@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 				if let endpointArnForSNS = createEndpointResponse.endpointArn {
 					print("endpointArn: \(endpointArnForSNS)")
 					Defaults.standard.set(endpointArnForSNS, forKey: Defaults.pushEndpointKey)
-					if var user = gblUser {
+					if let user = gblUser {
 						user._pushEndpoint = endpointArnForSNS
 						DB.shared().updateUser(user)
 					}
@@ -144,10 +144,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: {(granted, error) in
 				if (granted)
 				{
-					UIApplication.shared.registerForRemoteNotifications()
+					DispatchQueue.main.async {
+						UIApplication.shared.registerForRemoteNotifications()
+					}
 				}
 				else{
-					//Do stuff if unsuccessful…
+					print("User denied access to push notifications.")
 				}
 			})
 		} else {
@@ -190,6 +192,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 				"DEMO_PRODUCT_ID", withItemPrice: 1.00, withQuantity: 1, withCurrency: "USD")
 		pinpointAnalyticsClient.record(event)
 		pinpointAnalyticsClient.submitEvents()
+	}
+
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+		print("got notification bruh")
 	}
 
 	func application(

@@ -103,7 +103,7 @@ extension RegisterViewController : DBDelegate {
 		SVProgressHUD.dismiss()
 		if success {
 			gblUser = user!
-			Services.shared().connectSendBird(user: user!, imageUrlString: profileImageUrl!)
+			self.performSegue(withIdentifier: "registerSegue", sender: nil)
 		} else {
 			FBSDKAccessToken.setCurrent(nil)
 			FBSDKLoginManager().logOut()
@@ -122,14 +122,6 @@ extension RegisterViewController : ServicesDelegate {
 			self.popupAlert(title: "Failed to register through Facebook", message: "Would you like to try again?", actionTitles: ["Try Again", "Cancel"], actions: [{ (action) in
 				self.attemptFbRegistration()
 				}, nil])
-		}
-	}
-
-	func connectSendBirdResponse(success: Bool) {
-		if success {
-			self.performSegue(withIdentifier: "registerSegue", sender: nil)
-		} else {
-			singleActionPopup(title: "Failed to connect send bird", message: nil)
 		}
 	}
 }
