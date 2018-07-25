@@ -55,7 +55,7 @@ class GroupChannelListEditableTableViewCell: MGSwipeTableCell {
         if self.channel.memberCount == 1 {
             self.coverImageContainerForOne.isHidden = false
             let member = self.channel.members?[0] as! SBDUser
-            self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+            self.coverImageView11.af_setImage(withURL: URL(string: channel.coverUrl ?? member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
         }
         else if self.channel.memberCount == 2 {
             self.coverImageContainerForTwo.isHidden = false
@@ -63,7 +63,7 @@ class GroupChannelListEditableTableViewCell: MGSwipeTableCell {
                 if member.userId == SBDMain.getCurrentUser()?.userId {
                     continue
                 }
-                self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+                self.coverImageView11.af_setImage(withURL: URL(string: channel.coverUrl ?? member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
                 memberNames.append(member.nickname!)
             }
         }

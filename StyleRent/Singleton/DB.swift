@@ -313,6 +313,12 @@ class DB {
 			})
 	}
 
+	/// Query for getting rentals.
+	///
+	/// - Parameters:
+	///   - userId: The id of the user of which the rentals are
+	///   - lended: true if the user
+	///   - active: hello
 	func getRentals(userId : String, lended : Bool, active : Bool = true) {
 		let queryExpression = AWSDynamoDBQueryExpression()
 
@@ -336,6 +342,15 @@ class DB {
 			}
 			return nil
 		})
+	}
+
+	/**
+		Delegates for this method
+	*/
+	func getListingForChannel(withUrl url : String) {
+		let listingId = "3566A17A-F845-4B67-A686-A9E0C42891C8"
+		// TODO: Make this come from actual table
+		getListing(with: listingId)
 	}
 }
 

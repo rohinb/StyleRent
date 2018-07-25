@@ -204,8 +204,7 @@ class ListingDetailsViewController: UIViewController {
 			return
 		}
 		let userIds = [gblUser._id!, listing._sellerId!]
-		//SBDGroupChannel.createChannel(withName: <#T##String?#>, isDistinct: <#T##Bool#>, users: <#T##[SBDUser]#>, coverUrl: <#T##String?#>, data: <#T##String?#>, completionHandler: <#T##(SBDGroupChannel?, SBDError?) -> Void#>)
-		SBDGroupChannel.createChannel(withUserIds: userIds, isDistinct: false) { (channel, error) in
+		SBDGroupChannel.createChannel(withName: listing._name, userIds: userIds, coverUrl: Utilities.getUrlForListingPicture(listingId: listing._id!, imageNumber: 1).absoluteString, data: nil) { (channel, error) in
 			if error != nil {
 				NSLog("Error: %@", error!)
 				return

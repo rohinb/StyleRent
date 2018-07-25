@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 import SendBirdSDK
 import AlamofireImage
 
@@ -107,7 +108,7 @@ class GroupChannelListTableViewCell: UITableViewCell {
         if self.channel.memberCount == 1 {
             self.coverImageContainerForOne.isHidden = false
             let member = self.channel.members?[0] as! SBDUser
-            self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+            self.coverImageView11.af_setImage(withURL: URL(string: channel.coverUrl ?? member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
         }
         else if self.channel.memberCount == 2 {
             self.coverImageContainerForOne.isHidden = false
@@ -115,8 +116,13 @@ class GroupChannelListTableViewCell: UITableViewCell {
                 if member.userId == SBDMain.getCurrentUser()?.userId {
                     continue
                 }
-                self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
-                memberNames.append(member.nickname!)
+				Nuke.loadImage(with: URL(string: channel.coverUrl ?? member.profileUrl!)!,
+							   options: ImageLoadingOptions(
+								placeholder: #imageLiteral(resourceName: "placeholder"),
+								transition: .fadeIn(duration: 0.33)),
+							   into: self.coverImageView11)
+				
+				memberNames.append("\(member.nickname!), Re: \(channel.name)")
             }
         }
         else if self.channel.memberCount == 3 {

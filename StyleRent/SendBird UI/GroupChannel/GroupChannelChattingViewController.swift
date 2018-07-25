@@ -712,6 +712,7 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
     }
     
     func channelDidUpdateTypingStatus(_ sender: SBDGroupChannel) {
+		print(sender.channelUrl)
         if sender == self.groupChannel {
             if sender.getTypingMembers()?.count == 0 {
                 self.chattingView.endTypingIndicator()
