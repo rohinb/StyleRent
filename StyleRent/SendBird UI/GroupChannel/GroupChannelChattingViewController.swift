@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import SendBirdSDK
 import AVKit
 import AVFoundation
@@ -15,6 +16,13 @@ import Photos
 import NYTPhotoViewer
 import HTMLKit
 import FLAnimatedImage
+
+enum HandoffType : String {
+	case purchase = "Purchase"
+	case returnListing = "Return"
+	case sell = "Hand over Listing"
+	case acceptReturn = "Accept Return"
+}
 
 class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegate, SBDChannelDelegate, ChattingViewDelegate, MessageDelegate, ConnectionManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var groupChannel: SBDGroupChannel!
@@ -38,6 +46,33 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
     private var minMessageTimestamp: Int64 = Int64.max
     private var dumpedMessages: [SBDBaseMessage] = []
     private var cachedMessage: Bool = true
+
+	fileprivate var convoInfo : Conversation!
+	fileprivate var listing : Listing!
+	fileprivate var rental : Rental?
+	fileprivate var handoffType : HandoffType!
+
+	fileprivate func performHandoff(type : HandoffType) {
+		switch handoffType! {
+		case .purchase, .acceptReturn:
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateViewController(withIdentifier: "ScanningVC") as! QRScannerController
+			//TODO: Add message to scannercontroller
+			self.present(vc, animated: true, completion: nil)
+		case .returnListing:
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateViewController(withIdentifier: "HandoffVC") as! HandoffViewController
+			vc.config = .dropoff
+			vc.rental = rental
+			self.present(vc, animated: true, completion: nil)
+		case .sell:
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateViewController(withIdentifier: "HandoffVC") as! HandoffViewController
+			vc.config = .pickup
+			vc.listing = listing
+			self.present(vc, animated: true, completion: nil)
+		}
+	}
     
 
     override func viewDidLoad() {
@@ -126,6 +161,10 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
         else {
             self.loadPreviousMessage(initial: true)
         }
+
+		DB.shared().delegate = self
+		DB.shared().getConversation(withUrl: self.groupChannel.channelUrl)
+		SVProgressHUD.show(withStatus: "Fetching info...")
     }
     
     deinit {
@@ -181,8 +220,8 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
         let reportAction = UIAlertAction(title: "Report User", style: UIAlertActionStyle.default) { (action) in
 			print("Reported User")
         }
-		let handoffAction = UIAlertAction(title: /*TODO: say give or receive*/"Handoff", style: UIAlertActionStyle.default) { (action) in
-			//TODO: Initiate handoff for this listing based on status
+		let handoffAction = UIAlertAction(title: handoffType.rawValue, style: UIAlertActionStyle.default) { (action) in
+			self.performHandoff(type: self.handoffType)
         }
         let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil)
         vc.addAction(reportAction)
@@ -1493,4 +1532,54 @@ class GroupChannelChattingViewController: UIViewController, SBDConnectionDelegat
             self.photosViewController.dismiss(animated: true, completion: nil)
         }
     }
+}
+
+extension GroupChannelChattingViewController : DBDelegate {
+	func getConversationResponse(success: Bool, conversation: Conversation?, error: String?) {
+		if success {
+			convoInfo = conversation
+			DB.shared().getListing(with: convoInfo._listingId!)
+		} else {
+			SVProgressHUD.dismiss()
+			singleActionPopup(title: "Failed to get conversation info", message: nil) { (_) in
+				self.dismiss(animated: true, completion: nil)
+			}
+		}
+	}
+
+	func getListingResponse(success: Bool, listing: Listing?, error: String?) {
+		if success {
+			self.listing = listing!
+			DB.shared().getRentalForListing(withId: listing!._id!)
+		} else {
+			SVProgressHUD.dismiss()
+			singleActionPopup(title: "Failed to get listing info", message: nil) { (_) in
+				self.dismiss(animated: true, completion: nil)
+			}
+		}
+	}
+
+	func getRentalForListingResponse(success: Bool, rental: Rental?, error: String?) {
+		SVProgressHUD.dismiss()
+		if success {
+			self.rental = rental
+			if self.rental == nil {
+				if gblUser._id == listing._sellerId! {
+					self.handoffType = .sell
+				} else {
+					self.handoffType = .purchase
+				}
+			} else {
+				if gblUser._id == listing._sellerId! {
+					self.handoffType = .acceptReturn
+				} else {
+					self.handoffType = .returnListing
+				}
+			}
+		} else {
+			singleActionPopup(title: "Failed to get rental info", message: nil) { (_) in
+				self.dismiss(animated: true, completion: nil)
+			}
+		}
+	}
 }

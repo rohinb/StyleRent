@@ -31,6 +31,10 @@ class ListingDetailsViewController: UIViewController {
 
 	fileprivate var isLoadingImages = false
 	fileprivate var seller : User?
+	fileprivate var createdChannel : SBDGroupChannel!
+	fileprivate var wantToEdit = false
+	fileprivate var wantToRentOut = false
+	fileprivate var wantToDelete = false
 
 	var listing : Listing!
 	var images = [UIImage]()
@@ -47,6 +51,7 @@ class ListingDetailsViewController: UIViewController {
 		}
 
 		if listing._sellerId! == gblUser._id! {
+			messageButton.setTitle("Rent this out", for: UIControlState())
 			let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editPressed))
 			let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deletePressed))
 			navigationItem.setRightBarButtonItems([editButton, deleteButton], animated: false)
@@ -76,7 +81,9 @@ class ListingDetailsViewController: UIViewController {
 
 	fileprivate func renderSeller() {
 		sellerNameLabel.text = seller!._name!
-		messageButton.setTitle("Message \(seller!._name!)", for: UIControlState())
+		if gblUser._id! != listing._sellerId! {
+			messageButton.setTitle("Message \(seller!._name!)", for: UIControlState())
+		}
 	}
 
 	@objc fileprivate func showSellerCloset() {
@@ -124,14 +131,31 @@ class ListingDetailsViewController: UIViewController {
 			singleActionPopup(title: "Please wait", message: "Images must finish loading before you edit this listing.")
 			return
 		}
+		SVProgressHUD.show(withStatus: "Confirming with server...")
+		wantToEdit = true
+		checkIfRentedOut()
+	}
+
+	fileprivate func edit() {
 		performSegue(withIdentifier: "toEditListing", sender: nil)
 	}
 
 	@objc fileprivate func deletePressed() {
+		wantToDelete = true
+		SVProgressHUD.show(withStatus: "Confirming with server...")
+		checkIfRentedOut()
+	}
+
+	fileprivate func checkIfRentedOut() {
+		DB.shared().getRentalForListing(withId: listing._id!)
+	}
+
+	fileprivate func delete() {
 		popupAlert(title: "Are you sure you want to delete your listing?", message: "This action cannot be undone.", actionTitles: ["Delete", "Cancel"], actions: [{ (action) in
 			DB.shared().deleteListing(self.listing)
-		}, nil])
+			}, nil])
 	}
+
 
 	fileprivate func addImage(_ image : UIImage) {
 		images.append(image)
@@ -198,23 +222,37 @@ class ListingDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+	fileprivate func rentOut() {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "HandoffVC") as! HandoffViewController
+		vc.config = .pickup
+		vc.listing = listing
+		self.present(vc, animated: true, completion: nil)
+	}
+
 	@IBAction func messageOwner(_ sender: Any) {
-		if gblUser._id! == listing._sellerId! {
-			singleActionPopup(title: "You can't message yourself!", message: nil)
+		if gblUser._id! == listing._sellerId! { // this is my listing
+			SVProgressHUD.show(withStatus: "Confirming with server...")
+			wantToRentOut = true
+			checkIfRentedOut()
 			return
 		}
+		SVProgressHUD.show(withStatus: "Creating conversation...")
 		let userIds = [gblUser._id!, listing._sellerId!]
 		SBDGroupChannel.createChannel(withName: listing._name, userIds: userIds, coverUrl: Utilities.getUrlForListingPicture(listingId: listing._id!, imageNumber: 1).absoluteString, data: nil) { (channel, error) in
 			if error != nil {
+				SVProgressHUD.dismiss()
+				self.singleActionPopup(title: "Failed to create conversation", message: "Please try again soon.")
 				NSLog("Error: %@", error!)
 				return
 			}
-			channel?.name = "Listing Chat"
-			let vc = GroupChannelChattingViewController(nibName: "GroupChannelChattingViewController", bundle: Bundle.main)
-			vc.groupChannel = channel
-
-			self.present(vc, animated: true, completion: nil)
-			print("Channel created!")
+			self.createdChannel = channel!
+			let convo = Conversation()!
+			convo._channelUrl = channel!.channelUrl
+			convo._listingId = self.listing._id!
+			convo._purchaserId = gblUser._id!
+			convo._sellerId = self.listing._sellerId!
+			DB.shared().createConversation(convo: convo)
 		}
 	}
 
@@ -260,5 +298,39 @@ extension ListingDetailsViewController : DBDelegate {
 				self.navigationController?.popViewController(animated: true)
 			}
 		}
+	}
+
+	func createConversationResponse(success: Bool, error: String?) {
+		SVProgressHUD.dismiss()
+		let vc = GroupChannelChattingViewController(nibName: "GroupChannelChattingViewController", bundle: Bundle.main)
+		vc.groupChannel = createdChannel
+
+		self.present(vc, animated: true, completion: nil)
+	}
+
+	func getRentalForListingResponse(success: Bool, rental: Rental?, error: String?) {
+		SVProgressHUD.dismiss()
+		if success {
+			if rental == nil {
+				if wantToDelete {
+					delete()
+				} else if wantToEdit {
+					edit()
+				} else if wantToRentOut {
+					rentOut()
+				}
+			} else {
+				if wantToRentOut {
+					singleActionPopup(title: "This item is already rented out.", message: "Navigate to 'My Rentals' if you would like to accept this item's return")
+				} else {
+					singleActionPopup(title: "You cannot modify this listing while it is on rent", message: "Please wait until this listing is returned to make any changes.")
+				}
+			}
+		} else {
+			singleActionPopup(title: "Failed to contact server", message: "Please try again later.")
+		}
+		wantToDelete = false
+		wantToEdit = false
+		wantToRentOut = false
 	}
 }

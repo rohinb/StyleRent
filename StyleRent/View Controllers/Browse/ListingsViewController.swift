@@ -25,6 +25,7 @@ class ListingsViewController: UIViewController {
 	static let kCellHeight = 200.0
 
 	fileprivate var locManager = CLLocationManager()
+	fileprivate var hadLocationImmediately = false
 	fileprivate var listings = [Listing]()
 	fileprivate var listingImages = [String : UIImage]()
 	fileprivate var freshPull = true
@@ -52,11 +53,13 @@ class ListingsViewController: UIViewController {
 		collectionView.backgroundColor = UIColor.clear
 		locManager.delegate = self
 		locManager.requestWhenInUseAuthorization()
-		locManager.startUpdatingLocation()
 
 		if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
 			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
-			gblCurrentLocation = locManager.location
+			if let loc = locManager.location {
+				gblCurrentLocation = loc
+				hadLocationImmediately = true
+			}
 		}
 
 		if config != .rentals {
@@ -292,8 +295,9 @@ extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDat
 extension ListingsViewController : CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		if status == .authorizedAlways || status == .authorizedWhenInUse {
-			gblCurrentLocation = manager.location
-			self.performFreshPull()
+			if !hadLocationImmediately {
+				locManager.startUpdatingLocation()
+			}
 		}
 	}
 

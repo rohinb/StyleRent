@@ -18,6 +18,7 @@
 		0F1C5CC020E8BB3600A320AF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */; };
 		0F1C5CC320E8CBA700A320AF /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5CC120E8CBA700A320AF /* DetailCell.swift */; };
 		0F1C5CC420E8CBA700A320AF /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C5CC220E8CBA700A320AF /* DetailCell.xib */; };
+		0F1D5E2B2109AE32002AE9E1 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D5E2A2109AE32002AE9E1 /* Conversation.swift */; };
 		0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6B20C9F66C0036141B /* ListingCell.swift */; };
 		0F384A6E20C9F66C0036141B /* ListingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F384A6C20C9F66C0036141B /* ListingCell.xib */; };
 		0F384A7020CF1AAA0036141B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */; };
@@ -170,6 +171,7 @@
 		0F1C5CBF20E8BB3600A320AF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		0F1C5CC120E8CBA700A320AF /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		0F1C5CC220E8CBA700A320AF /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		0F1D5E2A2109AE32002AE9E1 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		0F384A6B20C9F66C0036141B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
 		0F384A6C20C9F66C0036141B /* ListingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListingCell.xib; sourceTree = "<group>"; };
 		0F384A6F20CF1AAA0036141B /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			children = (
 				0F47BF3F20B7E7E600C2CA55 /* Listing.swift */,
 				0F47BF3D20B7E7E500C2CA55 /* Ratings.swift */,
+				0F1D5E2A2109AE32002AE9E1 /* Conversation.swift */,
 				0F47BF3E20B7E7E500C2CA55 /* Rental.swift */,
 				0F47BF3C20B7E7E500C2CA55 /* User.swift */,
 			);
@@ -981,6 +984,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F1D5E2B2109AE32002AE9E1 /* Conversation.swift in Sources */,
 				0F98FA1020D1FEA10054E14C /* GroupChannelChattingViewController.swift in Sources */,
 				0F384A7820CF95300036141B /* ListingDetailsViewController.swift in Sources */,
 				0F98F9C620D1FE7E0054E14C /* IncomingFileMessageTableViewCell.swift in Sources */,

@@ -8,20 +8,20 @@
 
 import UIKit
 
-enum HandoffType : String {
+enum QRType : String {
 	case pickup = "pickup"
 	case dropoff = "dropoff"
 }
 class HandoffViewController: UIViewController {
 	@IBOutlet weak var qrImageView: UIImageView!
 
-	var config : HandoffType!
-	var listing : Listing!
-	var rental : Rental!
+	var config : QRType!
+	var listing : Listing?
+	var rental : Rental?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		let dict = ["type" : config.rawValue, "id" : rental._id ?? listing._id!]
+		let dict = ["type" : config.rawValue, "id" : rental?._id ?? listing!._id!]
 
 		let data = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
 

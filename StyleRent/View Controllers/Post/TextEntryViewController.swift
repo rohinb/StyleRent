@@ -32,6 +32,11 @@ class TextEntryViewController: UIViewController {
 		}
     }
 
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		textView.becomeFirstResponder()
+	}
+
 	fileprivate func updateCharsRemaining() {
 		let remainingChars = charsAllowed! - textView.text.count
 		charsLabel.text = "\(remainingChars)"

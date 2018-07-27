@@ -136,6 +136,19 @@ class DB {
 		})
 	}
 
+	func createConversation(convo : Conversation) {
+
+		dynamoDbObjectMapper.save(convo, completionHandler: {
+			(error: Error?) -> Void in
+			DispatchQueue.main.async {
+				if let error = error {
+					self.delegate?.createConversationResponse?(success: false, error: "Amazon DynamoDB Save Error: \(error)")
+				}
+				self.delegate?.createConversationResponse?(success: true, error: nil)
+			}
+		})
+	}
+
 	func createRental(rental : Rental) {
 
 		dynamoDbObjectMapper.save(rental, completionHandler: {
@@ -313,12 +326,33 @@ class DB {
 			})
 	}
 
-	/// Query for getting rentals.
-	///
-	/// - Parameters:
-	///   - userId: The id of the user of which the rentals are
-	///   - lended: true if the user
-	///   - active: hello
+	// gets the active rental, if there is one, for a given listing
+	func getRentalForListing(withId listingId : String) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.indexName = "listingId-index"
+		queryExpression.keyConditionExpression = "listingId = :listingId"
+		queryExpression.filterExpression = "isActive = :isActive"
+		queryExpression.expressionAttributeValues = [":listingId" : listingId, ":isActive" : true]
+
+		dynamoDbObjectMapper.query(Rental.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+				DispatchQueue.main.async {
+					if let error = task.error as NSError? {
+						print("The request failed. Error: \(error)")
+						self.delegate?.getRentalForListingResponse?(success: false, rental: nil, error: "Failed to connect to the server.")
+					} else if let result = task.result {
+						if let rental = result.items.first as? Rental {
+							self.delegate?.getRentalForListingResponse?(success: true, rental: rental, error: nil)
+						} else {
+							self.delegate?.getRentalForListingResponse?(success: true, rental: nil, error: "Rental with id not found.")
+						}
+					}
+				}
+				return nil
+			})
+	}
+
 	func getRentals(userId : String, lended : Bool, active : Bool = true) {
 		let queryExpression = AWSDynamoDBQueryExpression()
 
@@ -344,13 +378,28 @@ class DB {
 		})
 	}
 
-	/**
-		Delegates for this method
-	*/
-	func getListingForChannel(withUrl url : String) {
-		let listingId = "3566A17A-F845-4B67-A686-A9E0C42891C8"
-		// TODO: Make this come from actual table
-		getListing(with: listingId)
+	func getConversation(withUrl url : String) {
+		let queryExpression = AWSDynamoDBQueryExpression()
+
+		queryExpression.keyConditionExpression = "channelUrl = :id"
+		queryExpression.expressionAttributeValues = [":id" : url]
+
+		dynamoDbObjectMapper.query(Conversation.self, expression: queryExpression)
+			.continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+				DispatchQueue.main.async {
+					if let error = task.error as NSError? {
+						print("The request failed. Error: \(error)")
+						self.delegate?.getConversationResponse?(success: false, conversation: nil, error: "Failed to connect to the server.")
+					} else if let result = task.result {
+						if let conversation = result.items.first as? Conversation {
+							self.delegate?.getConversationResponse?(success: true, conversation: conversation, error: nil)
+						} else {
+							self.delegate?.getConversationResponse?(success: false, conversation: nil, error: "Conversation with url not found.")
+						}
+					}
+				}
+				return nil
+			})
 	}
 }
 
@@ -359,6 +408,7 @@ class DB {
 	@objc optional func createListingResponse(success : Bool, error : String?)
 	@objc optional func updateUserResponse(success : Bool, error : String?)
 	@objc optional func createRentalResponse(success : Bool, error : String?)
+	@objc optional func createConversationResponse(success : Bool, error : String?)
 	@objc optional func getListingsResponse(success : Bool, listings : [Listing], error : String?, lastEval : [String : AWSDynamoDBAttributeValue]?)
 	@objc optional func getRentalsResponse(success : Bool, rentals : [Rental], lended : Bool, error : String?)
 	@objc optional func deleteListingResponse(success : Bool)
@@ -366,4 +416,6 @@ class DB {
 	@objc optional func getUserResponse(success : Bool, user : User?, error : String?)
 	@objc optional func getListingResponse(success : Bool, listing : Listing?, error : String?)
 	@objc optional func getRentalResponse(success : Bool, rental : Rental?, error : String?)
+	@objc optional func getRentalForListingResponse(success : Bool, rental : Rental?, error : String?)
+	@objc optional func getConversationResponse(success : Bool, conversation : Conversation?, error : String?)
 }

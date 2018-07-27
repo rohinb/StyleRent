@@ -237,7 +237,7 @@ extension CheckoutViewController : DBDelegate {
 				}
 			}
 		} else {
-			singleActionPopup(title: "Rental creation failed.", message: "//TODO: handle")
+			singleActionPopup(title: "Rental creation failed.", message: error)
 		}
 	}
 }

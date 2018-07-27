@@ -154,7 +154,7 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             
             if metadataObj.stringValue != nil {
 				let dict = metadataObj.stringValue!.toJSON() as! [String : String]
-				let type = HandoffType(rawValue: dict["type"]!)!
+				let type = QRType(rawValue: dict["type"]!)!
 				switch type {
 				case .pickup:
 					let listingId = dict["id"]!

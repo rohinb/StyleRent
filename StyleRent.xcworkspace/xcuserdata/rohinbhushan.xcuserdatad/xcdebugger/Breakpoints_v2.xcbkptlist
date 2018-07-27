@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "StyleRent/SendBird UI/GroupChannel/GroupChannelListViewController.swift"
-            timestampString = "554203903.769253"
+            filePath = "StyleRent/View Controllers/Stripe/CheckoutViewController.swift"
+            timestampString = "554366177.661345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "updateBadge()"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "createRentalResponse(success:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
