@@ -43,7 +43,7 @@ class SelectionViewController: UITableViewController {
 		if let cell = tableView.cellForRow(at: indexPath) {
 			cell.accessoryType = .checkmark
 		}
-		delegate.madeSelection(type: type, value: options[indexPath.row])
+		delegate.madeSelection(type: type, value: options[indexPath.row], shouldReload: true)
 		self.navigationController?.popViewController(animated: true)
 	}
 

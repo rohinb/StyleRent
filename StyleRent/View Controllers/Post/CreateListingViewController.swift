@@ -28,7 +28,7 @@ enum DetailType : String {
 	case earnings = "Your earnings"
 }
 
-enum SectionType : Int {
+fileprivate enum SectionType : Int {
 	case name = 0
 	case description
 	case details
@@ -54,12 +54,25 @@ enum SectionType : Int {
 
 	var rowHeight : CGFloat {
 		switch self {
-		case .name: return 40
+		case .name: return 45
 		case .description: return 70
-		case .details: return 35
-		case .price: return 35
+		case .details: return 40
+		case .price: return 40
 		}
 	}
+
+	var footer : String? {
+		if self == .price {
+			return "We take no cut! All the money from renting goes to you!"
+		}
+		return nil
+	}
+
+	static let count: Int = {
+		var max: Int = 0
+		while let _ = SectionType(rawValue: max) { max += 1 }
+		return max
+	}()
 }
 
 
@@ -97,6 +110,27 @@ class CreateListingViewController: UIViewController {
 		title = isEditView ? "Edit Listing" : "Post Listing"
 		let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePressed))
 		navigationItem.rightBarButtonItem = doneButton
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+	}
+
+	deinit {
+		NotificationCenter.default.removeObserver(self)
+	}
+
+	// MARK: Keyboard Notifications
+
+	@objc func keyboardWillShow(notification: NSNotification) {
+		if let keyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+			tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight, 0)
+		}
+	}
+
+	@objc func keyboardWillHide(notification: NSNotification) {
+		UIView.animate(withDuration: 0.2, animations: {
+			// For some reason adding inset in keyboardWillShow is animated by itself but removing is not, that's why we have to use animateWithDuration here
+			self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+		})
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -126,6 +160,7 @@ class CreateListingViewController: UIViewController {
 	}
 
 	@objc fileprivate func donePressed() {
+		self.view.endEditing(true)
 		let isValidated = newListing!._category != nil &&
 							newListing!._description != nil &&
 							newListing!._name != nil &&
@@ -181,13 +216,17 @@ class CreateListingViewController: UIViewController {
 		}
 	}
 
+	fileprivate func getNSNumForString(value : String?) -> NSNumber? {
+		return (value == nil || value == "") ? nil : NSNumber(integerLiteral: Int(value!)!)
+	}
+
 	fileprivate func setCurrInfo(info value : String?, for type: DetailType) {
 		switch type {
 		case .category: newListing!._category = value
 		case .description: newListing!._description = value
 		case .name: newListing!._name = value
-		case .listingPrice: newListing!._price = value == nil ? nil : NSNumber(integerLiteral: Int(value!)!)
-		case .originalPrice: newListing!._originalPrice = value == nil ? nil : NSNumber(integerLiteral: Int(value!)!)
+		case .listingPrice: newListing!._price = getNSNumForString(value: value)
+		case .originalPrice: newListing!._originalPrice = getNSNumForString(value: value)
 		case .size: newListing!._size = value
 		default: break
 		}
@@ -372,46 +411,76 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 		switch type {
 		case .name:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
+			cell.field.isUserInteractionEnabled = false
 			cell.field.placeholder = "What are you selling?"
 			cell.field.text = text
 			return cell
 		case .description:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell") as! TextViewCell
+			cell.field.isUserInteractionEnabled = false
 			cell.field.placeholder = "Describe it!"
 			cell.field.text = text
 			return cell
 		case .details:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
 			cell.nameLabel.text = detailType.rawValue
+			cell.field.isUserInteractionEnabled = false
 			cell.field.text = text
 			cell.field.placeholder = "required"
 			return cell
 		case .price:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "FormCell") as! FormCell
 			let detailType = type.rows[indexPath.row]
+			cell.delegate = self
+			cell.detailType = detailType
 			cell.nameLabel.text = detailType.rawValue
-			cell.field.text = text
-			cell.field.placeholder = "required"
+			cell.field.keyboardType = .numberPad
+			cell.addDoneButton(target: self.view)
+			cell.field.returnKeyType = .done
+			switch detailType {
+			case .earnings:
+				cell.field.text = getCurrInfo(for: .listingPrice) // we don't take a share yet
+				cell.field.isUserInteractionEnabled = false
+				cell.field.placeholder = "auto-calculated"
+			case .listingPrice:
+				cell.field.text = text
+				cell.field.isUserInteractionEnabled = true
+				cell.field.placeholder = "required"
+			case .originalPrice:
+				cell.field.text = text
+				cell.field.isUserInteractionEnabled = true
+				cell.field.placeholder = "required"
+			default: break
+			}
 			return cell
 		}
 	}
 
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 4
+		return SectionType.count
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		let type = SectionType(rawValue: indexPath.section)!.rows[indexPath.row]
+		let type : DetailType = SectionType(rawValue: indexPath.section)!.rows[indexPath.row]
 		let currInfo = getCurrInfo(for: type)
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		if type == .name || type == .description || type == .originalPrice || type == .listingPrice{
+		switch type {
+		case .name, .description:
 			let vc = storyboard.instantiateViewController(withIdentifier: "TextEntryVC") as! TextEntryViewController
 			vc.delegate = self
 			vc.type = type
 			vc.startingValue = currInfo
 			self.navigationController?.pushViewController(vc, animated: true)
-		} else {
+		case .listingPrice, .originalPrice:
+			DispatchQueue.main.async {
+				let cell = tableView.cellForRow(at: indexPath) as! FormCell
+				cell.detailType = type
+				cell.field.becomeFirstResponder()
+			}
+		case .earnings:
+			break
+		case .size, .category:
 			let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
 			vc.delegate = self
 			vc.type = type
@@ -456,14 +525,21 @@ extension CreateListingViewController : UITableViewDelegate, UITableViewDataSour
 			return 40
 		}
 	}
+
+	func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+		let type = SectionType(rawValue: section)!
+		return type.footer
+	}
 }
 
 extension CreateListingViewController : SelectionDelegate {
-	func madeSelection(type: DetailType, value: String) {
+	func madeSelection(type: DetailType, value: String, shouldReload : Bool) {
 		setCurrInfo(info: value, for: type)
 		if type == .category {
 			setCurrInfo(info: nil, for: .size)
 		}
-		self.tableView.reloadData()
+		if shouldReload {
+			self.tableView.reloadData()
+		}
 	}
 }

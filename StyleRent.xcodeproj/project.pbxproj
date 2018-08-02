@@ -37,6 +37,7 @@
 		0F47BF4820B7EFB400C2CA55 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4720B7EFB400C2CA55 /* Globals.swift */; };
 		0F47BF4A20B937FF00C2CA55 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */; };
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
+		0F4DAD7F210EBFBF00EB7A92 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4DAD7E210EBFBF00EB7A92 /* CircleImageView.swift */; };
 		0F5418B720F6D7EA00F6FB08 /* RentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */; };
 		0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */; };
 		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
@@ -192,6 +193,7 @@
 		0F47BF4720B7EFB400C2CA55 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0F47BF4920B937FE00C2CA55 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListingViewController.swift; sourceTree = "<group>"; };
+		0F4DAD7E210EBFBF00EB7A92 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		0F51E3FE20FD609100CAFB41 /* StyleRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StyleRent.entitlements; sourceTree = "<group>"; };
 		0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +382,15 @@
 			);
 			name = Models;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		0F4DAD7D210EBFA600EB7A92 /* UI Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				0F4DAD7E210EBFBF00EB7A92 /* CircleImageView.swift */,
+			);
+			name = "UI Subclasses";
+			path = "Global/UI Subclasses";
 			sourceTree = "<group>";
 		};
 		0F5418AE20F5C95E00F6FB08 /* View Controllers */ = {
@@ -648,6 +659,7 @@
 				0F1387F020BB9A0B00E78B25 /* API */,
 				0F47BF4420B7E7EE00C2CA55 /* Models */,
 				0F5418B220F5CA3000F6FB08 /* Singleton */,
+				0F4DAD7D210EBFA600EB7A92 /* UI Subclasses */,
 				0F1387DF20BB8FB800E78B25 /* Global */,
 				0F1387F320BB9CF300E78B25 /* Extensions */,
 				0F5418AE20F5C95E00F6FB08 /* View Controllers */,
@@ -1028,6 +1040,7 @@
 				0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */,
 				0F98FA0D20D1FEA10054E14C /* SelectedUserListCollectionViewCell.swift in Sources */,
 				0F98FA0620D1FEA10054E14C /* MemberListTableViewCell.swift in Sources */,
+				0F4DAD7F210EBFBF00EB7A92 /* CircleImageView.swift in Sources */,
 				0F98FA0820D1FEA10054E14C /* CreateGroupChannelUserListTableViewCell.swift in Sources */,
 				0F98FA2720D21BA80054E14C /* ConnectionManager.swift in Sources */,
 				0F98F9D920D1FE7E0054E14C /* Constants.swift in Sources */,

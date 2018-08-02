@@ -53,7 +53,7 @@ class TextEntryViewController: UIViewController {
 			singleActionPopup(title: "Input cannot be empty", message: nil)
 			return
 		}
-		delegate.madeSelection(type: type, value: textView.text)
+		delegate.madeSelection(type: type, value: textView.text, shouldReload: true)
 		self.navigationController?.popViewController(animated: true)
 	}
 
@@ -87,5 +87,5 @@ extension TextEntryViewController : UITextViewDelegate {
 }
 
 protocol SelectionDelegate {
-	func madeSelection(type : DetailType, value : String)
+	func madeSelection(type : DetailType, value : String, shouldReload : Bool)
 }

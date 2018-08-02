@@ -134,7 +134,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SIl-pf-gt7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SIl-pf-gt7" customClass="CircleImageView" customModule="StyleRent" customModuleProvider="target">
                                 <rect key="frame" x="121" y="277" width="133" height="133"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SIl-pf-gt7" secondAttribute="height" multiplier="1:1" id="UlF-O5-Fkg"/>
@@ -363,7 +363,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Zf-f7T">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Zf-f7T" customClass="CircleImageView" customModule="StyleRent" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="PYC-Zf-f7T" secondAttribute="height" multiplier="1:1" id="VQL-cX-2Vi"/>
@@ -852,7 +852,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7P-Xl-W9E">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7P-Xl-W9E" customClass="CircleImageView" customModule="StyleRent" customModuleProvider="target">
                                 <rect key="frame" x="112.5" y="97" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="QKB-US-MB0"/>
@@ -1054,7 +1054,7 @@
         <image name="cross" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vei-op-9lr"/>
+        <segue reference="zBe-y1-RDj"/>
         <segue reference="K5r-Wl-X7S"/>
     </inferredMetricsTieBreakers>
 </document>

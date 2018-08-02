@@ -81,7 +81,7 @@ class FiltersViewController: UITableViewController {
 }
 
 extension FiltersViewController : SelectionDelegate {
-	func madeSelection(type: DetailType, value: String) {
+	func madeSelection(type: DetailType, value: String, shouldReload : Bool) {
 		switch type {
 		case .category:
 			if value != currentDetail.category?.rawValue {

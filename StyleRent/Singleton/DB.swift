@@ -214,6 +214,7 @@ class DB {
 				attrValues[":size"] = size
 			}
 
+			// connect each clause with an 'AND'
 			if !filterExpressions.isEmpty {
 				var filterExpression = filterExpressions[0]
 				for i in 1..<filterExpressions.count {
