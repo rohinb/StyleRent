@@ -29,7 +29,7 @@ class SettingsViewController: UITableViewController {
     }
 
 	@objc fileprivate func viewBalance() {
-		
+		self.performSegue(withIdentifier: "viewBalance", sender: nil)
 	}
 
 	fileprivate func showMyCloset() {

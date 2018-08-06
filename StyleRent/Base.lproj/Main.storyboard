@@ -517,10 +517,43 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Account" id="ofq-cL-1VA"/>
+                    <connections>
+                        <segue destination="dIG-HG-N6M" kind="show" identifier="viewBalance" id="d2Z-Wg-7N4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aw-Or-c6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5020" y="286.50674662668666"/>
+        </scene>
+        <!--My Balance View Controller-->
+        <scene sceneID="YUi-kY-lMV">
+            <objects>
+                <viewController id="dIG-HG-N6M" customClass="MyBalanceViewController" customModule="StyleRent" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8OG-YQ-alY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Balance: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUU-na-Pj2">
+                                <rect key="frame" x="133" y="203" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BUU-na-Pj2" firstAttribute="top" secondItem="R5N-Rh-wNU" secondAttribute="top" constant="139" id="CvL-qR-wdD"/>
+                            <constraint firstItem="BUU-na-Pj2" firstAttribute="centerX" secondItem="R5N-Rh-wNU" secondAttribute="centerX" id="O74-Pw-ZrZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="R5N-Rh-wNU"/>
+                    </view>
+                    <connections>
+                        <outlet property="balanceLabel" destination="BUU-na-Pj2" id="OJB-mG-Apa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uP0-ME-Aay" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5757.6000000000004" y="289.20539730134936"/>
         </scene>
         <!--Listings-->
         <scene sceneID="DaN-4U-Q3r">

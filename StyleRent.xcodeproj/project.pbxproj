@@ -42,6 +42,7 @@
 		0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */; };
 		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
 		0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */; };
+		0F8996A2211812E20087A977 /* MyBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8996A1211812E20087A977 /* MyBalanceViewController.swift */; };
 		0F981A7320EF5A9000A6133B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7220EF5A9000A6133B /* HomeViewController.swift */; };
 		0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7620EF606900A6133B /* SettingsViewController.swift */; };
 		0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */; };
@@ -199,6 +200,7 @@
 		0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectionViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		0F8996A1211812E20087A977 /* MyBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceViewController.swift; sourceTree = "<group>"; };
 		0F981A7220EF5A9000A6133B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0F981A7620EF606900A6133B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 		0F5418B320F5CB1300F6FB08 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0F8996A1211812E20087A977 /* MyBalanceViewController.swift */,
 				0F981A7620EF606900A6133B /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -1013,6 +1016,7 @@
 				0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */,
 				0F98F9C120D1FE7E0054E14C /* OutgoingUserMessageTableViewCell.swift in Sources */,
 				0F1C5CBE20E4268B00A320AF /* SelectionViewController.swift in Sources */,
+				0F8996A2211812E20087A977 /* MyBalanceViewController.swift in Sources */,
 				0F384A6D20C9F66C0036141B /* ListingCell.swift in Sources */,
 				0F98F9FD20D1FEA10054E14C /* CreateGroupChannelUserListViewController.swift in Sources */,
 				0F98FA3E20D25E130054E14C /* TabBarViewController.swift in Sources */,
