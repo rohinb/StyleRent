@@ -24,6 +24,7 @@ class User: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
 	var _password: String?
 	var _stripeId: String?
 	var _pushEndpoint: String?
+	var _balance : NSNumber?
     
     class func dynamoDBTableName() -> String {
 
@@ -42,7 +43,8 @@ class User: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
 			   "_authType" : "authType",
 			   "_password" : "password",
 			   "_stripeId" : "stripeId",
-			   "_pushEndpoint" : "pushEndpoint"
+			   "_pushEndpoint" : "pushEndpoint",
+			   "_balance" : "balance"
         ]
     }
 }

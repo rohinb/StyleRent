@@ -14,6 +14,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		gblTabBarController = self
+		title = "Account"
 		// Add messages view
 		let vc = GroupChannelListViewController()
 		let navController = UINavigationController()
@@ -21,17 +22,8 @@ class TabBarViewController: UITabBarController {
 		let item = UITabBarItem(title: "Conversations", image: nil, selectedImage: nil)
 		navController.tabBarItem = item
 		navController.title = "Conversations"
-		self.viewControllers?.append(navController)
+		self.viewControllers?.insert(navController, at: self.viewControllers!.count - 1)
 		let _ = vc.view // pre-load the messages ui
-
-		// add my listings page
-		let vc2 = Utilities.getClosetVcFor(user: gblUser)
-		let navController2 = UINavigationController()
-		navController2.viewControllers = [vc2]
-		let item2 = UITabBarItem(title: "My Listings", image: nil, selectedImage: nil)
-		navController2.tabBarItem = item2
-		navController2.title = "My Listings"
-		self.viewControllers?.append(navController2)
     }
 
     override func didReceiveMemoryWarning() {

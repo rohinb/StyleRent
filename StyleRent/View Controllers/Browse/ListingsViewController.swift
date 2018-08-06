@@ -82,10 +82,6 @@ class ListingsViewController: UIViewController {
 		}
 
 		title = getTitle()
-		if config == .closet && listingsOwnerId! == gblUser._id! {
-			let settingsButton = UIBarButtonItem(title: "Settings", style: UIBarButtonItemStyle.plain, target: self, action: #selector(settingsButtonPressed))
-			navigationItem.leftBarButtonItem = settingsButton
-		}
 
 		gblUser._pushEndpoint = Defaults.standard.string(forKey: Defaults.pushEndpointKey)
 		DB.shared().updateUser(gblUser)

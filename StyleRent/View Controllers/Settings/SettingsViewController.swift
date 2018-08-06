@@ -12,48 +12,29 @@ import FBSDKLoginKit
 class SettingsViewController: UITableViewController {
 
 	fileprivate enum SettingsType : String {
+		case guide = "Your Guide to StyleRent"
+		case myCloset = "My Closet"
+		case myBalance = "My Balance"
 		case terms = "Terms of Service"
 		case privacy = "Privacy Policy"
 		case logout = "Logout"
 
-		static let allValues : [SettingsType] = [.terms, .privacy, .logout]
+		static let allValues : [[SettingsType]] = [[.guide, .myBalance], [.myCloset], [.terms, .privacy], [.logout]]
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		let editButton = UIBarButtonItem(title: "My Balance", style: UIBarButtonItemStyle.plain, target: self, action: #selector(viewBalance))
+		navigationItem.setRightBarButton(editButton, animated: true)
     }
 
-    // MARK: - Table view data source
+	@objc fileprivate func viewBalance() {
+		
+	}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return SettingsType.allValues.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-
-		let type = SettingsType.allValues[indexPath.row]
-		cell.textLabel?.text = type.rawValue
-
-        return cell
-    }
-
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		self.tableView.deselectRow(at: indexPath, animated: true)
-
-		let type = SettingsType.allValues[indexPath.row]
-		switch type {
-		case .terms: break
-		case .privacy: break
-		case .logout: logout()
-		}
+	fileprivate func showMyCloset() {
+		let vc = Utilities.getClosetVcFor(user: gblUser)
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 
 	fileprivate func logout() {
@@ -68,14 +49,39 @@ class SettingsViewController: UITableViewController {
 		FBSDKLoginManager().logOut()
 		self.dismiss(animated: true, completion: nil)
 	}
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+// MARK: - Table view
+extension SettingsViewController {
 
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return SettingsType.allValues.count
+	}
+
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return SettingsType.allValues[section].count
+	}
+
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = UITableViewCell()
+
+		let type = SettingsType.allValues[indexPath.section][indexPath.row]
+		cell.textLabel?.text = type.rawValue
+
+		return cell
+	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.tableView.deselectRow(at: indexPath, animated: true)
+
+		let type = SettingsType.allValues[indexPath.section][indexPath.row]
+		switch type {
+		case .guide: break
+		case .myBalance: viewBalance()
+		case .myCloset: showMyCloset()
+		case .terms: break
+		case .privacy: break
+		case .logout: logout()
+		}
+	}
 }
