@@ -10,6 +10,7 @@ import UIKit
 import AWSMobileClient
 import AWSCognito
 import FBSDKCoreKit
+import CoreLocation
 import Stripe
 import SendBirdSDK
 import AWSSNS
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		// Override point for customization after application launch.
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 		SBDMain.initWithApplicationId("64DBE184-31A5-421E-BC58-CA2E3A34E5D5")
+		gblLocManager = CLLocationManager()
 		let config = STPPaymentConfiguration.shared()
 		config.publishableKey = "pk_test_O7WymMY05Cpb7FIInhdDyFHL"
 		config.companyName = "Style Rent"

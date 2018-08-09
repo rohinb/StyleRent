@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 		DB.shared().delegate = self
 		Services.shared().delegate = self
-		CLLocationManager().requestWhenInUseAuthorization()
+		gblLocManager.requestWhenInUseAuthorization()
 		var userNotificationTypes : UIUserNotificationType
 		userNotificationTypes = [.alert , .badge , .sound]
 		let notificationSettings = UIUserNotificationSettings.init(types: userNotificationTypes, categories: nil)

@@ -217,7 +217,7 @@ class CreateListingViewController: UIViewController {
 	}
 
 	fileprivate func getNSNumForString(value : String?) -> NSNumber? {
-		return (value == nil || value == "") ? nil : NSNumber(integerLiteral: Int(value!)!)
+		return (value == nil || value! == "" || Int(value!) == nil) ? nil : NSNumber(integerLiteral: Int(value!)!)
 	}
 
 	fileprivate func setCurrInfo(info value : String?, for type: DetailType) {

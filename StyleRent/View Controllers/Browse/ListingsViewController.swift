@@ -24,7 +24,6 @@ class ListingsViewController: UIViewController {
 	fileprivate let reuseIdentifier = "ListingCell"
 	static let kCellHeight = 200.0
 
-	fileprivate var locManager = CLLocationManager()
 	fileprivate var hadLocationImmediately = false
 	fileprivate var listings = [Listing]()
 	fileprivate var listingImages = [String : UIImage]()
@@ -51,14 +50,16 @@ class ListingsViewController: UIViewController {
 		collectionView.dataSource = self
 		collectionView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 		collectionView.backgroundColor = UIColor.clear
-		locManager.delegate = self
-		locManager.requestWhenInUseAuthorization()
+		gblLocManager.delegate = self
+		gblLocManager.requestWhenInUseAuthorization()
 
 		if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
 			CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
-			if let loc = locManager.location {
+			if let loc = gblLocManager.location {
 				gblCurrentLocation = loc
 				hadLocationImmediately = true
+			} else {
+				gblLocManager.startUpdatingLocation()
 			}
 		}
 
@@ -184,6 +185,18 @@ class ListingsViewController: UIViewController {
 	@IBAction func filterPressed(_ sender: UIBarButtonItem) {
 		self.performSegue(withIdentifier: "toFilter", sender: nil)
 	}
+
+	fileprivate func getDistanceString(for listing : Listing) -> String {
+		if listingsOwnerId == gblUser._id {
+			return "Less than a mile"
+		}
+		let lat = listing._latitude!.doubleValue
+		let lon = listing._longitude!.doubleValue
+		let metersAway = gblCurrentLocation.distance(from: CLLocation(latitude: lat, longitude: lon))
+		let milesAway = Int(metersAway / 1609.344)
+		let distanceString = milesAway < 1 ? "Less than a mile" : milesAway == 1 ? "1 mile" : "\(milesAway) miles"
+		return distanceString
+	}
 }
 
 extension ListingsViewController : DBDelegate {
@@ -254,7 +267,7 @@ extension ListingsViewController : UICollectionViewDelegate, UICollectionViewDat
 		let listing = listings[indexPath.row]
 		cell.listingNameLabel.text = listing._name!
 		cell.sizeLabel.text = "Size: \(listing._size!)"
-		cell.lenderNameLabel.text = "By \(listing._sellerId!)"
+		cell.lenderNameLabel.text = getDistanceString(for: listing) // showing distance here instead of lender name for now.
 		cell.priceLabel.text = "$\(listing._price!)"
 		cell.listingImageView.image = listingImages[listing._id!] ?? nil
 		return cell
@@ -294,16 +307,16 @@ extension ListingsViewController : CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		if status == .authorizedAlways || status == .authorizedWhenInUse {
 			if !hadLocationImmediately {
-				locManager.startUpdatingLocation()
+				gblLocManager.startUpdatingLocation()
 			}
 		}
 	}
 
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		print("updated locations")
+		gblLocManager.stopUpdatingLocation() // i don't need anymore locations
 		gblCurrentLocation = locations.last
 		self.performFreshPull()
-		locManager.stopUpdatingLocation() // i don't need anymore locations
 	}
 
 }

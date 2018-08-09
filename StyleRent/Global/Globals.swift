@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 
+var gblLocManager : CLLocationManager!
 var gblCurrentLocation : CLLocation!
 var gblTabBarController : TabBarViewController! // TODO: use fully
 var gblUser : User! {
