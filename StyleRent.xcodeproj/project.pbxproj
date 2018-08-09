@@ -43,6 +43,9 @@
 		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
 		0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */; };
 		0F8996A2211812E20087A977 /* MyBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8996A1211812E20087A977 /* MyBalanceViewController.swift */; };
+		0F8996A4211827430087A977 /* Finjinon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8996A3211827430087A977 /* Finjinon.framework */; };
+		0F8996A5211827430087A977 /* Finjinon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8996A3211827430087A977 /* Finjinon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0F8996A8211827860087A977 /* Finjinon.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0F8996A7211827860087A977 /* Finjinon.framework.dSYM */; };
 		0F981A7320EF5A9000A6133B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7220EF5A9000A6133B /* HomeViewController.swift */; };
 		0F981A7720EF606900A6133B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F981A7620EF606900A6133B /* SettingsViewController.swift */; };
 		0F98F9BE20D1FE7E0054E14C /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */; };
@@ -144,6 +147,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0F8996A6211827530087A977 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				0F8996A8211827860087A977 /* Finjinon.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0F98FA2420D21AF00054E14C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +164,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0F98FA2020D21AF00054E14C /* CommonCrypto.framework in Embed Frameworks */,
+				0F8996A5211827430087A977 /* Finjinon.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +215,8 @@
 		0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectionViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		0F8996A1211812E20087A977 /* MyBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceViewController.swift; sourceTree = "<group>"; };
+		0F8996A3211827430087A977 /* Finjinon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Finjinon.framework; path = Carthage/Build/iOS/Finjinon.framework; sourceTree = "<group>"; };
+		0F8996A7211827860087A977 /* Finjinon.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Finjinon.framework.dSYM; path = Carthage/Build/iOS/Finjinon.framework.dSYM; sourceTree = "<group>"; };
 		0F981A7220EF5A9000A6133B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0F981A7620EF606900A6133B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F98F99A20D1FE7E0054E14C /* MessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
@@ -308,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64E015F2B8614B766683CAE5 /* Pods_StyleRent.framework in Frameworks */,
+				0F8996A4211827430087A977 /* Finjinon.framework in Frameworks */,
 				0F98FA1F20D21AF00054E14C /* CommonCrypto.framework in Frameworks */,
 				0F47BF3520B6553A00C2CA55 /* Bolts.framework in Frameworks */,
 			);
@@ -626,6 +643,8 @@
 		0FA2D17120B5FBA500D7F243 = {
 			isa = PBXGroup;
 			children = (
+				0F8996A7211827860087A977 /* Finjinon.framework.dSYM */,
+				0F8996A3211827430087A977 /* Finjinon.framework */,
 				0F98FA3020D24F3E0054E14C /* SendBird-iOS.bundle */,
 				0FA2D17C20B5FBA500D7F243 /* StyleRent */,
 				0F47BF2220B63D3500C2CA55 /* StyleRentTests */,
@@ -760,6 +779,7 @@
 				0FA2D17820B5FBA500D7F243 /* Resources */,
 				5BDBBCCD2070D5052EF8DBEE /* [CP] Embed Pods Frameworks */,
 				0F98FA2420D21AF00054E14C /* Embed Frameworks */,
+				0F8996A6211827530087A977 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1341,6 +1361,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/Bolts.framework\"",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1367,6 +1388,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = StyleRent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

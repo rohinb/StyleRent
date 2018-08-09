@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "3.0.0",
+  "iOS" : [
+    {
+      "name" : "Finjinon",
+      "hash" : "179d9a9e708edf18a35e8be37b9ff5bdef1a2eaeabddd234ddd5ba8e4d489a30"
+    }
+  ]
+}

@@ -260,7 +260,7 @@ class ListingDetailsViewController: UIViewController {
 		if segue.identifier == "toEditListing" {
 			if let vc = segue.destination as? CreateListingViewController {
 				vc.isEditView = true
-				vc.images = self.images
+				vc.initialImages = self.images
 				vc.newListing = self.listing
 				vc.parentVC = self
 			}

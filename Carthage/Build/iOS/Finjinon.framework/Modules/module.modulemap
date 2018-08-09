@@ -1,0 +1,11 @@
+framework module Finjinon {
+  umbrella header "Finjinon.h"
+
+  export *
+  module * { export * }
+}
+
+module Finjinon.Swift {
+    header "Finjinon-Swift.h"
+    requires objc
+}
