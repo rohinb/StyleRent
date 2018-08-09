@@ -134,12 +134,14 @@ class ListingsViewController: UIViewController {
 		completionHandler = { (task, URL, data, error) -> Void in
 			DispatchQueue.main.async(execute: {
 				if error != nil {
-					print(error)
+					print(error!)
 				} else {
 					print("downlaod complete")
 					if data == nil { return } // handle weird edge case
 					self.listingImages[listing._id!] = UIImage(data: data!)
-					self.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+					if self.listings.count > index { // fix to prevent pending download from crashing after new filter was applied
+						self.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+					}
 				}
 			})
 		}
