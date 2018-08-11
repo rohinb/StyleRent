@@ -39,6 +39,8 @@
 		0F47BF4C20B9388D00C2CA55 /* CreateListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F47BF4B20B9388D00C2CA55 /* CreateListingViewController.swift */; };
 		0F4DAD7F210EBFBF00EB7A92 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4DAD7E210EBFBF00EB7A92 /* CircleImageView.swift */; };
 		0F5418B720F6D7EA00F6FB08 /* RentalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */; };
+		0F6C9FA1211F818300317C8C /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C9FA0211F818300317C8C /* SliderCell.swift */; };
+		0F6C9FA2211F87B200317C8C /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C9F9F211F818200317C8C /* SliderCell.xib */; };
 		0F7F1E3720F1DD3300CA5526 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */; };
 		0F7F1E3920F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */; };
 		0F7F1E3B20F1F2CB00CA5526 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */; };
@@ -197,6 +199,8 @@
 		0F4DAD7E210EBFBF00EB7A92 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		0F51E3FE20FD609100CAFB41 /* StyleRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StyleRent.entitlements; sourceTree = "<group>"; };
 		0F5418B620F6D7EA00F6FB08 /* RentalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalViewController.swift; sourceTree = "<group>"; };
+		0F6C9F9F211F818200317C8C /* SliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SliderCell.xib; path = "/Users/rohinbhushan/Desktop/iOS-dev/StyleRent/StyleRent/XIBs and their VCs/SliderCell.xib"; sourceTree = "<absolute>"; };
+		0F6C9FA0211F818300317C8C /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SliderCell.swift; path = "/Users/rohinbhushan/Desktop/iOS-dev/StyleRent/StyleRent/XIBs and their VCs/SliderCell.swift"; sourceTree = "<absolute>"; };
 		0F7F1E3620F1DD3300CA5526 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3820F1EA0C00CA5526 /* ProfileImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectionViewController.swift; sourceTree = "<group>"; };
 		0F7F1E3A20F1F2CB00CA5526 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 		0F1387E020BB8FCF00E78B25 /* XIBs and their VCs */ = {
 			isa = PBXGroup;
 			children = (
+				0F6C9FA0211F818300317C8C /* SliderCell.swift */,
+				0F6C9F9F211F818200317C8C /* SliderCell.xib */,
 				0FD0F97A20E0C28D00FE56AE /* TextViewCell.swift */,
 				0FD0F97B20E0C28D00FE56AE /* TextViewCell.xib */,
 				0FD0F97E20E0C4CE00FE56AE /* FormCell.swift */,
@@ -870,6 +876,7 @@
 				0F98F9D620D1FE7E0054E14C /* IncomingVideoFileMessageTableViewCell.xib in Resources */,
 				0F98FA0C20D1FEA10054E14C /* GroupChannelListEditableTableViewCell.xib in Resources */,
 				0F98FA0920D1FEA10054E14C /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
+				0F6C9FA2211F87B200317C8C /* SliderCell.xib in Resources */,
 				0F98FA1220D21A4E0054E14C /* CommonCrypto.xcconfig in Resources */,
 				0F98F9CB20D1FE7E0054E14C /* IncomingFileMessageTableViewCell.xib in Resources */,
 				0FD0F97D20E0C28D00FE56AE /* TextViewCell.xib in Resources */,
@@ -1053,6 +1060,7 @@
 				0F98F9C220D1FE7E0054E14C /* OutgoingFileMessageTableViewCell.swift in Sources */,
 				0FD0F98020E0C4CE00FE56AE /* FormCell.swift in Sources */,
 				0FD0F97C20E0C28D00FE56AE /* TextViewCell.swift in Sources */,
+				0F6C9FA1211F818300317C8C /* SliderCell.swift in Sources */,
 				0FFE8FD920ECBF92002E9D8F /* Services.swift in Sources */,
 				0F47BF4320B7E7E600C2CA55 /* Listing.swift in Sources */,
 				0F98F9FE20D1FEA10054E14C /* MemberListViewController.swift in Sources */,

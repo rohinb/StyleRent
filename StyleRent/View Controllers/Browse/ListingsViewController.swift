@@ -113,7 +113,7 @@ class ListingsViewController: UIViewController {
 		guard count > 0 else { return }
 		if config != .rentals {
 			if gblCurrentLocation != nil {
-				DB.shared().getListings(userId: config == .closet ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: 1000, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: config == .closet, lastEvalKey: self.lastEvalKey, limit: count)
+				DB.shared().getListings(userId: config == .closet ? listingsOwnerId! : gblUser._id!, lat: gblCurrentLocation.coordinate.latitude, lon: gblCurrentLocation.coordinate.longitude, radius: currentFilter.distanceRadius * 1609, minPrice: nil, maxPrice: nil, category: currentFilter.category?.rawValue, size: currentFilter.size, showMyListings: config == .closet, lastEvalKey: self.lastEvalKey, limit: count)
 			} else {
 				collectionView.finishInfiniteScroll()
 				collectionView.es.stopPullToRefresh()

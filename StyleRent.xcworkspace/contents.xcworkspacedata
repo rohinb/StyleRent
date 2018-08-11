@@ -5,6 +5,12 @@
       location = "group:my-house.gpx">
    </FileRef>
    <FileRef
+      location = "group:/Users/rohinbhushan/Desktop/iOS-dev/StyleRent/StyleRent/XIBs and their VCs/SliderCell.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/rohinbhushan/Desktop/iOS-dev/StyleRent/StyleRent/XIBs and their VCs/SliderCell.xib">
+   </FileRef>
+   <FileRef
       location = "group:StyleRent.xcodeproj">
    </FileRef>
    <FileRef

@@ -15,6 +15,7 @@ class FiltersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.register(UINib(nibName: "DetailCell", bundle: nil), forCellReuseIdentifier: "DetailCell")
+		tableView.register(UINib(nibName: "SliderCell", bundle: nil), forCellReuseIdentifier: "SliderCell")
         // Do any additional setup after loading the view.
     }
 
@@ -25,7 +26,7 @@ class FiltersViewController: UITableViewController {
 	}
     
 	@IBAction func cancelPressed(_ sender: Any) {
-		self.dismiss(animated: true, completion: nil)
+		applyFilter()
 	}
 
 	// MARK: - Table view data source
@@ -35,23 +36,36 @@ class FiltersViewController: UITableViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
+		return 3
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell") as! DetailCell
 		if indexPath.row == 0 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell") as! DetailCell
 			cell.titleLabel.text = "Category"
 			cell.detailLabel.text = currentDetail.category == nil ? "All" : currentDetail.category?.rawValue
+			return cell
 		} else if indexPath.row == 1 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell") as! DetailCell
 			cell.titleLabel.text = "Size"
 			cell.detailLabel.text = currentDetail.size ?? "All"
+			return cell
+		} else if indexPath.row == 2 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "SliderCell") as! SliderCell
+			cell.titleString = "Max Distance"
+			cell.slider.minimumValue = 1
+			cell.slider.maximumValue = 20
+			cell.slider.setValue(Float(currentDetail.distanceRadius), animated: false)
+			cell.sliderValueChanged(sender: cell.slider)
+			cell.delegate = self
+			return cell
+		} else {
+			return UITableViewCell()
 		}
-
-		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let vc = storyboard.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionViewController
 		vc.delegate = self
@@ -92,6 +106,12 @@ extension FiltersViewController : SelectionDelegate {
 		default: return
 		}
 		applyFilter()
+	}
+}
+
+extension FiltersViewController : SliderCellDelegate {
+	func sliderValueChanged(val: Float) {
+		currentDetail.distanceRadius = Double(val)
 	}
 }
 

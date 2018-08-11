@@ -44,6 +44,7 @@ enum AuthType : String {
 class ListingDetail {
 	var category : ListingCategory?
 	var size : String?
+	var distanceRadius : CLLocationDistance = 5
 }
 
 struct ClothingUtils {

@@ -164,7 +164,10 @@ class DB {
 	}
 
 	func getListings(userId : String, lat : Double, lon : Double, radius : Double, minPrice : Double?, maxPrice : Double?, category : String?, size : String?, showMyListings: Bool, lastEvalKey : [String : AWSDynamoDBAttributeValue]?, limit : Int) {
-		let boundingRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: lon), radius, radius)
+		// TODO: decide what to do about the bounding region being a rectangle.
+		// Since its a rectangle, the user might see listings outside of the desired
+		// radius but still in the corners of the rectangle.
+		let boundingRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: lon), radius * 2, radius * 2)
 		let latDelta = boundingRegion.span.latitudeDelta
 		let lonDelta = boundingRegion.span.longitudeDelta
 
